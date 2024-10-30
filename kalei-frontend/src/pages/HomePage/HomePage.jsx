@@ -1,9 +1,10 @@
 import React from "react";
+import Navbar from "../../components/Navbar/Navbar";
 
 export default function HomePage() {
   return (
-    <div>
-      <h1>Welcome to Kalei</h1>
+    <div className={StyleSheet.homepageSection}>
+      <Navbar />
     </div>
   );
 }

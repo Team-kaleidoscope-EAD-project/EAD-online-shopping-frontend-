@@ -1,0 +1,54 @@
+@font-face {
+  font-family: "amiko_regular";
+  src: url(../../assets/fonts/Amiko-Regular.ttf);
+}
+@font-face {
+  font-family: "amiko_semibold";
+  src: url(../../assets/fonts/Amiko-SemiBold.ttf);
+}
+@font-face {
+  font-family: "amiko-bold";
+  src: url(../../assets/fonts/Amiko-Bold.ttf);
+}
+
+.logo {
+  transition-duration: 300ms;
+}
+
+.logo:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.navbarContainer {
+  height: 70px;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.logoContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  height: 70px;
+}
+
+.sectionLinkContainer {
+  font-family: "amiko_semibold";
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  color: #1e1b1b;
+}
+
+.sectionLinkContainer a {
+  text-decoration: none;
+  font-size: 13px;
+  transition-duration: 300ms;
+  color: black;
+}
+
+.sectionLinkContainer a:hover {
+  color: #be8748;
+}
