@@ -1,6 +1,5 @@
 import React from "react";
 import Navbar from "../../components/Navbar/Navbar";
-import Footer from "../../components/Footer/Footer";
 import styles from "../HomePage/HomePage.module.css";
 
 export default function HomePage() {
@@ -13,7 +12,7 @@ export default function HomePage() {
 
       {/* your section */}
       {/* footer section */}
-      <Footer />
+
       {/* footer section */}
     </div>
   );
