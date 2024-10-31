@@ -47,8 +47,27 @@
   font-size: 13px;
   transition-duration: 300ms;
   color: black;
+  cursor: pointer;
 }
 
 .sectionLinkContainer a:hover {
   color: #be8748;
+}
+
+.megaMenuSection {
+  height: 500px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.megaMenuSection1 {
+  background-color: #be8748;
+}
+
+.megaMenuSection2 {
+  background-color: #93e938;
+}
+
+.megaMenuSection3 {
+  background-color: #38e9c6;
 }
