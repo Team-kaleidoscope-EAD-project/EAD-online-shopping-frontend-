@@ -4,7 +4,7 @@ import styles from "../Navbar.module.css";
 import Menu from "@mui/material/Menu";
 import Fade from "@mui/material/Fade";
 
-export default function Collections({ anchorEl, open, handleClose }) {
+export default function Accessories({ anchorEl, open, handleClose }) {
   return (
     <div>
       {" "}
@@ -29,9 +29,7 @@ export default function Collections({ anchorEl, open, handleClose }) {
         }}
       >
         <div
-          className={
-            (`${styles.megaMenuSection} ${styles.megaMenuSection2}`)
-          }
+          className={`${styles.megaMenuSection} ${styles.megaMenuSection5}`}
         ></div>
       </Menu>
     </div>

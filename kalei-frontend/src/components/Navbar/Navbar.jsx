@@ -8,14 +8,21 @@ import { Link } from "react-router-dom";
 import NewArrivals from "./sections/NewArrivals";
 import Collections from "./sections/Collections";
 import Womens from "./sections/Womens";
+import Mens from "./sections/Mens";
+import Accessories from "./sections/Accessories";
 
 export default function Navbar() {
   const [anchorNewArrivalEl, setAnchorNewArrivalEl] = useState();
   const [anchorCollectionEl, setAnchorCollectionEl] = useState();
   const [anchorWomenEl, setAnchorWomenEl] = useState();
+  const [anchorMenEl, setAnchorMenEl] = useState();
+  const [anchorAccessoriesEl, setAnchorAccessoriesEl] = useState();
+
   const openNewArrival = Boolean(anchorNewArrivalEl);
   const openCollection = Boolean(anchorCollectionEl);
   const openWomen = Boolean(anchorWomenEl);
+  const openMen = Boolean(anchorMenEl);
+  const openAccessories = Boolean(anchorAccessoriesEl);
 
   const handleNewArrivalClick = (event) => {
     setAnchorNewArrivalEl(event.currentTarget);
@@ -34,6 +41,18 @@ export default function Navbar() {
   };
   const handleWomenClose = () => {
     setAnchorWomenEl(null);
+  };
+  const handleMenClick = (event) => {
+    setAnchorMenEl(event.currentTarget);
+  };
+  const handleMenClose = () => {
+    setAnchorMenEl(null);
+  };
+  const handleAccessoriesClick = (event) => {
+    setAnchorAccessoriesEl(event.currentTarget);
+  };
+  const handleAccessoriesClose = () => {
+    setAnchorAccessoriesEl(null);
   };
 
   return (
@@ -62,8 +81,12 @@ export default function Navbar() {
             <Link to="/" onClick={handleWomenClick}>
               WOMEN
             </Link>
-            <Link to="/">MEN</Link>
-            <Link to="/">ACCESSORIES</Link>
+            <Link to="/" onClick={handleMenClick}>
+              MEN
+            </Link>
+            <Link to="/" onClick={handleAccessoriesClick}>
+              ACCESSORIES
+            </Link>
 
             {/* new arrivals section */}
             <NewArrivals
@@ -88,6 +111,22 @@ export default function Navbar() {
               handleClose={handleWomenClose}
             />
             {/* womens section */}
+
+            {/* mens section */}
+            <Mens
+              anchorEl={anchorMenEl}
+              open={openMen}
+              handleClose={handleMenClose}
+            />
+            {/* mens section */}
+
+            {/* accessories section */}
+            <Accessories
+              anchorEl={anchorAccessoriesEl}
+              open={openAccessories}
+              handleClose={handleAccessoriesClose}
+            />
+            {/* accessories section */}
           </Grid>
         </Grid>
       </Grid>
