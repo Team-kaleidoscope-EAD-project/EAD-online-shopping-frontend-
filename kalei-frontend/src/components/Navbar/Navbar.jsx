@@ -11,6 +11,18 @@ import Womens from "./sections/Womens";
 import Mens from "./sections/Mens";
 import Accessories from "./sections/Accessories";
 
+// icons
+import searchIcon from "../../assets/images/icons/search.png";
+import cartIcon from "../../assets/images/icons/cart.png";
+// icons
+
+// images
+import profileImg from "../../assets/images/profile/profileImg.png";
+import { Avatar, Tooltip } from "@mui/material";
+// images
+
+import Zoom from "@mui/material/Zoom";
+
 export default function Navbar() {
   const [anchorNewArrivalEl, setAnchorNewArrivalEl] = useState();
   const [anchorCollectionEl, setAnchorCollectionEl] = useState();
@@ -59,7 +71,7 @@ export default function Navbar() {
     <div className={styles.navbarContainer}>
       <Grid container spacing={2}>
         <Grid container size={{ xs: 12 }}>
-          <Grid size={{ xs: 6, md: 2, lg: 1 }} className={styles.logoContainer}>
+          <Grid size={{ xs: 6, md: 1, lg: 1 }} className={styles.logoContainer}>
             <img
               src={logo}
               width={60}
@@ -68,26 +80,27 @@ export default function Navbar() {
             />
           </Grid>
           <Grid
-            size={{ xs: 6, md: 8, lg: 9 }}
+            size={{ xs: 6, md: 7, lg: 8 }}
             className={styles.sectionLinkContainer}
           >
             <Link to="/">HOME</Link>
-            <Link to="/" onClick={handleNewArrivalClick}>
+            <Link to="/" onMouseOver={handleNewArrivalClick}>
               NEW ARRIVALS
             </Link>
-            <Link to="/" onClick={handleCollectionClick}>
+            <Link to="/" onMouseOver={handleCollectionClick}>
               COLLECTIONS
             </Link>
-            <Link to="/" onClick={handleWomenClick}>
+            <Link to="/" onMouseOver={handleWomenClick}>
               WOMEN
             </Link>
-            <Link to="/" onClick={handleMenClick}>
+            <Link to="/" onMouseOver={handleMenClick}>
               MEN
             </Link>
-            <Link to="/" onClick={handleAccessoriesClick}>
+            <Link to="/" onMouseOver={handleAccessoriesClick}>
               ACCESSORIES
             </Link>
-
+          </Grid>
+          <div style={{ display: "none" }}>
             {/* new arrivals section */}
             <NewArrivals
               anchorEl={anchorNewArrivalEl}
@@ -127,7 +140,39 @@ export default function Navbar() {
               handleClose={handleAccessoriesClose}
             />
             {/* accessories section */}
+          </div>
+          {/* search bar,cart and profile */}
+          <Grid
+            size={{ xs: 6, md: 2, lg: 3 }}
+            sx={{
+              display: "flex",
+              justifyContent: "space-evenly",
+              alignItems: "center",
+            }}
+          >
+            <div className={styles.searchBarContainer}>
+              <img src={searchIcon} alt="search icon" width={15} />
+              <span>SEARCH</span>
+            </div>
+            <>
+              <Tooltip title="Cart" arrow TransitionComponent={Zoom}>
+                <img
+                  src={cartIcon}
+                  alt="search icon"
+                  width={20}
+                  style={{ cursor: "pointer" }}
+                />
+              </Tooltip>
+              <Tooltip title="Profile" arrow TransitionComponent={Zoom}>
+                <Avatar
+                  alt="Profile Picture"
+                  src={profileImg}
+                  sx={{ cursor: "pointer" }}
+                />
+              </Tooltip>
+            </>
           </Grid>
+          {/* search bar,cart and profile */}
         </Grid>
       </Grid>
     </div>

@@ -28,11 +28,11 @@ export default function Collections({ anchorEl, open, handleClose }) {
           },
         }}
       >
-        <div
-          className={
-            (`${styles.megaMenuSection} ${styles.megaMenuSection2}`)
-          }
-        ></div>
+        <div className={`${styles.megaMenuSection} ${styles.megaMenuSection2}`}>
+          <div className={styles.collectionsContainer}>
+            
+          </div>
+        </div>
       </Menu>
     </div>
   );
