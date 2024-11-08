@@ -1,0 +1,22 @@
+/* Dilrangi/NewArrivals.css */
+.newArrivals {
+font-size: 18px;
+font-weight: 200;
+margin-top: 50px;
+margin-left: 25px;
+font-family: Arial, sans-serif;
+color: #7C4100;
+text-align: left;
+} 
+.ProductCard{
+    display: grid;
+    grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+    padding-left: 50px;
+
+    justify-content: center; /* Centers items horizontally */
+    align-items: center; /* Centers items vertically */
+  
+    
+}
+
+
