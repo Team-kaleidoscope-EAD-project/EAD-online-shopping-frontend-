@@ -4,14 +4,14 @@ import styles from "../Navbar.module.css";
 import Menu from "@mui/material/Menu";
 import Fade from "@mui/material/Fade";
 
-// women section images
-import img1 from "../../../assets/images/womenSectionImages/women_accessory.png";
-import img2 from "../../../assets/images/womenSectionImages/women_gym.png";
-import img3 from "../../../assets/images/womenSectionImages/women_skirts.png";
-import img4 from "../../../assets/images/womenSectionImages/women_street.png";
-// women section images
+// men section images
+import img1 from "../../../assets/images/menSectionImages/men_gym.png";
+import img2 from "../../../assets/images/menSectionImages/men_model.png";
+import img3 from "../../../assets/images/menSectionImages/men_street.png";
+import img4 from "../../../assets/images/menSectionImages/men_watches.png";
+// men section images
 
-export default function Womens({ anchorEl, open, handleClose }) {
+export default function Mens({ anchorEl, open, handleClose }) {
   return (
     <div>
       {" "}
@@ -35,40 +35,40 @@ export default function Womens({ anchorEl, open, handleClose }) {
           },
         }}
       >
-        <div className={`${styles.megaMenuSection} ${styles.megaMenuSection3}`}>
+        <div className={`${styles.megaMenuSection} ${styles.megaMenuSection4}`}>
           <div className={styles.collectionsContainer}>
-            {/* womens card */}
+            {/* mens card */}
             <div className={styles.collectionCard}>
               <div className={styles.collectionCardImgContainer}>
                 <img src={img1} alt="collection card image" width={400} />
               </div>
-              <span>ACCESSORIES FOR WOMEN</span>
+              <span>GYMWARE FOR MEN</span>
             </div>
-            {/* womens card */}
-            {/* womens card */}
+            {/* mens card */}
+            {/* mens card */}
             <div className={styles.collectionCard}>
               <div className={styles.collectionCardImgContainer}>
                 <img src={img3} alt="collection card image" width={400} />
               </div>
-              <span>BOTTOMS FOR WOMEN</span>
+              <span>MEN'S EYE WEAR</span>
             </div>
-            {/* womens card */}
-            {/* womens card */}
+            {/* mens card */}
+            {/* mens card */}
             <div className={styles.collectionCard}>
               <div className={styles.collectionCardImgContainer}>
                 <img src={img2} alt="collection card image" width={400} />
               </div>
-              <span>GYMWARE FOR WOMEN</span>
+              <span>STREETWARE FOR MEN</span>
             </div>
-            {/* womens card */}
-            {/* womens card */}
+            {/* mens card */}
+            {/* mens card */}
             <div className={styles.collectionCard}>
               <div className={styles.collectionCardImgContainer}>
                 <img src={img4} alt="collection card image" width={400} />
               </div>
-              <span>STREETWARE FOR WOMEN</span>
+              <span>ACCESSORIES FOR MEN</span>
             </div>
-            {/* womens card */}
+            {/* mens card */}
           </div>
         </div>
       </Menu>
