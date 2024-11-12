@@ -1,0 +1,28 @@
+h1{
+    font-family: "inria serif";
+    font-weight: 700;
+    font-size: 32px;
+    color: #ffffff;
+    margin: 0;
+    z-index: 10;
+}
+
+h3{
+    font-family: "amiko";
+    font-weight: 700;
+    font-size: 12px;
+    color: #CAC1C1;
+    margin: 0;
+    z-index: 10;
+}
+
+.container{
+    display: flex;
+    gap: 8px;
+    margin-top: 60%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    z-index: 10;
+}
