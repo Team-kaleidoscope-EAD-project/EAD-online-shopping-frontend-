@@ -4,6 +4,13 @@ import styles from "../Navbar.module.css";
 import Menu from "@mui/material/Menu";
 import Fade from "@mui/material/Fade";
 
+// collections images
+import img1 from "../../../assets/images/collectionImages/customerFavorites.png";
+import img2 from "../../../assets/images/collectionImages/specialOffers_forwomen.png";
+import img3 from "../../../assets/images/collectionImages/women_newArrivals.png";
+import img4 from "../../../assets/images/collectionImages/favorites.png";
+// collections images
+
 export default function Collections({ anchorEl, open, handleClose }) {
   return (
     <div>
@@ -30,7 +37,38 @@ export default function Collections({ anchorEl, open, handleClose }) {
       >
         <div className={`${styles.megaMenuSection} ${styles.megaMenuSection2}`}>
           <div className={styles.collectionsContainer}>
-            
+            {/* collection card */}
+            <div className={styles.collectionCard}>
+              <div className={styles.collectionCardImgContainer}>
+                <img src={img1} alt="collection card image" width={400} />
+              </div>
+              <span>SPECIAL OFFERS FOR WOMEN</span>
+            </div>
+            {/* collection card */}
+            {/* collection card */}
+            <div className={styles.collectionCard}>
+              <div className={styles.collectionCardImgContainer}>
+                <img src={img3} alt="collection card image" width={400} />
+              </div>
+              <span>CUSTOMER FAVORITES</span>
+            </div>
+            {/* collection card */}
+            {/* collection card */}
+            <div className={styles.collectionCard}>
+              <div className={styles.collectionCardImgContainer}>
+                <img src={img2} alt="collection card image" width={400} />
+              </div>
+              <span>NEW PRODUCTS FOR WOMEN</span>
+            </div>
+            {/* collection card */}
+            {/* collection card */}
+            <div className={styles.collectionCard}>
+              <div className={styles.collectionCardImgContainer}>
+                <img src={img4} alt="collection card image" width={400} />
+              </div>
+              <span>TRENDING PRODUCTS</span>
+            </div>
+            {/* collection card */}
           </div>
         </div>
       </Menu>
