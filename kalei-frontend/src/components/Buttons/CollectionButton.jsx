@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./CollectionButton.module.css";
 import Button from "@mui/material/Button";
 
 export default function CollectionButton({ name, bgColor, txtColor }) {
