@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../HomePage/HomePage.module.css";
 import Navbar from "../../components/Navbar/Navbar";
+import Carousel from "./Sections/Carousel/Carousel";
 
 export default function HomePage() {
   return (
@@ -9,7 +10,7 @@ export default function HomePage() {
       <Navbar />
       {/* navbar section */}
       {/* your section */}
-
+      <Carousel />
       {/* your section */}
       {/* footer section */}
 

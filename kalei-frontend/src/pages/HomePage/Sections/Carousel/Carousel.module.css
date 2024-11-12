@@ -1,0 +1,25 @@
+.carouselSection {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+.carouselPoster {
+  background-color: red;
+  width: 80%;
+  height: 550px;
+  border-radius: 15px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+
+.swiperComponent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
