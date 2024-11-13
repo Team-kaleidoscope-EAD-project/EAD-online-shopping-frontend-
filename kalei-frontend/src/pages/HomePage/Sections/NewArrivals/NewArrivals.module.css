@@ -8,15 +8,26 @@ font-family: Arial, sans-serif;
 color: #7C4100;
 text-align: left;
 } 
+
 .ProductCard{
     display: grid;
-    grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
-    padding-left: 50px;
+    grid-template-columns:1fr 1fr 1fr 1fr ;
+    justify-content: center;
+    justify-items: center;
 
-    justify-content: center; /* Centers items horizontally */
-    align-items: center; /* Centers items vertically */
-  
-    
+
 }
 
+/* Tablet view: 3 cards per row */
+@media (max-width: 1024px) {
+    .ProductCard {
+        grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+    }
+}
 
+/* Mobile view: 1 card per row */
+@media (max-width: 768px) {
+    .ProductCard {
+        grid-template-columns: 1fr; /* 1 card per row */
+    }
+}

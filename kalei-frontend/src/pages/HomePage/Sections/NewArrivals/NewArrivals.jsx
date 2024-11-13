@@ -5,7 +5,9 @@ import ProductCard from "../../../../components/Cards/ProductCard/ProductCard";
 
 export default function NewArrivals() {
   return (
-    <div className={styles.newArrivals}>New Arrivals
+    <div>
+    <div className={styles.newArrivals}>New Arrivals </div>
+
     <div className={styles.ProductCard}>
     <ProductCard/>
     <ProductCard/>
@@ -16,6 +18,7 @@ export default function NewArrivals() {
     <ProductCard/>
     <ProductCard/>
     </div>
+
 
 
 
