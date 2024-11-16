@@ -44,7 +44,7 @@ export default function Carousel() {
           }}
         >
           <div className={styles.carouselPoster}>
-            <img src={poster1} alt="carousel poster" width={1250} />
+            <img src={poster1} alt="carousel poster"/>
           </div>
         </SwiperSlide>
         <SwiperSlide
@@ -55,7 +55,7 @@ export default function Carousel() {
           }}
         >
           <div className={styles.carouselPoster}>
-            <img src={poster3} alt="carousel poster" width={1250} />
+            <img src={poster3} alt="carousel poster"/>
           </div>
         </SwiperSlide>
         <SwiperSlide
@@ -66,7 +66,7 @@ export default function Carousel() {
           }}
         >
           <div className={styles.carouselPoster}>
-            <img src={poster2} alt="carousel poster" width={1250} />
+            <img src={poster2} alt="carousel poster" />
           </div>
         </SwiperSlide>
       </Swiper>
