@@ -64,7 +64,7 @@
 }
 
 .sectionLinkContainer a:hover::before {
-  opacity: 1; 
+  opacity: 1;
 }
 
 .megaMenuSection {
@@ -263,4 +263,63 @@
 .accessoryContent h4:hover {
   color: #be8748;
   transform: scale(1.05);
+}
+
+.userDetails {
+  font-family: "amiko_semibold";
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profileImgContainer {
+  background-color: red;
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.profileDetailsContainer {
+  margin-left: 20px;
+}
+
+.navbarOptions {
+  padding-top: 40px;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.navbarOptions h4 {
+  font-family: "amiko_semibold";
+  font-size: 14px;
+  font-weight: lighter;
+  transition-duration: 200ms;
+  cursor: pointer;
+}
+
+.navbarOptions h4:hover {
+  transform: scale(1.05);
+  color: #be8748;
+}
+
+.navbarOptions h4::before {
+  content: "•";
+  color: #be8748;
+  font-size: 16px;
+  margin-right: 8px;
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+.navbarOptions h4:hover::before {
+  opacity: 1;
 }

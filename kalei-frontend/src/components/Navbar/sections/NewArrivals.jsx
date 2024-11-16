@@ -41,7 +41,7 @@ export default function NewArrivals({ anchorEl, open, handleClose }) {
             {/* arrival card */}
             <div className={styles.newArrivalCard}>
               <div className={styles.imgContainer}>
-                <img src={newWomenWear} width={200} alt="new arrival image" />
+                <img src={newWomenWear} width={200} alt="new arrival img" />
               </div>
               <span>NEW WOMEN'S WEAR</span>
             </div>
@@ -49,7 +49,7 @@ export default function NewArrivals({ anchorEl, open, handleClose }) {
             {/* arrival card */}
             <div className={styles.newArrivalCard}>
               <div className={styles.imgContainer}>
-                <img src={newMenWear} width={200} alt="new arrival image" />
+                <img src={newMenWear} width={200} alt="new arrival img" />
               </div>
               <span>NEW MEN'S WEAR</span>
             </div>
@@ -57,7 +57,7 @@ export default function NewArrivals({ anchorEl, open, handleClose }) {
             {/* arrival card */}
             <div className={styles.newArrivalCard}>
               <div className={styles.imgContainer}>
-                <img src={newDenimWear} width={200} alt="new arrival image" />
+                <img src={newDenimWear} width={200} alt="new arrival img" />
               </div>
               <span>NEW DENIM WEAR</span>
             </div>
@@ -65,7 +65,7 @@ export default function NewArrivals({ anchorEl, open, handleClose }) {
             {/* arrival card */}
             <div className={styles.newArrivalCard}>
               <div className={styles.imgContainer}>
-                <img src={watchArrivals} width={200} alt="new arrival image" />
+                <img src={watchArrivals} width={200} alt="new arrival img" />
               </div>
               <span>WATCH ARRIVALS</span>
             </div>
@@ -73,7 +73,7 @@ export default function NewArrivals({ anchorEl, open, handleClose }) {
             {/* arrival card */}
             <div className={styles.newArrivalCard}>
               <div className={styles.imgContainer}>
-                <img src={newShoeWear} width={200} alt="new arrival image" />
+                <img src={newShoeWear} width={200} alt="new arrival img" />
               </div>
               <span>NEW SHOE ARRIVALS</span>
             </div>

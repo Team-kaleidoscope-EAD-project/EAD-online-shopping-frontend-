@@ -14,16 +14,42 @@ import Accessories from "./sections/Accessories";
 // icons
 import searchIcon from "../../assets/images/icons/search.png";
 import cartIcon from "../../assets/images/icons/cart.png";
+import hamburger from "../../assets/images/icons/hamburger.png";
 // icons
+
+// drawer
+import Drawer from "@mui/material/Drawer";
+// drawer
 
 // images
 import profileImg from "../../assets/images/profile/profileImg.png";
+import profileImg2 from "../../assets/images/profile/profileImg2.png";
 import { Avatar, Tooltip } from "@mui/material";
 // images
 
 import Zoom from "@mui/material/Zoom";
 
 export default function Navbar() {
+  // drawer settings
+  const [state, setState] = React.useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
+  // drawer settings
+
   const [anchorNewArrivalEl, setAnchorNewArrivalEl] = useState();
   const [anchorCollectionEl, setAnchorCollectionEl] = useState();
   const [anchorWomenEl, setAnchorWomenEl] = useState();
@@ -70,7 +96,12 @@ export default function Navbar() {
   return (
     <div className={styles.navbarContainer}>
       <Grid container spacing={2}>
-        <Grid container size={{ xs: 12 }}>
+        {/* large and extra large devices */}
+        <Grid
+          container
+          size={{ lg: 12 }}
+          sx={{ display: { xs: "none", lg: "flex" } }}
+        >
           <Grid size={{ xs: 6, md: 1, lg: 1 }} className={styles.logoContainer}>
             <img
               src={logo}
@@ -174,7 +205,95 @@ export default function Navbar() {
           </Grid>
           {/* search bar,cart and profile */}
         </Grid>
+        {/* large and extra large devices */}
+        <Grid
+          container
+          size={{ xs: 12 }}
+          sx={{ display: { xs: "flex", lg: "none" } }}
+        >
+          <Grid size={{ xs: 4 }} className={styles.logoContainer}>
+            <img
+              src={hamburger}
+              width={20}
+              alt="kalei_logo"
+              className={styles.logo}
+              onClick={toggleDrawer("bottom", true)}
+            />
+          </Grid>
+          <Grid
+            size={{ xs: 4 }}
+            className={styles.logoContainer}
+            sx={{ justifyContent: "center" }}
+          >
+            <img
+              src={logo}
+              width={60}
+              alt="kalei_logo"
+              className={styles.logo}
+            />
+          </Grid>
+          <Grid
+            size={{ xs: 4 }}
+            sx={{ justifyContent: "end" }}
+            className={styles.logoContainer}
+          >
+            <img
+              src={searchIcon}
+              width={20}
+              alt="kalei_logo"
+              className={styles.logo}
+            />
+          </Grid>
+        </Grid>
       </Grid>
+      <Drawer
+        anchor={"bottom"}
+        open={state["bottom"]}
+        onClose={toggleDrawer("bottom", false)}
+      >
+        <div
+          style={{
+            height: "70vh",
+            width: "100%",
+            backgroundColor: "#FCF2E7",
+            paddingTop: "40px",
+          }}
+        >
+          <Grid container sx={{ display: "flex", flexDirection: "column" }}>
+            {/* user details */}
+            <div className={styles.userDetails}>
+              {/* profile picture */}
+              <div className={styles.profileImgContainer}>
+                <img src={profileImg2} alt="profileImg" width={100} />
+              </div>
+              {/* profile picture */}
+              {/* user information */}
+              <div className={styles.profileDetailsContainer}>
+                <span style={{ fontSize: "18px" }}>Anonymous user</span>
+                <br />
+                <span style={{ fontSize: "14px" }}>
+                  AnonymousEmail@gmail.com
+                </span>
+              </div>
+              {/* user information */}
+            </div>
+            {/* user details */}
+            {/* navbar options */}
+            <Grid
+              className={styles.navbarOptions}
+              sx={{ alignItems: { xs: "start", md: "center" } }}
+            >
+              <h4>HOME</h4>
+              <h4>NEW ARRIVALS</h4>
+              <h4>COLLECTIONS</h4>
+              <h4>WOMEN</h4>
+              <h4>MEN</h4>
+              <h4>ACCESSORIES</h4>
+            </Grid>
+            {/* navbar options */}
+          </Grid>
+        </div>
+      </Drawer>
     </div>
   );
 }
