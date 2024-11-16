@@ -40,7 +40,7 @@ export default function Collections({ anchorEl, open, handleClose }) {
             {/* collection card */}
             <div className={styles.collectionCard}>
               <div className={styles.collectionCardImgContainer}>
-                <img src={img1} alt="collection card image" width={400} />
+                <img src={img1} alt="collection card img" width={400} />
               </div>
               <span>SPECIAL OFFERS FOR WOMEN</span>
             </div>
@@ -48,7 +48,7 @@ export default function Collections({ anchorEl, open, handleClose }) {
             {/* collection card */}
             <div className={styles.collectionCard}>
               <div className={styles.collectionCardImgContainer}>
-                <img src={img3} alt="collection card image" width={400} />
+                <img src={img3} alt="collection card img" width={400} />
               </div>
               <span>CUSTOMER FAVORITES</span>
             </div>
@@ -56,7 +56,7 @@ export default function Collections({ anchorEl, open, handleClose }) {
             {/* collection card */}
             <div className={styles.collectionCard}>
               <div className={styles.collectionCardImgContainer}>
-                <img src={img2} alt="collection card image" width={400} />
+                <img src={img2} alt="collection card img" width={400} />
               </div>
               <span>NEW PRODUCTS FOR WOMEN</span>
             </div>
@@ -64,7 +64,7 @@ export default function Collections({ anchorEl, open, handleClose }) {
             {/* collection card */}
             <div className={styles.collectionCard}>
               <div className={styles.collectionCardImgContainer}>
-                <img src={img4} alt="collection card image" width={400} />
+                <img src={img4} alt="collection card img" width={400} />
               </div>
               <span>TRENDING PRODUCTS</span>
             </div>

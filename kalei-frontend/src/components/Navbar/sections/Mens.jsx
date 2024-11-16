@@ -40,7 +40,7 @@ export default function Mens({ anchorEl, open, handleClose }) {
             {/* mens card */}
             <div className={styles.collectionCard}>
               <div className={styles.collectionCardImgContainer}>
-                <img src={img1} alt="collection card image" width={400} />
+                <img src={img1} alt="collection card img" width={400} />
               </div>
               <span>GYMWARE FOR MEN</span>
             </div>
@@ -48,7 +48,7 @@ export default function Mens({ anchorEl, open, handleClose }) {
             {/* mens card */}
             <div className={styles.collectionCard}>
               <div className={styles.collectionCardImgContainer}>
-                <img src={img3} alt="collection card image" width={400} />
+                <img src={img3} alt="collection card img" width={400} />
               </div>
               <span>MEN'S EYE WEAR</span>
             </div>
@@ -56,7 +56,7 @@ export default function Mens({ anchorEl, open, handleClose }) {
             {/* mens card */}
             <div className={styles.collectionCard}>
               <div className={styles.collectionCardImgContainer}>
-                <img src={img2} alt="collection card image" width={400} />
+                <img src={img2} alt="collection card img" width={400} />
               </div>
               <span>STREETWARE FOR MEN</span>
             </div>
@@ -64,7 +64,7 @@ export default function Mens({ anchorEl, open, handleClose }) {
             {/* mens card */}
             <div className={styles.collectionCard}>
               <div className={styles.collectionCardImgContainer}>
-                <img src={img4} alt="collection card image" width={400} />
+                <img src={img4} alt="collection card img" width={400} />
               </div>
               <span>ACCESSORIES FOR MEN</span>
             </div>
