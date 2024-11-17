@@ -9,9 +9,11 @@ export default function HomePage() {
       {/* navbar section */}
       <Navbar />
       {/* navbar section */}
+
       {/* your section */}
-      <Carousel />
+      {/* <Carousel /> */}
       {/* your section */}
+
       {/* footer section */}
 
       {/* footer section */}
