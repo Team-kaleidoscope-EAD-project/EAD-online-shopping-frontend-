@@ -6,8 +6,8 @@ function MainImage({ productImage }) {
     <>
       <Box
         sx={{
-          height: { xs: "452px", md: "650px", lg: "1000px" },
-          width: { xs: "100%", md: "570px", lg: "768px" },
+          height: "auto",
+          width: { xs: "100%", md: "600px", lg: "768px" },
           backgroundColor: "white",
           borderRadius: "20px",
           overflow: "hidden",

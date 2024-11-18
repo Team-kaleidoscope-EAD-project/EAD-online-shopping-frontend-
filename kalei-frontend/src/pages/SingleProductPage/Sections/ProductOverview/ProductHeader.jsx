@@ -35,9 +35,10 @@ function ProductHeader({ productName, productId, productPrice }) {
           fontSize: { xs: "30px", sm: "35px", md: "40px" },
 
           fontFamily: "amiko-bold",
+          marginTop: { xs: "25px", sm: "30px", md: "40px" },
         }}
       >
-        Rs 3,500.00
+        Rs {productPrice.toLocaleString("en-IN")}
       </Typography>
     </Box>
   );

@@ -21,7 +21,7 @@ const responsive = {
   },
 };
 
-function MultiCarousel({ list }) {
+function MultiCarousel({ list, selectedColor }) {
   return (
     <Carousel
       swipeable={true}
@@ -43,10 +43,8 @@ function MultiCarousel({ list }) {
         list.map((item, index) => (
           <Box
             key={index}
-            style={{
-              display: "flex",
-              flexDirection: "row",
-            }}
+            sx={{ cursor: "pointer" }}
+            onClick={() => selectedColor(index)}
           >
             {item}
           </Box>
