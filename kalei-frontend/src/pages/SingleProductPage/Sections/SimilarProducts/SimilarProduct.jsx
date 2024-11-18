@@ -9,7 +9,7 @@ function SimilarProduct() {
       <Typography
         sx={{
           fontFamily: "amiko_semibold",
-          fontSize: "25px",
+          fontSize: { xs: "20px", md: "25px" },
           textAlign: "left",
           height: "100%",
           color: "#7C4100",
@@ -28,8 +28,8 @@ function SimilarProduct() {
           <Box key={index}>
             <Box
               sx={{
-                height: "100px",
-                width: "100px",
+                height: "400px",
+                width: "400px",
                 backgroundColor: "red",
               }}
             ></Box>

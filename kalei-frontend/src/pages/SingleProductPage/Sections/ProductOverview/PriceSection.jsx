@@ -14,7 +14,7 @@ function PriceSection({ productPrice, productStock, selectedQuantity }) {
         sx={{
           fontFamily: "amiko_regular",
           textAlign: "left",
-          fontSize: { xs: "20px", sm: "25px" },
+          fontSize: { xs: "20px", sm: "22px" },
           display: "flex",
 
           alignItems: "center",
@@ -24,7 +24,7 @@ function PriceSection({ productPrice, productStock, selectedQuantity }) {
         <Typography
           sx={{
             fontFamily: "amiko-bold",
-            fontSize: { xs: "20px", sm: "25px" },
+            fontSize: { xs: "20px", sm: "22px" },
             marginLeft: "10px",
           }}
         >

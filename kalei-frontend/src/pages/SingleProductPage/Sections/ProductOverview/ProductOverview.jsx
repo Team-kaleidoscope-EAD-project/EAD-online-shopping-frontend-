@@ -36,12 +36,9 @@ const productPrice = 3500;
 const sizeList = ["sm", "md", "lg", "xl"];
 const productStock = 10;
 
-const ProductList = [
-  <ProductColors image={singleProductImageList[0].image} />,
-  <ProductColors image={singleProductImageList[1].image} />,
-  <ProductColors image={singleProductImageList[2].image} />,
-  <ProductColors image={singleProductImageList[3].image} />,
-];
+const ProductList = singleProductImageList.map((item, index) => (
+  <ProductColors key={index} image={item.image} />
+));
 
 const ProductOverview = () => {
   const [selectedColor, setSelectedColor] = useState(0);
@@ -82,13 +79,13 @@ const ProductOverview = () => {
               sx={{
                 maxWidth: { xs: "100%", md: "45vw", lg: "38vw" },
                 padding: "10px",
-                marginTop: { xs: "0px", sm: "10px", md: "40px" },
+                marginTop: { xs: "0px", sm: "10px", md: "30px" },
                 marginBottom: { xs: "30px", md: "0px" },
               }}
             >
               <MultiCarousel
                 list={ProductList}
-                selectedColor={setSelectedColor}
+                selectedItem={setSelectedColor}
               />
             </Box>
           </Box>
@@ -105,7 +102,7 @@ const ProductOverview = () => {
           {/* product prices */}
           <Box
             sx={{
-              marginTop: { xs: "50px", sm: "60px", md: "70px" },
+              marginTop: { xs: "40px", sm: "45px", md: "50px" },
             }}
           >
             <PriceSection
@@ -118,7 +115,7 @@ const ProductOverview = () => {
           {/* user Rating */}
           <Box
             sx={{
-              marginTop: { xs: "50px", sm: "60px", md: "70px" },
+              marginTop: { xs: "40px", sm: "45px", md: "50px" },
             }}
           >
             <UserRating ratingValue={4} />

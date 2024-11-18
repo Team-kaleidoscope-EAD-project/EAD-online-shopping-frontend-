@@ -9,9 +9,9 @@ function SizeComponent({ sizeList, selectedSize }) {
         <Typography
           sx={{
             fontFamily: "amiko_regular",
-            fontSize: { xs: "20px", sm: "25px" },
+            fontSize: { xs: "20px", sm: "22px" },
             textAlign: "left",
-            marginBottom: "10px",
+            marginBottom: "5px",
           }}
         >
           Size

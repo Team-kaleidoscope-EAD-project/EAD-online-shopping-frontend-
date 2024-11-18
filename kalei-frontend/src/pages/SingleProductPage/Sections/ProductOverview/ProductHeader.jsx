@@ -13,7 +13,7 @@ function ProductHeader({ productName, productId, productPrice }) {
     >
       <Typography
         sx={{
-          fontSize: { xs: "30px", sm: "35px", md: "40px" },
+          fontSize: { xs: "28px", sm: "30px", md: "35px" },
           fontFamily: "amiko-bold",
         }}
       >
@@ -22,7 +22,7 @@ function ProductHeader({ productName, productId, productPrice }) {
 
       <Typography
         sx={{
-          fontSize: { xs: "14px", sm: "18px", md: "20px" },
+          fontSize: { xs: "14px", sm: "16px", md: "18px" },
 
           fontFamily: "amiko_regular",
         }}
@@ -32,10 +32,10 @@ function ProductHeader({ productName, productId, productPrice }) {
 
       <Typography
         sx={{
-          fontSize: { xs: "30px", sm: "35px", md: "40px" },
+          fontSize: { xs: "28px", sm: "30px", md: "35px" },
 
           fontFamily: "amiko-bold",
-          marginTop: { xs: "25px", sm: "30px", md: "40px" },
+          marginTop: { xs: "25px", sm: "30px", md: "30px" },
         }}
       >
         Rs {productPrice.toLocaleString("en-IN")}
