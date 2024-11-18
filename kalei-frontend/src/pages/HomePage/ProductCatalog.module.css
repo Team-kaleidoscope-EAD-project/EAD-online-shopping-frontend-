@@ -102,4 +102,46 @@
   font-family: "amiko_regular";
 }
 
+.filtersButton {
+  font-family: "amiko_regular";
+  border: 1px solid rgb(20, 18, 18);
+  background-color: rgb(255, 255, 255, 0);
+  width: 150px;
+  height: 35px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  cursor: pointer;
+  transition-duration: 300ms;
+}
+
+.filtersButton:hover {
+  color: white;
+  background-color: rgb(0, 0, 0, 100);
+  border: none;
+}
+
+.drawerText {
+  font-family: "amiko_regular";
+  font-size: 19px;
+}
+
+.drawerCloseBtn {
+  background-color: #141413;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  cursor: pointer;
+  transition-duration: 300ms;
+}
+
+.drawerCloseBtn:hover {
+  transform: scale(0.9);
+}
+
 /* filters */
