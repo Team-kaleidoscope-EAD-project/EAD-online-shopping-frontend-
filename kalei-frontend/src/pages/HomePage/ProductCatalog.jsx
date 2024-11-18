@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Grid from "@mui/material/Grid2";
 import styles from "./ProductCatalog.module.css";
 import Navbar from "../../components/Navbar/Navbar";
@@ -18,6 +18,11 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 // accordian
+
+// filter data
+import { productCategories } from "../../data/productFilters";
+import { productSizes } from "../../data/productFilters";
+// filter data
 
 // drawer
 import Drawer from "@mui/material/Drawer";
@@ -54,6 +59,34 @@ const marks = [
 // price ranges
 
 export default function ProductCatalog() {
+  // filters
+  const [category, setCategory] = useState(productCategories[0]);
+  const [size, setSize] = useState(productSizes[0]);
+  const [instock_availability, setInstock_Availability] = useState(true);
+  const [outofstock_availability, setOutofstock_Availability] = useState(false);
+  const [price, setPrice] = useState(0.0);
+  // filters
+
+  const handleProductCategoryFilter = (category) => {
+    setCategory(category);
+  };
+
+  const handleProductSizeFilter = (size) => {
+    setSize(size);
+  };
+
+  const handleInstock_Availability = () => {
+    setInstock_Availability(!instock_availability);
+    alert("in stock availability: " + instock_availability);
+    alert("out of stock availability: " + outofstock_availability);
+  };
+
+  const handleOutOfstock_Availability = () => {
+    setOutofstock_Availability(!outofstock_availability);
+    alert("in stock availability: " + instock_availability);
+    alert("out of stock availability: " + outofstock_availability);
+  };
+
   // drawer
   const [open, setOpen] = React.useState(false);
 
@@ -64,8 +97,8 @@ export default function ProductCatalog() {
 
   // price range
   const [val, setVal] = React.useState(MIN);
-  const handleChange = (_, newValue) => {
-    setVal(newValue);
+  const handleProductPrice = (_, newValue) => {
+    setPrice(newValue);
   };
   // price range
   const breadcrumbs = [
@@ -117,16 +150,23 @@ export default function ProductCatalog() {
             </AccordionSummary>
             <AccordionDetails sx={{ textAlign: "start" }}>
               <div className={styles.productCategories}>
-                <span>All Products</span>
-                <span>Foot wear</span>
-                <span>Watches</span>
-                <span>Denim wear</span>
-                <span>Men</span>
-                <span>Women</span>
-                <span>Pants</span>
-                <span>Oversized T-shirts</span>
-                <span>Casuals</span>
-                <span>Sports wear</span>
+                {productCategories.map((item) => {
+                  return (
+                    <>
+                      <span
+                        className={
+                          category == item ? `${styles.selectedCategory}` : ""
+                        }
+                        onClick={() => {
+                          handleProductCategoryFilter(item);
+                        }}
+                      >
+                        {category == item ? "• " : ""}
+                        {item}
+                      </span>
+                    </>
+                  );
+                })}
               </div>
             </AccordionDetails>
           </Accordion>
@@ -143,30 +183,24 @@ export default function ProductCatalog() {
             </AccordionSummary>
             <AccordionDetails sx={{ textAlign: "start" }}>
               <div className={styles.productSizes}>
-                <div className={`${styles.selectedSizeBox}`}>
-                  <span>All</span>
-                </div>
-                <div className={styles.sizeBox}>
-                  <span>XXS</span>
-                </div>
-                <div className={styles.sizeBox}>
-                  <span>XS</span>
-                </div>
-                <div className={styles.sizeBox}>
-                  <span>S</span>
-                </div>
-                <div className={styles.sizeBox}>
-                  <span>M</span>
-                </div>
-                <div className={styles.sizeBox}>
-                  <span>L</span>
-                </div>
-                <div className={styles.sizeBox}>
-                  <span>XL</span>
-                </div>
-                <div className={styles.sizeBox}>
-                  <span>XXL</span>
-                </div>
+                {productSizes.map((item) => {
+                  return (
+                    <>
+                      <div
+                        className={
+                          size == item
+                            ? `${styles.selectedSizeBox}`
+                            : `${styles.sizeBox}`
+                        }
+                        onClick={() => {
+                          handleProductSizeFilter(item);
+                        }}
+                      >
+                        <span>{item}</span>
+                      </div>
+                    </>
+                  );
+                })}
               </div>
             </AccordionDetails>
           </Accordion>
@@ -192,6 +226,8 @@ export default function ProductCatalog() {
                   }}
                   defaultChecked
                   name="availability"
+                  checked={instock_availability}
+                  onClick={handleInstock_Availability}
                 />
                 <span>In Stock</span>
               </div>
@@ -204,6 +240,8 @@ export default function ProductCatalog() {
                     },
                   }}
                   name="availability"
+                  checked={outofstock_availability}
+                  onClick={handleOutOfstock_Availability}
                 />
                 <span>Out Of Stock</span>
               </div>
@@ -224,11 +262,11 @@ export default function ProductCatalog() {
               <Slider
                 marks={marks}
                 step={10}
-                value={val}
+                value={price}
                 valueLabelDisplay="auto"
                 min={MIN}
                 max={MAX}
-                onChange={handleChange}
+                onChange={handleProductPrice}
                 color="grey"
                 sx={{
                   color: grey[800],
@@ -300,16 +338,25 @@ export default function ProductCatalog() {
                 </AccordionSummary>
                 <AccordionDetails sx={{ textAlign: "start" }}>
                   <div className={styles.productCategories}>
-                    <span>All Products</span>
-                    <span>Foot wear</span>
-                    <span>Watches</span>
-                    <span>Denim wear</span>
-                    <span>Men</span>
-                    <span>Women</span>
-                    <span>Pants</span>
-                    <span>Oversized T-shirts</span>
-                    <span>Casuals</span>
-                    <span>Sports wear</span>
+                    {productCategories.map((item) => {
+                      return (
+                        <>
+                          <span
+                            className={
+                              category == item
+                                ? `${styles.selectedCategory}`
+                                : ""
+                            }
+                            onClick={() => {
+                              handleProductCategoryFilter(item);
+                            }}
+                          >
+                            {category == item ? "• " : ""}
+                            {item}
+                          </span>
+                        </>
+                      );
+                    })}
                   </div>
                 </AccordionDetails>
               </Accordion>
@@ -326,30 +373,24 @@ export default function ProductCatalog() {
                 </AccordionSummary>
                 <AccordionDetails sx={{ textAlign: "start" }}>
                   <div className={styles.productSizes}>
-                    <div className={`${styles.selectedSizeBox}`}>
-                      <span>All</span>
-                    </div>
-                    <div className={styles.sizeBox}>
-                      <span>XXS</span>
-                    </div>
-                    <div className={styles.sizeBox}>
-                      <span>XS</span>
-                    </div>
-                    <div className={styles.sizeBox}>
-                      <span>S</span>
-                    </div>
-                    <div className={styles.sizeBox}>
-                      <span>M</span>
-                    </div>
-                    <div className={styles.sizeBox}>
-                      <span>L</span>
-                    </div>
-                    <div className={styles.sizeBox}>
-                      <span>XL</span>
-                    </div>
-                    <div className={styles.sizeBox}>
-                      <span>XXL</span>
-                    </div>
+                    {productSizes.map((item) => {
+                      return (
+                        <>
+                          <div
+                            className={
+                              size == item
+                                ? `${styles.selectedSizeBox}`
+                                : `${styles.sizeBox}`
+                            }
+                            onClick={() => {
+                              handleProductSizeFilter(item);
+                            }}
+                          >
+                            <span>{item}</span>
+                          </div>
+                        </>
+                      );
+                    })}
                   </div>
                 </AccordionDetails>
               </Accordion>
@@ -375,6 +416,8 @@ export default function ProductCatalog() {
                       }}
                       defaultChecked
                       name="availability"
+                      checked={instock_availability}
+                      onClick={handleInstock_Availability}
                     />
                     <span>In Stock</span>
                   </div>
@@ -387,6 +430,8 @@ export default function ProductCatalog() {
                         },
                       }}
                       name="availability"
+                      checked={outofstock_availability}
+                      onClick={handleOutOfstock_Availability}
                     />
                     <span>Out Of Stock</span>
                   </div>
@@ -407,11 +452,11 @@ export default function ProductCatalog() {
                   <Slider
                     marks={marks}
                     step={10}
-                    value={val}
+                    value={price}
                     valueLabelDisplay="auto"
                     min={MIN}
                     max={MAX}
-                    onChange={handleChange}
+                    onChange={handleProductPrice}
                     color="grey"
                     sx={{
                       color: grey[800],
