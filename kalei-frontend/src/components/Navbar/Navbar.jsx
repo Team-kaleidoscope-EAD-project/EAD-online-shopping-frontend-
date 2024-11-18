@@ -115,19 +115,19 @@ export default function Navbar() {
             className={styles.sectionLinkContainer}
           >
             <Link to="/">HOME</Link>
-            <Link to="/" onClick={handleNewArrivalClick}>
+            <Link to="/" onMouseOver={handleNewArrivalClick}>
               NEW ARRIVALS
             </Link>
-            <Link to="/" onClick={handleCollectionClick}>
+            <Link to="/" onMouseOver={handleCollectionClick}>
               COLLECTIONS
             </Link>
-            <Link to="/" onClick={handleWomenClick}>
+            <Link to="/" onMouseOver={handleWomenClick}>
               WOMEN
             </Link>
-            <Link to="/" onClick={handleMenClick}>
+            <Link to="/" onMouseOver={handleMenClick}>
               MEN
             </Link>
-            <Link to="/" onClick={handleAccessoriesClick}>
+            <Link to="/" onMouseOver={handleAccessoriesClick}>
               ACCESSORIES
             </Link>
           </Grid>
