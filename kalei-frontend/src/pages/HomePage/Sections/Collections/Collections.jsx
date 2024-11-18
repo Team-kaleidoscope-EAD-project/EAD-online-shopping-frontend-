@@ -6,6 +6,7 @@ import image2 from "../../../../assets/images/products/collection2.png";
 import image4 from "../../../../assets/images/products/collection4.png";
 import image3 from "../../../../assets/images/products/collection3.png";
 import styles from "./Collections.module.css";
+import Grid from "@mui/material/Grid2";
 
 export default function Collections() {
   const collections = [
@@ -33,20 +34,33 @@ export default function Collections() {
 
   return (
     <div>
-      <h2 className={styles.title}>COLLECTIONS</h2>
-      <div className={styles.container}>
-        {collections.length === 0 ? (
-          <div>No collections found.</div>
-        ) : (
-          collections.map((collection) => (
-            <CollectionCard
-              key={collection.key}
-              name={collection.name}
-              image={collection.image}
-            />
-          ))
-        )}
-      </div>
+      <Grid container>
+        <Grid
+          size={{ xs: 12 }}
+          sx={{
+            display: "flex",
+            justifyContent: { xs: "center", md: "start" },
+            alignItems: "center",
+          }}
+        >
+          <h2 className={styles.title}>COLLECTIONS</h2>
+        </Grid>
+        <Grid size={{ xs: 12 }}>
+          <div className={styles.container}>
+            {collections.length === 0 ? (
+              <div>No collections found.</div>
+            ) : (
+              collections.map((collection) => (
+                <CollectionCard
+                  key={collection.key}
+                  name={collection.name}
+                  image={collection.image}
+                />
+              ))
+            )}
+          </div>
+        </Grid>
+      </Grid>
     </div>
   );
 }
