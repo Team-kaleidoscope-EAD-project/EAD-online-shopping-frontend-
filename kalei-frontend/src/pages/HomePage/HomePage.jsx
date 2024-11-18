@@ -2,6 +2,7 @@ import React from "react";
 import styles from "../HomePage/HomePage.module.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Carousel from "./Sections/Carousel/Carousel";
+import Collections from "./Sections/Collections/Collections";
 
 export default function HomePage() {
   return (
@@ -10,7 +11,8 @@ export default function HomePage() {
       <Navbar />
       {/* navbar section */}
       {/* your section */}
-      <Carousel />
+      <Carousel />      
+      <Collections />
       {/* your section */}
       {/* footer section */}
 
