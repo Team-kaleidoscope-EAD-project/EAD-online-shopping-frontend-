@@ -2,6 +2,7 @@
 import React from "react";
 import styles from "../NewArrivals/NewArrivals.module.css";
 import ProductCard from "../../../../components/Cards/ProductCard/ProductCard";
+const productData = require("./products.json");
 
 export default function NewArrivals() {
   return (
@@ -9,15 +10,14 @@ export default function NewArrivals() {
     <div className={styles.newArrivals}>New Arrivals </div>
 
     <div className={styles.ProductCard}>
-    <ProductCard/>
-    <ProductCard/>
-    <ProductCard/>
-    <ProductCard/>
-    <ProductCard/>
-    <ProductCard/>
-    <ProductCard/>
-    <ProductCard/>
-    </div>
+        {productData.map((product, index) => (
+          <ProductCard
+            key={index}
+            id={product.id}
+            
+          />
+        ))}
+      </div>
 
 
 

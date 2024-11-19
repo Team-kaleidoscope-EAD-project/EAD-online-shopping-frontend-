@@ -9,7 +9,7 @@ export default function HomePage() {
       {/* navbar section */}
       {/* navbar section */}
       <NewArrivals />
-      <CartPage/>
+      {/* <CartPage/> */}
       {/* your section */}
       {/* footer section */}
       {/* footer section */}

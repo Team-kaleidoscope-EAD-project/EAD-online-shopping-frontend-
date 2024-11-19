@@ -8,13 +8,13 @@ import {
   Button,
   Chip,
   Box,
-  IconButton,
+  IconButton,zzz
 } from "@mui/material";
 
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ProductImage from "../../../assets/images/products/kalei1.png";
 
-export default function ProductCard() {
+export default function ProductCard({id}) {
   const colors = [
     "#986AA2", // purple
     "#FBB7DC", // pink
@@ -32,6 +32,7 @@ export default function ProductCard() {
   const [colorIndex, setColorIndex] = useState(0);
   const [product, setProduct] = useState({ name: "Women's Shirt", price: 2000 });
   const [material, setMaterial] = useState("Cotton");
+  const testId = id;
 
 
   const handleNextColorSet = () => {
@@ -113,6 +114,7 @@ export default function ProductCard() {
             }}
           >
             {product.name}
+            {testId}
           </Typography>
           <Typography
             component="div"
@@ -248,7 +250,7 @@ export default function ProductCard() {
             
           }}
         >
-          ADD TO CART
+          VIEW PRODUCT
         </Button>
       </CardContent>
     </Card>
