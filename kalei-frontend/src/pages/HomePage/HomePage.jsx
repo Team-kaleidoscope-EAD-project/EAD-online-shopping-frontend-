@@ -8,7 +8,7 @@ export default function HomePage() {
     <div className={styles.homepageSection}>
       {/* navbar section */}
       {/* navbar section */}
-      {/* <NewArrivals /> */}
+      <NewArrivals />
       <CartPage/>
       {/* your section */}
       {/* footer section */}
