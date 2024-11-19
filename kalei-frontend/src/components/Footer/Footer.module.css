@@ -1,0 +1,12 @@
+@media (max-width: 600px) {
+    .icon-circle {
+      background-color: white;
+      border-radius: 50%;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  
