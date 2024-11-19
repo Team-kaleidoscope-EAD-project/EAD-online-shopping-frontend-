@@ -10,10 +10,12 @@ export default function HomePage() {
       {/* navbar section */}
       <Navbar />
       {/* navbar section */}
+
       {/* your section */}
       <Carousel />      
       <Collections />
       {/* your section */}
+
       {/* footer section */}
 
       {/* footer section */}
