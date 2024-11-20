@@ -61,10 +61,9 @@ export default function Footer() {
   return (
     <div
       style={{
-        bottom: "0px",
-        position: "fixed",
-        bottom: "0px",
-        left: "0px",
+        bottom: 0,
+        position: "sticky",
+        left: 0,
         width: "100%",
       }}
     >
