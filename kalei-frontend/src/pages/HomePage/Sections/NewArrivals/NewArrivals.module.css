@@ -1,0 +1,39 @@
+/* Dilrangi/NewArrivals.css */
+.newArrivals {
+font-size: 18px;
+font-weight: 200;
+margin-top: 50px;
+margin-left: 25px;
+font-family: Arial, sans-serif;
+color: #7C4100;
+text-align: left;
+} 
+
+.ProductCard{
+    display: grid;
+    grid-template-columns:1fr 1fr 1fr 1fr ;
+    justify-content: center;
+    justify-items: center;
+
+
+}
+
+/* Tablet view: 3 cards per row */
+@media (max-width: 1146px) {
+    .ProductCard {
+        grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+    }
+}
+
+@media (max-width: 900px) {
+    .ProductCard {
+        grid-template-columns: 1fr 1fr; /* 1 card per row */
+    }
+}
+
+/* Mobile view: 1 card per row */
+@media (max-width: 680px) {
+    .ProductCard {
+        grid-template-columns: 1fr; /* 1 card per row */
+    }
+}
