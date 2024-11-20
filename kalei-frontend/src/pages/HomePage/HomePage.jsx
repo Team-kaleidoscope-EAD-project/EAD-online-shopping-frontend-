@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "../HomePage/HomePage.module.css";
+import CartPage from "./Sections/AddToCart/AddToCart";
 
 export default function HomePage() {
   return (
@@ -9,7 +10,7 @@ export default function HomePage() {
       {/* navbar section */}
       {/* your section */}
 
-      {/* your section */}
+      <CartPage/>
       {/* footer section */}
 
       {/* footer section */}
