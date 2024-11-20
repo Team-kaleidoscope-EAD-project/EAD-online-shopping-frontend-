@@ -62,7 +62,7 @@ export default function Footer() {
     <div
       style={{
         bottom: 0,
-        position: "fixed",
+        position: "relative",
         left: 0,
         width: "100%",
         zIndex: 1000,
