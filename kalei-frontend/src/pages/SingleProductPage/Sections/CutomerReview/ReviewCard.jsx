@@ -5,8 +5,8 @@ function ReviewCard({ proPic, ratingValue, username, date, comment }) {
   return (
     <Box
       sx={{
-        height: { xs: "350px", md: "400px" },
-        width: { xs: "100%", md: "85%" },
+        height: "350px",
+        width: { xs: "100%", md: "87%" },
         boxShadow: "2px 2px 8px rgba(0,0,0,0.15)",
         padding: "35px",
         borderRadius: "20px",
@@ -72,7 +72,7 @@ function ReviewCard({ proPic, ratingValue, username, date, comment }) {
       <Typography
         sx={{
           fontFamily: "amiko_regular",
-          fontSize: { xs: "15px", md: "20px" },
+          fontSize: { xs: "15px", md: "18px" },
           marginTop: "25px",
           height: "170px",
           overflow: "scroll",

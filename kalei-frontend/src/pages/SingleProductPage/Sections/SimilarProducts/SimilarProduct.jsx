@@ -1,7 +1,8 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Grid2, Typography } from "@mui/material";
 import React from "react";
+import ProductCard from "../../../../components/Cards/ProductCard/ProductCard";
 
-const similarProductList = [1, 2, 3];
+const similarProductList = [1, 2, 3, 1, 2];
 
 function SimilarProduct() {
   return (
@@ -13,29 +14,26 @@ function SimilarProduct() {
           textAlign: "left",
           height: "100%",
           color: "#7C4100",
+          marginBottom: "25px",
         }}
       >
         SIMILAR PRODUCTS
       </Typography>
 
-      <Box
+      <Grid2
+        container
+        spacing={{ xs: 2, sm: 3, md: 4, lg: 6 }}
+        columns={{ xs: 4, sm: 8, md: 12 }}
         sx={{
-          display: "flex",
-          gap: "25px",
+          justifyContent: "center",
         }}
       >
         {similarProductList.map((item, index) => (
-          <Box key={index}>
-            <Box
-              sx={{
-                height: "400px",
-                width: "400px",
-                backgroundColor: "red",
-              }}
-            ></Box>
-          </Box>
+          <Grid2 key={index} item xs={6} md={8}>
+            <ProductCard />
+          </Grid2>
         ))}
-      </Box>
+      </Grid2>
     </div>
   );
 }
