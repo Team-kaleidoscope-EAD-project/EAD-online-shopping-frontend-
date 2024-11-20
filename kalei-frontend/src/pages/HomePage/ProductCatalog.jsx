@@ -38,6 +38,7 @@ import closeBtn from "../../assets/images/icons/cross.png";
 
 import { grey } from "@mui/material/colors";
 import ProductCard from "../../components/Cards/ProductCard/ProductCard";
+import Footer from "../../components/Footer/Footer";
 
 // price ranges
 function handleClick(event) {
@@ -97,10 +98,10 @@ export default function ProductCatalog() {
   // drawer
 
   // price range
-  const [val, setVal] = React.useState(MIN);
   const handleProductPrice = (_, newValue) => {
     setPrice(newValue);
   };
+  
   // price range
   const breadcrumbs = [
     <Link
@@ -156,13 +157,13 @@ export default function ProductCatalog() {
                     <>
                       <span
                         className={
-                          category == item ? `${styles.selectedCategory}` : ""
+                          category === item ? `${styles.selectedCategory}` : ""
                         }
                         onClick={() => {
                           handleProductCategoryFilter(item);
                         }}
                       >
-                        {category == item ? "• " : ""}
+                        {category === item ? "• " : ""}
                         {item}
                       </span>
                     </>
@@ -189,7 +190,7 @@ export default function ProductCatalog() {
                     <>
                       <div
                         className={
-                          size == item
+                          size === item
                             ? `${styles.selectedSizeBox}`
                             : `${styles.sizeBox}`
                         }
@@ -346,7 +347,7 @@ export default function ProductCatalog() {
                         <>
                           <span
                             className={
-                              category == item
+                              category === item
                                 ? `${styles.selectedCategory}`
                                 : ""
                             }
@@ -354,7 +355,7 @@ export default function ProductCatalog() {
                               handleProductCategoryFilter(item);
                             }}
                           >
-                            {category == item ? "• " : ""}
+                            {category === item ? "• " : ""}
                             {item}
                           </span>
                         </>
@@ -381,7 +382,7 @@ export default function ProductCatalog() {
                         <>
                           <div
                             className={
-                              size == item
+                              size === item
                                 ? `${styles.selectedSizeBox}`
                                 : `${styles.sizeBox}`
                             }
@@ -481,7 +482,11 @@ export default function ProductCatalog() {
           </Drawer>
           {/* drawer */}
         </Grid>
-        <Grid size={{ xs: 12, md: 8, lg: 9 }} paddingLeft={3} className={styles.productCatalogContainer}>
+        <Grid
+          size={{ xs: 12, md: 8, lg: 9 }}
+          paddingLeft={3}
+          className={styles.productCatalogContainer}
+        >
           <ProductCard />
           <ProductCard />
           <ProductCard />
@@ -494,7 +499,7 @@ export default function ProductCatalog() {
       </Grid>
       {/* product catalog */}
       {/* footer section */}
-
+      <Footer />
       {/* footer section */}
     </div>
   );

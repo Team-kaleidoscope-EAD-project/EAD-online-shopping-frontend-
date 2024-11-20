@@ -63,7 +63,7 @@ function CustomerReview() {
   const [selectedReview, setSelectedReview] = useState();
 
   return (
-    <>
+    <div style={{ padding: "25px" }}>
       <Box
         sx={{
           display: "flex",
@@ -94,7 +94,7 @@ function CustomerReview() {
           itemsCount={{ desktop: 2, tablet: 1, mobile: 1 }}
         />
       </Box>
-    </>
+    </div>
   );
 }
 

@@ -7,6 +7,7 @@ import CustomerReview from "./Sections/CutomerReview/CustomerReview";
 import SimilarProduct from "./Sections/SimilarProducts/SimilarProduct";
 import PopUp from "./Sections/CutomerReview/PopUp";
 import EditIcon from "@mui/icons-material/Edit";
+import Footer from "../../components/Footer/Footer";
 
 function SingleProductPage() {
   const [displayPopUp, setDisplayPopUp] = useState(false);
@@ -16,7 +17,6 @@ function SingleProductPage() {
       <Navbar />
       <div
         style={{
-          padding: "25px",
           color: "#292726",
         }}
       >
@@ -83,6 +83,7 @@ function SingleProductPage() {
         <Box
           sx={{
             marginTop: { xs: "60px", md: "100px" },
+            padding: "25px",
           }}
         >
           <SimilarProduct />
@@ -90,6 +91,10 @@ function SingleProductPage() {
 
         {/* popup */}
         {displayPopUp && <PopUp close={setDisplayPopUp} />}
+
+        {/* footer section */}
+        <Footer />
+        {/* footer section */}
       </div>
     </>
   );

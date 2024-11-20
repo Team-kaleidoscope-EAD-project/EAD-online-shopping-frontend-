@@ -7,16 +7,12 @@ const productData = require("./products.json");
 export default function NewArrivals() {
   return (
     <div>
-    <div className={styles.newArrivals}>New Arrivals </div>
-    <div className={styles.ProductCard}>
+      <div className={styles.newArrivals}>NEW ARRIVALS </div>
+      <div className={styles.ProductCard}>
         {productData.map((product, index) => (
-          <ProductCard
-            key={index}
-            id={product.id}
-            
-          />
+          <ProductCard key={index} id={product.id} />
         ))}
-      </div>   
+      </div>
     </div>
   );
 }

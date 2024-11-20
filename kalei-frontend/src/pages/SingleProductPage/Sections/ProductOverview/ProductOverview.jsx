@@ -54,6 +54,7 @@ const ProductOverview = () => {
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
           gap: "50px",
+          padding: "25px",
         }}
       >
         {/* cover Image */}

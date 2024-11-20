@@ -6,7 +6,7 @@ const productDescription =
 
 function ProductDescription() {
   return (
-    <>
+    <div style={{ padding: "25px" }}>
       <Box
         sx={{
           display: "flex",
@@ -46,7 +46,7 @@ function ProductDescription() {
           {productDescription}
         </Typography>
       </Box>
-    </>
+    </div>
   );
 }
 

@@ -61,6 +61,7 @@ export default function Footer() {
   return (
     <div
       style={{
+        marginTop: "10vh",
         bottom: 0,
         position: "relative",
         left: 0,

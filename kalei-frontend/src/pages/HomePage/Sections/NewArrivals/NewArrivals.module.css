@@ -1,12 +1,18 @@
+@font-face {
+  font-family: "amiko-regular";
+  src: url("../../../../assets/fonts/Amiko-Regular.ttf");
+}
+
 /* Dilrangi/NewArrivals.css */
 .newArrivals {
   font-size: 18px;
   font-weight: 200;
   margin-top: 50px;
   margin-left: 25px;
-  font-family: Arial, sans-serif;
+  font-family: "amiko-regular";
   color: #7c4100;
   text-align: left;
+  font-weight: bold;
 }
 
 .ProductCard {
@@ -15,6 +21,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 70px;
+  margin-top: 20px;
 }
 
 /* Tablet view: 3 cards per row */
