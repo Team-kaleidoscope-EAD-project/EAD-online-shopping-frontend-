@@ -62,9 +62,10 @@ export default function Footer() {
     <div
       style={{
         bottom: 0,
-        position: "sticky",
+        position: "fixed",
         left: 0,
         width: "100%",
+        zIndex: 1000,
       }}
     >
       <Box
