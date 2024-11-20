@@ -8,7 +8,6 @@ export default function NewArrivals() {
   return (
     <div>
     <div className={styles.newArrivals}>New Arrivals </div>
-
     <div className={styles.ProductCard}>
         {productData.map((product, index) => (
           <ProductCard
@@ -17,13 +16,7 @@ export default function NewArrivals() {
             
           />
         ))}
-      </div>
-
-
-
-
-   
-      
+      </div>   
     </div>
   );
 }

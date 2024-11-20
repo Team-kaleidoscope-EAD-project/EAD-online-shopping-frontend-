@@ -142,4 +142,12 @@
   transform: scale(0.9);
 }
 
+.productCatalogContainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
 /* filters */

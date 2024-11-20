@@ -14,7 +14,6 @@ function SingleProductPage() {
   return (
     <>
       <Navbar />
-
       <div
         style={{
           padding: "25px",

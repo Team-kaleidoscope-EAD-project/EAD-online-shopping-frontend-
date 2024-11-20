@@ -37,6 +37,7 @@ import closeBtn from "../../assets/images/icons/cross.png";
 // close img
 
 import { grey } from "@mui/material/colors";
+import ProductCard from "../../components/Cards/ProductCard/ProductCard";
 
 // price ranges
 function handleClick(event) {
@@ -297,6 +298,8 @@ export default function ProductCatalog() {
           <button className={styles.filtersButton} onClick={toggleDrawer(true)}>
             Show Filters
           </button>
+
+          {/* drawer */}
           <Drawer open={open} onClose={toggleDrawer(false)}>
             <Grid
               size={{ xs: 12 }}
@@ -476,6 +479,17 @@ export default function ProductCatalog() {
               {/* product price */}
             </Grid>
           </Drawer>
+          {/* drawer */}
+        </Grid>
+        <Grid size={{ xs: 12, md: 8, lg: 9 }} paddingLeft={3} className={styles.productCatalogContainer}>
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
         </Grid>
       </Grid>
       {/* product catalog */}

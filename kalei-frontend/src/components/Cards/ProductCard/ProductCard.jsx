@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import {
   Card,
@@ -8,13 +7,18 @@ import {
   Button,
   Chip,
   Box,
-  IconButton,zzz
+  IconButton,
 } from "@mui/material";
 
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ProductImage from "../../../assets/images/products/kalei1.png";
 
-export default function ProductCard({id}) {
+// navigation
+import { useNavigate } from "react-router-dom";
+// navigation
+
+export default function ProductCard({ id }) {
+  const navigate = useNavigate();
   const colors = [
     "#986AA2", // purple
     "#FBB7DC", // pink
@@ -26,14 +30,20 @@ export default function ProductCard({id}) {
     "#00FFFF", // cyan
   ];
 
-  // Simulate available colors fetched from the database
-  const availableColors = ["#986AA2", "#44BC68", "#9F5700", "#00FFFF"]; // Available colors without pink (#FBB7DC)
+  const availableColors = ["#986AA2", "#44BC68", "#9F5700", "#00FFFF"];
 
   const [colorIndex, setColorIndex] = useState(0);
-  const [product, setProduct] = useState({ name: "Women's Shirt", price: 2000 });
+  const [product, setProduct] = useState({
+    name: "Women's Shirt",
+    price: 2000,
+  });
   const [material, setMaterial] = useState("Cotton");
   const testId = id;
 
+  const handleViewProduct = () => {
+    // Pass the product ID or any relevant data via the route
+    navigate(`/single-product-view`, { state: { id, product } });
+  };
 
   const handleNextColorSet = () => {
     setColorIndex((prevIndex) => (prevIndex + 4) % colors.length);
@@ -48,17 +58,10 @@ export default function ProductCard({id}) {
           md: 250,
         },
         borderRadius: 3,
-      
         px: 2,
         py: 2,
         position: "relative",
-        marginTop: 8,
         boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
-  
- 
-    
-       
-     
       }}
     >
       <Chip
@@ -225,7 +228,6 @@ export default function ProductCard({id}) {
                   borderRadius: "50%",
                   fontSize: 8,
                   fontWeight: "bold",
-                  
                 }}
               >
                 {size}
@@ -233,10 +235,8 @@ export default function ProductCard({id}) {
             ))}
           </Box>
         </Box>
-
         <Button
           variant="contained"
-        
           sx={{
             width: "100%",
             backgroundColor: "#F0E3D5",
@@ -247,8 +247,8 @@ export default function ProductCard({id}) {
             borderRadius: 5,
             fontSize: 13,
             boxShadow: "rgba(240, 227, 213, 0.16) 0px 1px 4px",
-            
           }}
+          onClick={handleViewProduct}
         >
           VIEW PRODUCT
         </Button>
