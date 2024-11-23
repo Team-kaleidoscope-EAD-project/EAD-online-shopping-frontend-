@@ -4,7 +4,6 @@ import Navbar from "../../components/Navbar/Navbar";
 import Carousel from "./Sections/Carousel/Carousel";
 import Collections from "./Sections/Collections/Collections";
 import NewArrivals from "./Sections/NewArrivals/NewArrivals";
-import CartPage from "./Sections/AddToCart/AddToCart";
 import Footer from "../../components/Footer/Footer";
 import CartPage from "../AddToCart/AddToCart";
 

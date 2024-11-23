@@ -1,10 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
 
-const productDescription =
-  "Brand - HUF & DEE Material -Cotton Lycra \n Neck – Crew \n Sleeve - Short Sleeve \n Texture – Printed \n Size - S - 3XL";
-
-function ProductDescription() {
+function ProductDescription({ productDescription }) {
   return (
     <div style={{ padding: "25px" }}>
       <Box

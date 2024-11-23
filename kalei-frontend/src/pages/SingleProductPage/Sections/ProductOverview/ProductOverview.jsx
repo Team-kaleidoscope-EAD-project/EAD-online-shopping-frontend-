@@ -8,44 +8,24 @@ import SizeComponent from "./SizeComponent";
 import PriceSection from "./PriceSection";
 import UserRating from "./UserRating";
 
-// dummy data
-const singleProductImageList = [
-  {
-    image: require("../../../../assets/images/singleProductImages/woman_image1.png"),
-    color: "purple",
-  },
+const ProductOverview = ({
+  singleProductImageList,
+  productName,
+  productId,
+  productPrice,
+  sizeList,
+  productStock,
+}) => {
 
-  {
-    image: require("../../../../assets/images/singleProductImages/woman_image2.png"),
-    color: "green",
-  },
-
-  {
-    image: require("../../../../assets/images/singleProductImages/woman_image3.png"),
-    color: "orange",
-  },
-  {
-    image: require("../../../../assets/images/singleProductImages/woman_image2.png"),
-    color: "green",
-  },
-];
-const productName = "Women’s Silk TShirt";
-const productId = "1234567890_KALEI";
-const productPrice = 3500;
-
-const sizeList = ["sm", "md", "lg", "xl"];
-const productStock = 10;
-
-const ProductList = singleProductImageList.map((item, index) => (
-  <ProductColors key={index} image={item.image} />
-));
-
-const ProductOverview = () => {
   const [selectedColor, setSelectedColor] = useState(0);
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedQuantity, setSelectedQuantity] = useState(1);
 
   console.log(selectedQuantity);
+
+  const ProductList = singleProductImageList.map((item, index) => (
+    <ProductColors key={index} image={item.image} />
+  ));
 
   return (
     <>

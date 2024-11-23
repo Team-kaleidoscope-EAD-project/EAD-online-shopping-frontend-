@@ -9,5 +9,7 @@ const ProductService = {
             console.error('Error fetching product details:', error);
             throw error;
         }
-    }
+    },
 };
+
+export default ProductService;

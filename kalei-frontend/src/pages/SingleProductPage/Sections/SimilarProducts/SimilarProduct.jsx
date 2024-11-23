@@ -1,10 +1,8 @@
-import { Box, Grid2, Typography } from "@mui/material";
+import { Grid2, Typography } from "@mui/material";
 import React from "react";
 import ProductCard from "../../../../components/Cards/ProductCard/ProductCard";
 
-const similarProductList = [1, 2, 3, 1, 2];
-
-function SimilarProduct() {
+function SimilarProduct({ similarProductList }) {
   return (
     <div>
       <Typography
