@@ -12,12 +12,5 @@
       "price": 2500.0,
       "quantity": 1,
       "image": "https://kellyfelder.com/cdn/shop/files/S_B_0039_096A9417.jpg?v=1731742980"
-    },
-    {
-      "id": 3,
-      "name": "Purple T-Shirt",
-      "price": 2500.0,
-      "quantity": 1,
-      "image": "https://kellyfelder.com/cdn/shop/files/IMG_6296.jpg?v=1731742739"
     }
   ]

@@ -14,6 +14,35 @@ export default function Cart() {
     setCartItems(cartItemData);
   },[]);
 
+  useEffect(() => { 
+    
+    const cartDataToSave = cartItems.map((item) => ({
+      id: item.id,
+      price: item.price,
+      totalPrice: item.price * item.quantity,
+      quantity: item.quantity,
+
+      
+    }));
+    
+    localStorage.setItem("cartData", JSON.stringify(cartDataToSave));
+  },[cartItems]); 
+
+ 
+
+  
+
+  const [localStorageData, setLocalStorageData] = useState([]);
+
+  useEffect(() => {
+    const savedCartData = localStorage.getItem("cartData");
+    if (savedCartData) {
+      setLocalStorageData(JSON.parse(savedCartData));
+    }
+  }, []);
+
+  console.log(localStorageData)
+
   const handleRemove = (id) => {
     setCartItems(cartItems.filter((item) => item.id !== id));
   };
