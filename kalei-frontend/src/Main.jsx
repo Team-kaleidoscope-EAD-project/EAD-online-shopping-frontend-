@@ -6,6 +6,7 @@ import ProductCatalog from "./pages/HomePage/ProductCatalog";
 // pages
 import NotFoundPage from "./pages/NotFoundPage";
 import SingleProductPage from "./pages/SingleProductPage/SingleProductPage";
+import AddToCartPage from "./pages/AddToCart/AddToCartPage";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,11 @@ const router = createBrowserRouter([
   {
     path: "/product-catalog",
     element: <ProductCatalog />,
+    errorElement: <NotFoundPage />,
+  },
+  {
+    path: "/add-to-cart",
+    element: <AddToCartPage />,
     errorElement: <NotFoundPage />,
   },
 ]);
