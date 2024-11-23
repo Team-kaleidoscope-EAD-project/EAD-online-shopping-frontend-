@@ -1,41 +1,29 @@
-// Cart.js
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import CartItem from "./CartItem";
-import image1 from "../../../../assets/images/products/product1.png"
-import image2 from "../../../../assets/images/products/product2.png"
+import image1 from "../../../../assets/images/products/product1.png";
+import image2 from "../../../../assets/images/products/product2.png";
+import "./Cart.css";
+import cartItemData from "./data.json"
 
 export default function Cart() {
   const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "Pink Sweater",
-      price: 2500.0,
-      quantity: 1,
-      image: image1,
-    },
-    {
-      id: 2,
-      name: "Purple T-Shirt",
-      price: 2500.0,
-      quantity: 1,
-      image: image2,
-    },
-    {
-      id: 2,
-      name: "Purple T-Shirt",
-      price: 2500.0,
-      quantity: 1,
-      image: image1,
-    },
+
   ]);
 
+  useEffect(()=>{
+    setCartItems(cartItemData);
+
+  })
+  
   const handleRemove = (id) => {
     setCartItems(cartItems.filter((item) => item.id !== id));
   };
 
   const handleQuantityChange = (id, quantity) => {
     setCartItems(
-      cartItems.map((item) => (item.id === id ? { ...item, quantity } : item))
+      cartItems.map((item) =>
+        item.id === id ? { ...item, quantity } : item
+      )
     );
   };
 
@@ -45,10 +33,10 @@ export default function Cart() {
 
   return (
     <div>
-      <div style={styles.yourCart}>Your Cart</div>
-      <div style={styles.cartContainer}>
-        <div style={styles.cartSection}>
-          <div style={styles.cartHeader}>
+      <div className="yourCart">Your Cart</div>
+      <div className="cartContainer">
+        <div className="cartSection">
+          <div className="cartHeader">
             <div>Product</div>
             <div>Price</div>
             <div>Quantity</div>
@@ -65,25 +53,24 @@ export default function Cart() {
           ))}
         </div>
 
-        <div style={styles.summarySection}>
-          <span style={styles.orderSummary}>ORDER SUMMARY</span>
-          <div style={styles.summaryDetails}>
+        <div className="summarySection">
+          <span className="orderSummary">ORDER SUMMARY</span>
+          <div className="summaryDetails">
             <div>
-              <div style={styles.total}>
+              <div className="total">
                 <span>Total</span>
               </div>
-              <div style={styles.totalAmount}>
+              <div className="totalAmount">
                 <span>Rs. {calculateTotal().toFixed(2)}</span>
               </div>
             </div>
-            {/* <small>Tax included and shipping calculated at checkout</small> */}
           </div>
           <div>
-            <div style={styles.text}>
+            <div className="text">
               Tax included and shipping calculated at checkout
             </div>
-            <button style={styles.checkoutButton}>PROCEED TO CHECKOUT</button>
-            <button style={styles.continueShoppingButton}>
+            <button className="checkoutButton">PROCEED TO CHECKOUT</button>
+            <button className="continueShoppingButton">
               CONTINUE SHOPPING
             </button>
           </div>
@@ -92,95 +79,3 @@ export default function Cart() {
     </div>
   );
 }
-
-const styles = {
-  cartContainer: {
-    display: "flex",
-    justifyContent: "space-between",
-    flexWrap: "wrap", // Enable wrapping for smaller screens
-    padding: "20px",
-    fontFamily: "Arial, sans-serif",
-  },
-  cartSection: {
-    width: "65%", // Default for larger screens
-
-    paddingRight: "20px",
-    marginBottom: "20px", // Add spacing for smaller screens
-  },
-  summarySection: {
-    width: "30%", // Default for larger screens
-    padding: "20px",
-    border: "1px solid #F0E3D5",
-    borderRadius: "8px",
-  },
-  orderSummary: {
-    justifyContent: "left",
-    letterSpacing: "2px",
-    fontSize: "18px",
-    marginBottom: "35px",
-  },
-  text: {
-    color: "#7C4100",
-    marginTop: "25px",
-    fontSize: "12px",
-  },
-
-  cartHeader: {
-    display: "flex",
-    justifyContent: "space-between",
-    paddingLeft:'50px',
-    fontWeight: "bold",
-    padding: "25px",
-    color: "#7C4100",
-    borderRadius: "15px",
-    backgroundColor: "#ECE8E8",
-    marginBottom: "20px",
-  },
-  yourCart: {
-    fontSize: "25px",
-    textAlign: "left",
-    margin: "20px",
-    color: "#7C4100",
-    borderBottom: "2px solid #F0E3D5",
-    paddingBottom: "20px",
-  },
-  checkoutButton: {
-    marginTop: "20px",
-    width: "85%",
-    padding: "10px",
-    marginBottom: "10px",
-    backgroundColor: "#7C4100",
-    color: "white",
-    border: "none",
-    borderRadius: "10px",
-    cursor: "pointer",
-    letterSpacing: "2px",
-  },
-  continueShoppingButton: {
-    width: "85%",
-    padding: "10px",
-    backgroundColor: "#F0E3D5",
-    color: "#7C4100",
-    border: "none",
-    border: "none",
-    borderRadius: "10px",
-    cursor: "pointer",
-    letterSpacing: "2px",
-  },
-
-  total: {
-    textAlign: "left",
-    marginTop: "10px",
-    borderTop: " 3px solid #D9D9D9",
-
-    paddingTop: "20px",
-  },
-  totalAmount: {
-    textAlign: "right", // Optional if additional right-alignment is needed
-    marginTop: "-18px",
-    borderBottom: " 3px solid #D9D9D9",
-    paddingBottom: "18px",
-  },
-
-
-};
