@@ -10,7 +10,6 @@ export default function HomePage() {
       {/* navbar section */}
       {/* your section */}
 
-      <CartPage/>
       {/* footer section */}
 
       {/* footer section */}
