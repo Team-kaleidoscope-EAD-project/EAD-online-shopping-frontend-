@@ -1,5 +1,5 @@
 import React ,{useEffect}from "react";
-import RemoveButton from "../../../../assets/images/products/removeButton.png";
+import RemoveButton from "../../assets/images/products/removeButton.png";
 import "./Cart.css";
 
 export default function CartItem({ product, onRemove, onQuantityChange , }) {

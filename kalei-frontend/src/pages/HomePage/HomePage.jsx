@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../HomePage/HomePage.module.css";
-import CartPage from "./Sections/AddToCart/AddToCart";
+import CartPage from "../AddToCart/AddToCart";
 
 export default function HomePage() {
   return (

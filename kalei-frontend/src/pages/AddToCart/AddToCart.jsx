@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CartItem from "./CartItem";
-import image1 from "../../../../assets/images/products/product1.png";
-import image2 from "../../../../assets/images/products/product2.png";
+
 import "./Cart.css";
 import cartItemData from "./data.json";
 import Popup from "./DiliveryAddressPopup";
