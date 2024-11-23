@@ -1,6 +1,8 @@
 // Cart.js
 import React, { useState } from "react";
 import CartItem from "./CartItem";
+import image1 from "../../../../assets/images/products/product1.png"
+import image2 from "../../../../assets/images/products/product2.png"
 
 export default function Cart() {
   const [cartItems, setCartItems] = useState([
@@ -9,14 +11,21 @@ export default function Cart() {
       name: "Pink Sweater",
       price: 2500.0,
       quantity: 1,
-      image: "https://via.placeholder.com/80",
+      image: image1,
     },
     {
       id: 2,
       name: "Purple T-Shirt",
       price: 2500.0,
       quantity: 1,
-      image: "https://via.placeholder.com/80",
+      image: image2,
+    },
+    {
+      id: 2,
+      name: "Purple T-Shirt",
+      price: 2500.0,
+      quantity: 1,
+      image: image1,
     },
   ]);
 
@@ -119,6 +128,7 @@ const styles = {
   cartHeader: {
     display: "flex",
     justifyContent: "space-between",
+    paddingLeft:'50px',
     fontWeight: "bold",
     padding: "25px",
     color: "#7C4100",
@@ -172,19 +182,5 @@ const styles = {
     paddingBottom: "18px",
   },
 
-  // Media query styles for responsiveness
-  "@media (max-width: 700px)": {
-    cartContainer: {
-      flexDirection: "column", // Stack sections vertically for mobile
-    },
-    cartSection: {
-      width: "100%", // Full width for smaller screens
-      borderRight: "none", // Remove the border for mobile
-      paddingRight: "0",
-    },
-    summarySection: {
-      width: "100%", // Full width for smaller screens
-      marginTop: "20px", // Move the summary below the table
-    },
-  },
+
 };
