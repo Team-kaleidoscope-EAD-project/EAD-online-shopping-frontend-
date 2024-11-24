@@ -2,7 +2,7 @@ import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // pages
 import HomePage from "./pages/HomePage/HomePage";
-import ProductCatalog from "./pages/HomePage/ProductCatalog";
+import ProductCatalog from "./pages/ProductCatalog/ProductCatalog";
 // pages
 import NotFoundPage from "./pages/NotFoundPage";
 import SingleProductPage from "./pages/SingleProductPage/SingleProductPage";
