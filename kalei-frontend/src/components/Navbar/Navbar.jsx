@@ -24,12 +24,22 @@ import Drawer from "@mui/material/Drawer";
 // images
 import profileImg from "../../assets/images/profile/profileImg.png";
 import profileImg2 from "../../assets/images/profile/profileImg2.png";
-import { Avatar, Tooltip } from "@mui/material";
+import { Avatar, Box, Tooltip } from "@mui/material";
 // images
+
+// search modal
+import Modal from "@mui/material/Modal";
+// search modal
 
 import Zoom from "@mui/material/Zoom";
 
 export default function Navbar() {
+  // search modal controls
+  const [openSearchModal, setSearchModal] = React.useState(false);
+  const handleSearchModalOpen = () => setSearchModal(true);
+  const handleSearchModalClose = () => setSearchModal(false);
+  // search modal controls
+
   // drawer settings
   const [state, setState] = React.useState({
     top: false,
@@ -94,206 +104,244 @@ export default function Navbar() {
   };
 
   return (
-    <div className={styles.navbarContainer}>
-      <Grid container spacing={2}>
-        {/* large and extra large devices */}
-        <Grid
-          container
-          size={{ lg: 12 }}
-          sx={{ display: { xs: "none", lg: "flex" } }}
-        >
-          <Grid size={{ xs: 6, md: 1, lg: 1 }} className={styles.logoContainer}>
-            <img
-              src={logo}
-              width={60}
-              alt="kalei_logo"
-              className={styles.logo}
-            />
+    <>
+      {/* search modal */}
+      <Modal
+        open={openSearchModal}
+        onClose={handleSearchModalClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          border: "none",
+        }}
+      >
+        <Box className={styles.searchBoxContainer}>
+          <Grid container>
+            {/* search bar */}
+            <Grid size={{ xs: "12" }} className={styles.searchBar}></Grid>
+            {/* search bar */}
+            {/* searched products */}
+            <Grid
+              size={{ xs: "12" }}
+              className={styles.searchedProducts}
+            ></Grid>
+            {/* searched products */}
           </Grid>
+        </Box>
+      </Modal>
+      {/* search modal */}
+
+      <div className={styles.navbarContainer}>
+        <Grid container spacing={2}>
+          {/* large and extra large devices */}
           <Grid
-            size={{ xs: 6, md: 7, lg: 8 }}
-            className={styles.sectionLinkContainer}
+            container
+            size={{ lg: 12 }}
+            sx={{ display: { xs: "none", lg: "flex" } }}
           >
-            <Link to="/">HOME</Link>
-            <Link to="/" onMouseOver={handleNewArrivalClick}>
-              NEW ARRIVALS
-            </Link>
-            <Link to="/" onMouseOver={handleCollectionClick}>
-              COLLECTIONS
-            </Link>
-            <Link to="/" onMouseOver={handleWomenClick}>
-              WOMEN
-            </Link>
-            <Link to="/" onMouseOver={handleMenClick}>
-              MEN
-            </Link>
-            <Link to="/" onMouseOver={handleAccessoriesClick}>
-              ACCESSORIES
-            </Link>
+            <Grid
+              size={{ xs: 6, md: 1, lg: 1 }}
+              className={styles.logoContainer}
+            >
+              <img
+                src={logo}
+                width={60}
+                alt="kalei_logo"
+                className={styles.logo}
+              />
+            </Grid>
+            <Grid
+              size={{ xs: 6, md: 7, lg: 8 }}
+              className={styles.sectionLinkContainer}
+            >
+              <Link to="/">HOME</Link>
+              <Link to="/" onMouseOver={handleNewArrivalClick}>
+                NEW ARRIVALS
+              </Link>
+              <Link to="/" onMouseOver={handleCollectionClick}>
+                COLLECTIONS
+              </Link>
+              <Link to="/" onMouseOver={handleWomenClick}>
+                WOMEN
+              </Link>
+              <Link to="/" onMouseOver={handleMenClick}>
+                MEN
+              </Link>
+              <Link to="/" onMouseOver={handleAccessoriesClick}>
+                ACCESSORIES
+              </Link>
+            </Grid>
+            <div style={{ display: "none" }}>
+              {/* new arrivals section */}
+              <NewArrivals
+                anchorEl={anchorNewArrivalEl}
+                open={openNewArrival}
+                handleClose={handleNewArrivalClose}
+              />
+              {/* new arrivals section */}
+
+              {/* collections section */}
+              <Collections
+                anchorEl={anchorCollectionEl}
+                open={openCollection}
+                handleClose={handleCollectionClose}
+              />
+              {/* collections section */}
+
+              {/* womens section */}
+              <Womens
+                anchorEl={anchorWomenEl}
+                open={openWomen}
+                handleClose={handleWomenClose}
+              />
+              {/* womens section */}
+
+              {/* mens section */}
+              <Mens
+                anchorEl={anchorMenEl}
+                open={openMen}
+                handleClose={handleMenClose}
+              />
+              {/* mens section */}
+
+              {/* accessories section */}
+              <Accessories
+                anchorEl={anchorAccessoriesEl}
+                open={openAccessories}
+                handleClose={handleAccessoriesClose}
+              />
+              {/* accessories section */}
+            </div>
+            {/* search bar,cart and profile */}
+            <Grid
+              size={{ xs: 6, md: 2, lg: 3 }}
+              sx={{
+                display: "flex",
+                justifyContent: "space-evenly",
+                alignItems: "center",
+              }}
+            >
+              <div
+                className={styles.searchBarContainer}
+                onClick={handleSearchModalOpen}
+              >
+                <img src={searchIcon} alt="search icon" width={15} />
+                <span>SEARCH</span>
+              </div>
+              <>
+                <Tooltip title="Cart" arrow TransitionComponent={Zoom}>
+                  <img
+                    src={cartIcon}
+                    alt="search icon"
+                    width={20}
+                    style={{ cursor: "pointer" }}
+                  />
+                </Tooltip>
+                <Tooltip title="Profile" arrow TransitionComponent={Zoom}>
+                  <Avatar
+                    alt="Profile Picture"
+                    src={profileImg}
+                    sx={{ cursor: "pointer" }}
+                  />
+                </Tooltip>
+              </>
+            </Grid>
+            {/* search bar,cart and profile */}
           </Grid>
-          <div style={{ display: "none" }}>
-            {/* new arrivals section */}
-            <NewArrivals
-              anchorEl={anchorNewArrivalEl}
-              open={openNewArrival}
-              handleClose={handleNewArrivalClose}
-            />
-            {/* new arrivals section */}
-
-            {/* collections section */}
-            <Collections
-              anchorEl={anchorCollectionEl}
-              open={openCollection}
-              handleClose={handleCollectionClose}
-            />
-            {/* collections section */}
-
-            {/* womens section */}
-            <Womens
-              anchorEl={anchorWomenEl}
-              open={openWomen}
-              handleClose={handleWomenClose}
-            />
-            {/* womens section */}
-
-            {/* mens section */}
-            <Mens
-              anchorEl={anchorMenEl}
-              open={openMen}
-              handleClose={handleMenClose}
-            />
-            {/* mens section */}
-
-            {/* accessories section */}
-            <Accessories
-              anchorEl={anchorAccessoriesEl}
-              open={openAccessories}
-              handleClose={handleAccessoriesClose}
-            />
-            {/* accessories section */}
-          </div>
-          {/* search bar,cart and profile */}
+          {/* large and extra large devices */}
           <Grid
-            size={{ xs: 6, md: 2, lg: 3 }}
-            sx={{
-              display: "flex",
-              justifyContent: "space-evenly",
-              alignItems: "center",
+            container
+            size={{ xs: 12 }}
+            sx={{ display: { xs: "flex", lg: "none" } }}
+          >
+            <Grid size={{ xs: 4 }} className={styles.logoContainer}>
+              <img
+                src={hamburger}
+                width={20}
+                alt="kalei_logo"
+                className={styles.logo}
+                onClick={toggleDrawer("bottom", true)}
+              />
+            </Grid>
+            <Grid
+              size={{ xs: 4 }}
+              className={styles.logoContainer}
+              sx={{ justifyContent: "center" }}
+            >
+              <img
+                src={logo}
+                width={60}
+                alt="kalei_logo"
+                className={styles.logo}
+              />
+            </Grid>
+            <Grid
+              size={{ xs: 4 }}
+              sx={{ justifyContent: "end" }}
+              className={styles.logoContainer}
+            >
+              <img
+                src={searchIcon}
+                width={20}
+                alt="kalei_logo"
+                className={styles.logo}
+                onClick={handleSearchModalOpen}
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+        <Drawer
+          anchor={"bottom"}
+          open={state["bottom"]}
+          onClose={toggleDrawer("bottom", false)}
+        >
+          <div
+            style={{
+              height: "70vh",
+              width: "100%",
+              backgroundColor: "#FCF2E7",
+              paddingTop: "40px",
             }}
           >
-            <div className={styles.searchBarContainer}>
-              <img src={searchIcon} alt="search icon" width={15} />
-              <span>SEARCH</span>
-            </div>
-            <>
-              <Tooltip title="Cart" arrow TransitionComponent={Zoom}>
-                <img
-                  src={cartIcon}
-                  alt="search icon"
-                  width={20}
-                  style={{ cursor: "pointer" }}
-                />
-              </Tooltip>
-              <Tooltip title="Profile" arrow TransitionComponent={Zoom}>
-                <Avatar
-                  alt="Profile Picture"
-                  src={profileImg}
-                  sx={{ cursor: "pointer" }}
-                />
-              </Tooltip>
-            </>
-          </Grid>
-          {/* search bar,cart and profile */}
-        </Grid>
-        {/* large and extra large devices */}
-        <Grid
-          container
-          size={{ xs: 12 }}
-          sx={{ display: { xs: "flex", lg: "none" } }}
-        >
-          <Grid size={{ xs: 4 }} className={styles.logoContainer}>
-            <img
-              src={hamburger}
-              width={20}
-              alt="kalei_logo"
-              className={styles.logo}
-              onClick={toggleDrawer("bottom", true)}
-            />
-          </Grid>
-          <Grid
-            size={{ xs: 4 }}
-            className={styles.logoContainer}
-            sx={{ justifyContent: "center" }}
-          >
-            <img
-              src={logo}
-              width={60}
-              alt="kalei_logo"
-              className={styles.logo}
-            />
-          </Grid>
-          <Grid
-            size={{ xs: 4 }}
-            sx={{ justifyContent: "end" }}
-            className={styles.logoContainer}
-          >
-            <img
-              src={searchIcon}
-              width={20}
-              alt="kalei_logo"
-              className={styles.logo}
-            />
-          </Grid>
-        </Grid>
-      </Grid>
-      <Drawer
-        anchor={"bottom"}
-        open={state["bottom"]}
-        onClose={toggleDrawer("bottom", false)}
-      >
-        <div
-          style={{
-            height: "70vh",
-            width: "100%",
-            backgroundColor: "#FCF2E7",
-            paddingTop: "40px",
-          }}
-        >
-          <Grid container sx={{ display: "flex", flexDirection: "column" }}>
-            {/* user details */}
-            <div className={styles.userDetails}>
-              {/* profile picture */}
-              <div className={styles.profileImgContainer}>
-                <img src={profileImg2} alt="profileImg" width={100} />
+            <Grid container sx={{ display: "flex", flexDirection: "column" }}>
+              {/* user details */}
+              <div className={styles.userDetails}>
+                {/* profile picture */}
+                <div className={styles.profileImgContainer}>
+                  <img src={profileImg2} alt="profileImg" width={100} />
+                </div>
+                {/* profile picture */}
+                {/* user information */}
+                <div className={styles.profileDetailsContainer}>
+                  <span style={{ fontSize: "18px" }}>Anonymous user</span>
+                  <br />
+                  <span style={{ fontSize: "14px" }}>
+                    AnonymousEmail@gmail.com
+                  </span>
+                </div>
+                {/* user information */}
               </div>
-              {/* profile picture */}
-              {/* user information */}
-              <div className={styles.profileDetailsContainer}>
-                <span style={{ fontSize: "18px" }}>Anonymous user</span>
-                <br />
-                <span style={{ fontSize: "14px" }}>
-                  AnonymousEmail@gmail.com
-                </span>
-              </div>
-              {/* user information */}
-            </div>
-            {/* user details */}
-            {/* navbar options */}
-            <Grid
-              className={styles.navbarOptions}
-              sx={{ alignItems: { xs: "start", md: "center" } }}
-            >
-              <h4>HOME</h4>
-              <h4>NEW ARRIVALS</h4>
-              <h4>COLLECTIONS</h4>
-              <h4>WOMEN</h4>
-              <h4>MEN</h4>
-              <h4>ACCESSORIES</h4>
+              {/* user details */}
+              {/* navbar options */}
+              <Grid
+                className={styles.navbarOptions}
+                sx={{ alignItems: { xs: "start", md: "center" } }}
+              >
+                <h4>HOME</h4>
+                <h4>NEW ARRIVALS</h4>
+                <h4>COLLECTIONS</h4>
+                <h4>WOMEN</h4>
+                <h4>MEN</h4>
+                <h4>ACCESSORIES</h4>
+              </Grid>
+              {/* navbar options */}
             </Grid>
-            {/* navbar options */}
-          </Grid>
-        </div>
-      </Drawer>
-    </div>
+          </div>
+        </Drawer>
+      </div>
+    </>
   );
 }

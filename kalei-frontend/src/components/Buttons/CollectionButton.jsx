@@ -7,7 +7,7 @@ export default function CollectionButton({ name, bgColor, txtColor }) {
       <Button
         variant="contained"
         sx={{
-          backgroundColor: "#7C4100",
+          backgroundColor: "#be8748",
           color: "#FFFFFF",
           borderRadius: "20px",
           padding: "6px 20px",
@@ -16,7 +16,7 @@ export default function CollectionButton({ name, bgColor, txtColor }) {
           fontWeight: "bold",
           boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
           "&:hover": {
-            backgroundColor: "#4A240A",
+            backgroundColor: "#d48c3a",
           },
           boxSizing: "border-box",
         }}

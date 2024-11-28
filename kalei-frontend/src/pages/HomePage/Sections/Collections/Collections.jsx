@@ -1,33 +1,45 @@
 // Hirushi
 import React from "react";
 import CollectionCard from "../../../../components/Cards/CollectionCard";
-import image1 from "../../../../assets/images/products/collection1.png";
-import image2 from "../../../../assets/images/products/collection2.png";
-import image4 from "../../../../assets/images/products/collection4.png";
-import image3 from "../../../../assets/images/products/collection3.png";
+import image1 from "../../../../assets/images/collectionImages/collection1.jpg";
+import image2 from "../../../../assets/images/collectionImages/collection2.jpg";
+import image3 from "../../../../assets/images/collectionImages/collection3.jpg";
+import image4 from "../../../../assets/images/collectionImages/collection4.jpg";
 import styles from "./Collections.module.css";
 import Grid from "@mui/material/Grid2";
+import SeeMoreButton from "../../../../components/Buttons/seeMore/SeeMoreButton";
+
+// navigation
+import { useNavigate } from "react-router-dom";
+// navigation
 
 export default function Collections() {
+  const navigate = useNavigate();
+
+  const handleAllCollectionsPageNavigation = () => {
+    // Pass the product ID or any relevant data via the route
+    navigate(`/collections`);
+  };
+
   const collections = [
     {
       key: 1,
-      name: "TIMELESS",
+      name: "OVERSIZED",
       image: image1,
     },
     {
       key: 2,
-      name: "CELINE",
+      name: "JACKETS",
       image: image2,
     },
     {
       key: 3,
-      name: "SIERRA",
+      name: "MEN'S WEAR",
       image: image3,
     },
     {
       key: 4,
-      name: "WORKWEAR",
+      name: "WOMEN'S WEAR",
       image: image4,
     },
   ];
@@ -59,6 +71,21 @@ export default function Collections() {
               ))
             )}
           </div>
+        </Grid>
+        <Grid
+          size={{ xs: 12 }}
+          sx={{
+            display: "flex",
+            justifyContent: "end",
+            alignItems: "center",
+            paddingLeft: "2vw",
+            paddingRight: "2vw",
+            marginTop: "2vh",
+          }}
+        >
+          <SeeMoreButton
+            navigatingFunction={handleAllCollectionsPageNavigation}
+          />
         </Grid>
       </Grid>
     </div>

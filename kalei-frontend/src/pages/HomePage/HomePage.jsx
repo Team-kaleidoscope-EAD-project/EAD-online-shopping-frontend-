@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../HomePage/HomePage.module.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Carousel from "./Sections/Carousel/Carousel";
-import Collections from "./Sections/Collections/Collections";
+import Collections from "../HomePage/Sections/Collections/Collections";
 import NewArrivals from "./Sections/NewArrivals/NewArrivals";
 import Footer from "../../components/Footer/Footer";
 

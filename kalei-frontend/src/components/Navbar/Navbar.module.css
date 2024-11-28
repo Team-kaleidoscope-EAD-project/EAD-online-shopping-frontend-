@@ -323,3 +323,27 @@
 .navbarOptions h4:hover::before {
   opacity: 1;
 }
+
+/* searchbox */
+.searchBoxContainer {
+  width: 70%;
+  height: 80vh;
+  border: none;
+  outline: none;
+}
+
+.searchBar {
+  background-color: white;
+  height: 50px;
+  width: 100%;
+  border-radius: 50px;
+}
+
+.searchedProducts {
+  background-color: white;
+  height: 70vh;
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 30px;
+}
+/* searchbox */

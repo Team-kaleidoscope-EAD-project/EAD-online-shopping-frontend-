@@ -1,5 +1,10 @@
+@font-face {
+  font-family: "amiko-regular";
+  src: url("../../assets/fonts/Amiko-Regular.ttf");
+}
+
 h1 {
-  font-family: "inria serif";
+  font-family: "amiko-regular";
   font-weight: 700;
   font-size: 28px;
   color: #ffffff;
@@ -18,6 +23,7 @@ h1 {
 .collectionCard {
   cursor: pointer;
   transition-duration: 300ms;
+  width: fit-content;
 }
 
 .collectionCard:hover {

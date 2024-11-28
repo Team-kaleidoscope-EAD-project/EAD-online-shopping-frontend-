@@ -40,7 +40,6 @@ import { grey } from "@mui/material/colors";
 import ProductCard from "../../components/Cards/ProductCard/ProductCard";
 import Footer from "../../components/Footer/Footer";
 
-// price ranges
 function handleClick(event) {
   event.preventDefault();
   console.info("You clicked a breadcrumb.");
@@ -122,6 +121,7 @@ export default function ProductCatalog({ category = productCategories[0] }) {
       All Products
     </Typography>,
   ];
+
   return (
     <div className={styles.ProductCatalogPage}>
       {/* navbar section */}
