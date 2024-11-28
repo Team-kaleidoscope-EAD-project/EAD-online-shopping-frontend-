@@ -1,7 +1,7 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import KeycloakProvider from "./config/KeycloakProvider";
+import KeycloakProvider from "./auth/KeycloakProvider";
 import routes from "./routes/routes";
 
 const router = createBrowserRouter(routes);

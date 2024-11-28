@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { Avatar } from "@mui/material";
-import { logout } from "../../../config/logout";
+import { logout } from "../../../auth/logout";
 
 export default function ProfileMenu({ profileImg }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -25,7 +25,7 @@ export default function ProfileMenu({ profileImg }) {
     <div>
       <Avatar
         alt="Profile Picture"
-        src={profileImg}
+        // src={profileImg}
         sx={{ cursor: "pointer" }}
         onClick={handleClick}
       />

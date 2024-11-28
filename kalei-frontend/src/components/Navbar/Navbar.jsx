@@ -24,13 +24,13 @@ import Drawer from "@mui/material/Drawer";
 // images
 import profileImg from "../../assets/images/profile/profileImg.png";
 import profileImg2 from "../../assets/images/profile/profileImg2.png";
-import { Avatar, Tooltip, Button } from "@mui/material";
+import { Tooltip, Button } from "@mui/material";
 // images
 
 import Zoom from "@mui/material/Zoom";
 
-import { auth } from "../../config/auth";
-import keycloak from "../../config/keycloak";
+import { auth } from "../../auth/auth";
+import keycloak from "../../auth/keycloak";
 import ProfileMenu from "./sections/ProfileMenu";
 
 export default function Navbar() {
