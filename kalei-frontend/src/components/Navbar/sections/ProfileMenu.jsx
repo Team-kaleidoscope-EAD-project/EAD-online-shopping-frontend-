@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { Avatar } from "@mui/material";
+import { logout } from "../../../config/logout";
 
 export default function ProfileMenu({ profileImg }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -17,6 +18,7 @@ export default function ProfileMenu({ profileImg }) {
 
   const handleLogout = () => {
     handleClose();
+    logout();
   };
 
   return (
