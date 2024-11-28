@@ -30,7 +30,7 @@ function MultiCarousel({ list, selectedItem, itemsCount }) {
       showDots={false}
       responsive={responsive}
       ssr={true} // Server-side rendering
-      infinite={true}
+      infinite={false}
       autoPlay={true}
       keyBoardControl={true}
       customTransition="all 1.3s"

@@ -13,6 +13,8 @@
     "ajv": "^6.12.6",
     "ajv-keywords": "^3.5.2",
     "kalei-frontend": "file:",
+    "keycloak-js": "^26.0.6",
+    "keycloak-react-web": "^0.1.19",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-multi-carousel": "^2.8.5",

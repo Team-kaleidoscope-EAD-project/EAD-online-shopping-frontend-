@@ -1,5 +1,5 @@
 // Dinul
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid2";
 import styles from "./Navbar.module.css";
 
@@ -24,12 +24,30 @@ import Drawer from "@mui/material/Drawer";
 // images
 import profileImg from "../../assets/images/profile/profileImg.png";
 import profileImg2 from "../../assets/images/profile/profileImg2.png";
-import { Avatar, Tooltip } from "@mui/material";
+import { Avatar, Tooltip, Button } from "@mui/material";
 // images
 
 import Zoom from "@mui/material/Zoom";
 
+import { auth } from "../../config/auth";
+import keycloak from "../../config/keycloak";
+
 export default function Navbar() {
+  const [authenticated, setAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const initializeAuth = async () => {
+      try {
+        const isAuthenticated = await keycloak.init({ onLoad: "check-sso" }); // Check if the user is authenticated
+        setAuthenticated(isAuthenticated); // Update state based on Keycloak's status
+      } catch (error) {
+        console.error("Error during Keycloak initialization:", error);
+      }
+    };
+
+    initializeAuth();
+  }, []);
+
   // drawer settings
   const [state, setState] = React.useState({
     top: false,
@@ -195,11 +213,21 @@ export default function Navbar() {
                 />
               </Tooltip>
               <Tooltip title="Profile" arrow TransitionComponent={Zoom}>
-                <Avatar
-                  alt="Profile Picture"
-                  src={profileImg}
-                  sx={{ cursor: "pointer" }}
-                />
+                {authenticated ? (
+                  <Avatar
+                    alt="Profile Picture"
+                    src={profileImg}
+                    sx={{ cursor: "pointer" }}
+                  />
+                ) : (
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => auth()}
+                  >
+                    Login
+                  </Button>
+                )}
               </Tooltip>
             </>
           </Grid>

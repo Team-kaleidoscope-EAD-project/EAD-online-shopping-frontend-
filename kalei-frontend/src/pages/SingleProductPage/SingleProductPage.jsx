@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Navbar from "../../components/Navbar/Navbar";
 import ProductOverview from "./Sections/ProductOverview/ProductOverview";
 import { Box, Typography } from "@mui/material";
 import ProductDescription from "./Sections/ProductDescription/ProductDescription";
@@ -14,7 +13,6 @@ function SingleProductPage() {
 
   return (
     <>
-      <Navbar />
       <div
         style={{
           color: "#292726",
