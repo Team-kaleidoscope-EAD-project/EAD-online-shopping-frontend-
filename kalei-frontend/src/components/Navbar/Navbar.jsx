@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid2";
 import styles from "./Navbar.module.css";
 
 import logo from "../../assets/images/icons/kalei_logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NewArrivals from "./sections/NewArrivals";
 import Collections from "./sections/Collections";
 import Womens from "./sections/Womens";
@@ -34,6 +34,7 @@ import keycloak from "../../auth/keycloak";
 import ProfileMenu from "./sections/ProfileMenu";
 
 export default function Navbar() {
+  const navigate = useNavigate();
   const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
@@ -205,7 +206,12 @@ export default function Navbar() {
               <span>SEARCH</span>
             </div>
             <>
-              <Tooltip title="Cart" arrow TransitionComponent={Zoom}>
+              <Tooltip
+                title="Cart"
+                arrow
+                TransitionComponent={Zoom}
+                onClick={() => navigate("/add-to-cart")}
+              >
                 <img
                   src={cartIcon}
                   alt="search icon"

@@ -1,7 +1,12 @@
 import { Box, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-function PriceSection({ productPrice, productStock, selectedQuantity }) {
+function PriceSection({
+  productPrice,
+  productStock,
+  selectedQuantity,
+  handleCart,
+}) {
   const [productQuantity, setProductQuantity] = useState(1);
 
   useEffect(() => {
@@ -124,6 +129,7 @@ function PriceSection({ productPrice, productStock, selectedQuantity }) {
               opacity: 0.6,
             },
           }}
+          onClick={() => handleCart()}
         >
           <Typography
             sx={{

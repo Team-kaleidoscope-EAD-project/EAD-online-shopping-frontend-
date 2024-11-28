@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid2";
 import styles from "./ProductCatalog.module.css";
 import Navbar from "../../components/Navbar/Navbar";
@@ -60,17 +60,22 @@ const marks = [
 ];
 // price ranges
 
-export default function ProductCatalog() {
+export default function ProductCatalog({ category = productCategories[0] }) {
+  
   // filters
-  const [category, setCategory] = useState(productCategories[0]);
+  const [productCategory, setProductCategory] = useState(productCategories[0]);
   const [size, setSize] = useState(productSizes[0]);
   const [instock_availability, setInstock_Availability] = useState(true);
   const [outofstock_availability, setOutofstock_Availability] = useState(false);
   const [price, setPrice] = useState(0.0);
   // filters
 
+  useEffect(() => {
+    setProductCategory(category);
+  }, []);
+
   const handleProductCategoryFilter = (category) => {
-    setCategory(category);
+    setProductCategory(category);
   };
 
   const handleProductSizeFilter = (size) => {
@@ -157,13 +162,15 @@ export default function ProductCatalog() {
                     <>
                       <span
                         className={
-                          category === item ? `${styles.selectedCategory}` : ""
+                          productCategory === item
+                            ? `${styles.selectedCategory}`
+                            : ""
                         }
                         onClick={() => {
                           handleProductCategoryFilter(item);
                         }}
                       >
-                        {category === item ? "• " : ""}
+                        {productCategory === item ? "• " : ""}
                         {item}
                       </span>
                     </>
@@ -347,7 +354,7 @@ export default function ProductCatalog() {
                         <>
                           <span
                             className={
-                              category === item
+                              productCategory === item
                                 ? `${styles.selectedCategory}`
                                 : ""
                             }
@@ -355,7 +362,7 @@ export default function ProductCatalog() {
                               handleProductCategoryFilter(item);
                             }}
                           >
-                            {category === item ? "• " : ""}
+                            {productCategory === item ? "• " : ""}
                             {item}
                           </span>
                         </>
