@@ -31,6 +31,7 @@ import Zoom from "@mui/material/Zoom";
 
 import { auth } from "../../config/auth";
 import keycloak from "../../config/keycloak";
+import ProfileMenu from "./sections/ProfileMenu";
 
 export default function Navbar() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -214,16 +215,14 @@ export default function Navbar() {
               </Tooltip>
               <Tooltip title="Profile" arrow TransitionComponent={Zoom}>
                 {authenticated ? (
-                  <Avatar
-                    alt="Profile Picture"
-                    src={profileImg}
-                    sx={{ cursor: "pointer" }}
-                  />
+                  <ProfileMenu profileImg={profileImg} />
                 ) : (
                   <Button
                     variant="contained"
-                    color="primary"
                     onClick={() => auth()}
+                    sx={{
+                      backgroundColor: "#A6742B",
+                    }}
                   >
                     Login
                   </Button>

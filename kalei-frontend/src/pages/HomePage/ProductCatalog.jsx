@@ -101,7 +101,7 @@ export default function ProductCatalog() {
   const handleProductPrice = (_, newValue) => {
     setPrice(newValue);
   };
-  
+
   // price range
   const breadcrumbs = [
     <Link
@@ -120,7 +120,7 @@ export default function ProductCatalog() {
   return (
     <div className={styles.ProductCatalogPage}>
       {/* navbar section */}
-      <Navbar />
+      {/* <Navbar /> */}
       {/* navbar section */}
       {/* product catalog */}
       <Grid container>
