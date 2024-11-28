@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Navbar from "../../components/Navbar/Navbar";
+import React, { useEffect, useState } from "react";
 import ProductOverview from "./Sections/ProductOverview/ProductOverview";
 import { Box, Typography } from "@mui/material";
 import ProductDescription from "./Sections/ProductDescription/ProductDescription";
@@ -10,6 +9,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import Footer from "../../components/Footer/Footer";
 import useFetch from "../../hooks/useFetch";
 import ProductService from "../../services/productServices";
+import { useNavigate } from "react-router-dom";
 
 // dummy data for ProductOverview
 const singleProductImageList = [
@@ -93,6 +93,7 @@ const reviewDataList = [
 const similarProductList = [1, 2, 3, 1, 2];
 
 function SingleProductPage({ productId = "1234567890_KALEI" }) {
+  const navigate = useNavigate();
   const [displayPopUp, setDisplayPopUp] = useState(false);
 
   const { data, error, loading } = useFetch(
@@ -100,9 +101,35 @@ function SingleProductPage({ productId = "1234567890_KALEI" }) {
     [productId]
   );
 
+  const addToCart = (selectedQuantity, selectedSize, selectedColor) => {
+    // Prepare the item data
+    const selectedItem = {
+      itemId: productId,
+      name: productName,
+      price: productPrice,
+      quantity: selectedQuantity,
+      size: sizeList[selectedSize],
+      color: singleProductImageList[selectedColor].color,
+      image: singleProductImageList[selectedColor].image,
+    };
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    // Check if the item already exists in the cart
+    const existingItemIndex = cart.findIndex(
+      (item) => item.itemId === selectedItem.itemId
+    );
+
+    if (existingItemIndex === -1) {
+      cart.push(selectedItem);
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
+
+    navigate("/add-to-cart", { state: { productStock: productStock } });
+  };
+
   return (
     <>
-      <Navbar />
       <div
         style={{
           color: "#292726",
@@ -116,6 +143,7 @@ function SingleProductPage({ productId = "1234567890_KALEI" }) {
           productPrice={productPrice}
           sizeList={sizeList}
           productStock={productStock}
+          addToCart={addToCart}
         />
 
         {/* Description  */}

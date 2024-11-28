@@ -1,10 +1,10 @@
 // Dinul
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid2";
 import styles from "./Navbar.module.css";
 
 import logo from "../../assets/images/icons/kalei_logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NewArrivals from "./sections/NewArrivals";
 import Collections from "./sections/Collections";
 import Womens from "./sections/Womens";
@@ -24,7 +24,7 @@ import Drawer from "@mui/material/Drawer";
 // images
 import profileImg from "../../assets/images/profile/profileImg.png";
 import profileImg2 from "../../assets/images/profile/profileImg2.png";
-import { Avatar, Box, Tooltip } from "@mui/material";
+import { Box, Tooltip, Button } from "@mui/material";
 // images
 
 // search modal
@@ -33,12 +33,32 @@ import Modal from "@mui/material/Modal";
 
 import Zoom from "@mui/material/Zoom";
 
+import { auth } from "../../auth/auth";
+import keycloak from "../../auth/keycloak";
+import ProfileMenu from "./sections/ProfileMenu";
+
 export default function Navbar() {
   // search modal controls
   const [openSearchModal, setSearchModal] = React.useState(false);
   const handleSearchModalOpen = () => setSearchModal(true);
   const handleSearchModalClose = () => setSearchModal(false);
   // search modal controls
+
+  const navigate = useNavigate();
+  const [authenticated, setAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const initializeAuth = async () => {
+      try {
+        const isAuthenticated = await keycloak.init({ onLoad: "check-sso" }); // Check if the user is authenticated
+        setAuthenticated(isAuthenticated); // Update state based on Keycloak's status
+      } catch (error) {
+        console.error("Error during Keycloak initialization:", error);
+      }
+    };
+
+    initializeAuth();
+  }, []);
 
   // drawer settings
   const [state, setState] = React.useState({
@@ -207,141 +227,151 @@ export default function Navbar() {
               />
               {/* mens section */}
 
-              {/* accessories section */}
-              <Accessories
-                anchorEl={anchorAccessoriesEl}
-                open={openAccessories}
-                handleClose={handleAccessoriesClose}
-              />
-              {/* accessories section */}
-            </div>
-            {/* search bar,cart and profile */}
-            <Grid
-              size={{ xs: 6, md: 2, lg: 3 }}
-              sx={{
-                display: "flex",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-              }}
-            >
-              <div
-                className={styles.searchBarContainer}
-                onClick={handleSearchModalOpen}
-              >
-                <img src={searchIcon} alt="search icon" width={15} />
-                <span>SEARCH</span>
-              </div>
-              <>
-                <Tooltip title="Cart" arrow TransitionComponent={Zoom}>
-                  <img
-                    src={cartIcon}
-                    alt="search icon"
-                    width={20}
-                    style={{ cursor: "pointer" }}
-                  />
-                </Tooltip>
-                <Tooltip title="Profile" arrow TransitionComponent={Zoom}>
-                  <Avatar
-                    alt="Profile Picture"
-                    src={profileImg}
-                    sx={{ cursor: "pointer" }}
-                  />
-                </Tooltip>
-              </>
-            </Grid>
-            {/* search bar,cart and profile */}
-          </Grid>
-          {/* large and extra large devices */}
+            {/* accessories section */}
+            <Accessories
+              anchorEl={anchorAccessoriesEl}
+              open={openAccessories}
+              handleClose={handleAccessoriesClose}
+            />
+            {/* accessories section */}
+          </div>
+          {/* search bar,cart and profile */}
           <Grid
-            container
-            size={{ xs: 12 }}
-            sx={{ display: { xs: "flex", lg: "none" } }}
-          >
-            <Grid size={{ xs: 4 }} className={styles.logoContainer}>
-              <img
-                src={hamburger}
-                width={20}
-                alt="kalei_logo"
-                className={styles.logo}
-                onClick={toggleDrawer("bottom", true)}
-              />
-            </Grid>
-            <Grid
-              size={{ xs: 4 }}
-              className={styles.logoContainer}
-              sx={{ justifyContent: "center" }}
-            >
-              <img
-                src={logo}
-                width={60}
-                alt="kalei_logo"
-                className={styles.logo}
-              />
-            </Grid>
-            <Grid
-              size={{ xs: 4 }}
-              sx={{ justifyContent: "end" }}
-              className={styles.logoContainer}
-            >
-              <img
-                src={searchIcon}
-                width={20}
-                alt="kalei_logo"
-                className={styles.logo}
-                onClick={handleSearchModalOpen}
-              />
-            </Grid>
-          </Grid>
-        </Grid>
-        <Drawer
-          anchor={"bottom"}
-          open={state["bottom"]}
-          onClose={toggleDrawer("bottom", false)}
-        >
-          <div
-            style={{
-              height: "70vh",
-              width: "100%",
-              backgroundColor: "#FCF2E7",
-              paddingTop: "40px",
+            size={{ xs: 6, md: 2, lg: 3 }}
+            sx={{
+              display: "flex",
+              justifyContent: "space-evenly",
+              alignItems: "center",
             }}
           >
-            <Grid container sx={{ display: "flex", flexDirection: "column" }}>
-              {/* user details */}
-              <div className={styles.userDetails}>
-                {/* profile picture */}
-                <div className={styles.profileImgContainer}>
-                  <img src={profileImg2} alt="profileImg" width={100} />
-                </div>
-                {/* profile picture */}
-                {/* user information */}
-                <div className={styles.profileDetailsContainer}>
-                  <span style={{ fontSize: "18px" }}>Anonymous user</span>
-                  <br />
-                  <span style={{ fontSize: "14px" }}>
-                    AnonymousEmail@gmail.com
-                  </span>
-                </div>
-                {/* user information */}
-              </div>
-              {/* user details */}
-              {/* navbar options */}
-              <Grid
-                className={styles.navbarOptions}
-                sx={{ alignItems: { xs: "start", md: "center" } }}
+            <div className={styles.searchBarContainer} onClick={handleSearchModalOpen}>
+              <img src={searchIcon} alt="search icon" width={15} />
+              <span>SEARCH</span>
+            </div>
+            <>
+              <Tooltip
+                title="Cart"
+                arrow
+                TransitionComponent={Zoom}
+                onClick={() => navigate("/add-to-cart")}
               >
-                <h4>HOME</h4>
-                <h4>NEW ARRIVALS</h4>
-                <h4>COLLECTIONS</h4>
-                <h4>WOMEN</h4>
-                <h4>MEN</h4>
-                <h4>ACCESSORIES</h4>
-              </Grid>
-              {/* navbar options */}
+                <img
+                  src={cartIcon}
+                  alt="search icon"
+                  width={20}
+                  style={{ cursor: "pointer" }}
+                />
+              </Tooltip>
+              <Tooltip title="Profile" arrow TransitionComponent={Zoom}>
+                {authenticated ? (
+                  <ProfileMenu profileImg={profileImg} />
+                ) : (
+                  <Button
+                    variant="contained"
+                    onClick={() => auth()}
+                    sx={{
+                      backgroundColor: "#A6742B",
+                    }}
+                  >
+                    Login
+                  </Button>
+                )}
+              </Tooltip>
+            </>
+          </Grid>
+          {/* search bar,cart and profile */}
+        </Grid>
+        {/* large and extra large devices */}
+        <Grid
+          container
+          size={{ xs: 12 }}
+          sx={{ display: { xs: "flex", lg: "none" } }}
+        >
+          <Grid size={{ xs: 4 }} className={styles.logoContainer}>
+            <img
+              src={hamburger}
+              width={20}
+              alt="kalei_logo"
+              className={styles.logo}
+              onClick={toggleDrawer("bottom", true)}
+            />
+          </Grid>
+          <Grid
+            size={{ xs: 4 }}
+            className={styles.logoContainer}
+            sx={{ justifyContent: "center" }}
+          >
+            <img
+              src={logo}
+              width={60}
+              alt="kalei_logo"
+              className={styles.logo}
+              
+            />
+          </Grid>
+          <Grid
+            size={{ xs: 4 }}
+            sx={{ justifyContent: "end" }}
+            className={styles.logoContainer}
+          >
+            <img
+              src={searchIcon}
+              width={20}
+              alt="kalei_logo"
+              className={styles.logo}
+              onClick={handleSearchModalOpen}
+            />
+          </Grid>
+        </Grid>
+      </Grid>
+      <Drawer
+        anchor={"bottom"}
+        open={state["bottom"]}
+        onClose={toggleDrawer("bottom", false)}
+      >
+        <div
+          style={{
+            height: "70vh",
+            width: "100%",
+            backgroundColor: "#FCF2E7",
+            paddingTop: "40px",
+          }}
+        >
+          <Grid container sx={{ display: "flex", flexDirection: "column" }}>
+            {/* user details */}
+            <div className={styles.userDetails}>
+              {/* profile picture */}
+              <div className={styles.profileImgContainer}>
+                <img src={profileImg2} alt="profileImg" width={100} />
+              </div>
+              {/* profile picture */}
+              {/* user information */}
+              <div className={styles.profileDetailsContainer}>
+                <span style={{ fontSize: "18px" }}>Anonymous user</span>
+                <br />
+                <span style={{ fontSize: "14px" }}>
+                  AnonymousEmail@gmail.com
+                </span>
+              </div>
+              {/* user information */}
+            </div>
+            {/* user details */}
+            {/* navbar options */}
+            <Grid
+              className={styles.navbarOptions}
+              sx={{ alignItems: { xs: "start", md: "center" } }}
+            >
+              <h4>HOME</h4>
+              <h4>NEW ARRIVALS</h4>
+              <h4>COLLECTIONS</h4>
+              <h4>WOMEN</h4>
+              <h4>MEN</h4>
+              <h4>ACCESSORIES</h4>
             </Grid>
-          </div>
-        </Drawer>
-      </div>
-    </>
+            {/* navbar options */}
+          </Grid>
+        </div>
+      </Drawer>
+    </div>
   );
 }

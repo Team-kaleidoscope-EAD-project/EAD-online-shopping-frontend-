@@ -7,7 +7,7 @@ import Footer from "../../components/Footer/Footer";
 export default function AddToCartPage() {
   return (
     <div className={styles.homepageSection}>
-      <Navbar />
+      {/* <Navbar /> */}
       <CartPage />
       <Footer />
     </div>

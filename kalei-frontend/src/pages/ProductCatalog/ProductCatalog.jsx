@@ -125,7 +125,7 @@ export default function ProductCatalog({ category = productCategories[0] }) {
   return (
     <div className={styles.ProductCatalogPage}>
       {/* navbar section */}
-      <Navbar />
+      {/* <Navbar /> */}
       {/* navbar section */}
       {/* product catalog */}
       <Grid container>

@@ -15,17 +15,19 @@ const ProductOverview = ({
   productPrice,
   sizeList,
   productStock,
+  addToCart,
 }) => {
-
   const [selectedColor, setSelectedColor] = useState(0);
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedQuantity, setSelectedQuantity] = useState(1);
 
-  console.log(selectedQuantity);
-
   const ProductList = singleProductImageList.map((item, index) => (
     <ProductColors key={index} image={item.image} />
   ));
+
+  const handleCart = () => {
+    addToCart(selectedQuantity, selectedSize, selectedColor);
+  };
 
   return (
     <>
@@ -90,6 +92,7 @@ const ProductOverview = ({
               productPrice={productPrice}
               productStock={productStock}
               selectedQuantity={setSelectedQuantity}
+              handleCart={() => handleCart()}
             />
           </Box>
 
