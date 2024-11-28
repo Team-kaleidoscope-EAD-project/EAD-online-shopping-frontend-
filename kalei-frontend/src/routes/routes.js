@@ -4,6 +4,7 @@ import ProductCatalog from "../pages/ProductCatalog/ProductCatalog";
 import AddToCartPage from "../pages/AddToCart/AddToCart";
 import NotFoundPage from "../pages/NotFoundPage";
 import SingleProductPage from "../pages/SingleProductPage/SingleProductPage";
+import CollectionsPage from "../pages/Collections/CollectionsPage";
 
 const routes = [
   {
@@ -38,6 +39,15 @@ const routes = [
     element: (
       <Layout>
         <AddToCartPage />
+      </Layout>
+    ),
+    errorElement: <NotFoundPage />,
+  },
+  {
+    path: "/collections",
+    element: (
+      <Layout>
+        <CollectionsPage />
       </Layout>
     ),
     errorElement: <NotFoundPage />,
