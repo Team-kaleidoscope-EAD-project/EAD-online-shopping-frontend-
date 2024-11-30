@@ -9,7 +9,6 @@ export default function CollectionCard2({ name, image }) {
   const navigate = useNavigate();
 
   const handleViewCollection = (category) => {
-    alert("hi");
     navigate(`/product-catalog`, { state: { category } });
   };
 
@@ -64,9 +63,7 @@ export default function CollectionCard2({ name, image }) {
           <div className={styles.container}>
             <h1>{name}</h1>
             <CollectionButton
-              parseFunction={() => {
-                alert("hello");
-              }}
+              parseFunction={() => handleViewCollection(name)}
             />
           </div>
         </CardContent>

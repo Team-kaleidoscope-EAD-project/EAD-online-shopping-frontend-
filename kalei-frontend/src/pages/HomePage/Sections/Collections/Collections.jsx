@@ -1,6 +1,6 @@
 // Hirushi
 import React from "react";
-import CollectionCard from "../../../../components/Cards/CollectionCard";
+import CollectionCard from "../../../../components/Cards/CollectionCard2";
 import image1 from "../../../../assets/images/collectionImages/collection1.jpg";
 import image2 from "../../../../assets/images/collectionImages/collection2.jpg";
 import image3 from "../../../../assets/images/collectionImages/collection3.jpg";
