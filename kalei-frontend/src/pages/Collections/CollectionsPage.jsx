@@ -1,7 +1,6 @@
 import React from "react";
 import Grid from "@mui/material/Grid2";
 import Footer from "../../components/Footer/Footer";
-import Navbar from "../../components/Navbar/Navbar";
 import { Breadcrumbs, Link, Typography } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
@@ -98,7 +97,7 @@ export default function CollectionsPage() {
     <div>
       <Grid container>
         <Grid size={{ xs: 12 }}>
-          <Navbar />
+          {/* <Navbar /> */}
         </Grid>
         <Grid size={{ xs: 12 }} sx={{ padding: "2vw" }}>
           <Breadcrumbs

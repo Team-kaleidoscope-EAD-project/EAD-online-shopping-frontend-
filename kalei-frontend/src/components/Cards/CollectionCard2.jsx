@@ -3,7 +3,15 @@ import { Card, CardContent, Box } from "@mui/material";
 import styles from "./CollectionCard.module.css";
 import CollectionButton from "../Buttons/CollectionButton";
 
+import { useNavigate } from "react-router-dom";
+
 export default function CollectionCard2({ name, image }) {
+  const navigate = useNavigate();
+
+  const handleViewCollection = (category) => {
+    navigate(`/product-catalog`, { state: { category } });
+  };
+
   return (
     <div className={styles.collectionCard}>
       <Card
@@ -54,7 +62,9 @@ export default function CollectionCard2({ name, image }) {
         >
           <div className={styles.container}>
             <h1>{name}</h1>
-            <CollectionButton />
+            <CollectionButton
+              parseFunction={() => handleViewCollection(name)}
+            />
           </div>
         </CardContent>
       </Card>

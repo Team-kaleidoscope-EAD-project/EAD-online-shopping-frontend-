@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid2";
 import styles from "./ProductCatalog.module.css";
-import Navbar from "../../components/Navbar/Navbar";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import { useLocation } from "react-router-dom";
 import {
   Box,
   Breadcrumbs,
@@ -60,9 +60,15 @@ const marks = [
 // price ranges
 
 export default function ProductCatalog({ category = productCategories[0] }) {
-  
+  const location = useLocation();
+
+  const passedCategory = location.state?.category || category;
+
+  console.log("default category: " + category);
+  console.log("parsed category: " + passedCategory);
+
   // filters
-  const [productCategory, setProductCategory] = useState(productCategories[0]);
+  const [productCategory, setProductCategory] = useState(passedCategory);
   const [size, setSize] = useState(productSizes[0]);
   const [instock_availability, setInstock_Availability] = useState(true);
   const [outofstock_availability, setOutofstock_Availability] = useState(false);
@@ -70,7 +76,7 @@ export default function ProductCatalog({ category = productCategories[0] }) {
   // filters
 
   useEffect(() => {
-    setProductCategory(category);
+    setProductCategory(passedCategory);
   }, []);
 
   const handleProductCategoryFilter = (category) => {
