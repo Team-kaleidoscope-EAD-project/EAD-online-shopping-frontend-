@@ -98,7 +98,7 @@ export default function CollectionsPage() {
     <div>
       <Grid container>
         <Grid size={{ xs: 12 }}>
-          <Navbar />
+          {/* <Navbar /> */}
         </Grid>
         <Grid size={{ xs: 12 }} sx={{ padding: "2vw" }}>
           <Breadcrumbs

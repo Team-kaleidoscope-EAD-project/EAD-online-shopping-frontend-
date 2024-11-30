@@ -1,7 +1,12 @@
 import React from "react";
 import Button from "@mui/material/Button";
 
-export default function CollectionButton({ name, bgColor, txtColor }) {
+export default function CollectionButton({
+  name,
+  bgColor,
+  txtColor,
+  parseFunction,
+}) {
   return (
     <div>
       <Button
@@ -20,6 +25,7 @@ export default function CollectionButton({ name, bgColor, txtColor }) {
           },
           boxSizing: "border-box",
         }}
+        onClick={parseFunction}
       >
         SHOP NOW
       </Button>

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid2";
 import styles from "./ProductCatalog.module.css";
-import Navbar from "../../components/Navbar/Navbar";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import {
   Box,
