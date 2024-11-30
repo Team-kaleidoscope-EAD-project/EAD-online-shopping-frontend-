@@ -1,9 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import CartItem from "./CartItem";
 
 import "./Cart.css";
 import Popup from "./DiliveryAddressPopup";
 import { useLocation } from "react-router-dom";
+import CheckoutForm from "../../components/CheckoutForm/CheckoutForm";
+
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import {
+  createPaymentIntent,
+  sendOrderDetails,
+} from "../../services/order/orderService";
+import { userInfo } from "../../services/users/userInfo";
+
+const stripePromise = loadStripe(
+  "pk_test_51QOBxSHp3hdPZfFz6HFx8CyHRsKhaN8O1pi2GtBVoEOcnJQR9rJPpFQ7sW9HKYHFwqpdSwzeXEWg5PPx2r474Cyg00TihsPctx"
+);
 
 export default function Cart() {
   const location = useLocation();
@@ -15,6 +28,11 @@ export default function Cart() {
   });
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isPaymentOpen, setIsPaymentOpen] = useState(false);
+  const [deliveryAddress, setDeliveryAddress] = useState("");
+  const [totalPrice, setTotalPrice] = useState(null);
+  const [clientSecret, setClientSecret] = useState(null);
+  const [orderId, setOrderId] = useState(null);
 
   //save cart data in local storage
   useEffect(() => {
@@ -33,8 +51,22 @@ export default function Cart() {
     );
   };
 
+  const orderObject = {
+    userId: userInfo()?.userId || "Unregistered User",
+    orderItemsData: cartItems,
+  };
+
+  useEffect(() => {
+    calculateTotal();
+  }, [cartItems]);
+
   const calculateTotal = () => {
-    return cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const totalPrice = cartItems.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0
+    );
+    setTotalPrice(totalPrice);
+    return totalPrice;
   };
 
   const handleCheckout = () => {
@@ -43,6 +75,25 @@ export default function Cart() {
 
   const closePopup = () => {
     setIsPopupOpen(false); // Close the popup
+  };
+
+  const handleContinueCheckOut = async () => {
+    if (deliveryAddress) {
+      closePopup();
+      try {
+        // const response = await sendOrderDetails();
+        // if (response && response.orderId) {
+        //   setOrderId(response.orderId);
+        // }
+
+        const { clientSecret } = await createPaymentIntent(totalPrice);
+        setClientSecret(clientSecret);
+      } catch (error) {
+        console.log(error);
+      }
+
+      setIsPaymentOpen(true);
+    }
   };
 
   return (
@@ -110,7 +161,7 @@ export default function Cart() {
             <div>
               <div className="total">Total</div>
               <div className="totalAmount">
-                <span>Rs. {calculateTotal().toFixed(2)}</span>
+                <span>Rs. {totalPrice}</span>
               </div>
             </div>
           </div>
@@ -130,7 +181,7 @@ export default function Cart() {
 
       <Popup show={isPopupOpen} onClose={closePopup}>
         <div className="checkoutHeading">Checkout</div>
-        <p>Your total is Rs. {calculateTotal().toFixed(2)}</p>
+        <p>Your total is Rs. {totalPrice}</p>
         <div style={{ marginTop: "20px" }}>
           <label
             htmlFor="deliveryAddress"
@@ -142,6 +193,7 @@ export default function Cart() {
             id="deliveryAddress"
             rows="4"
             cols="40"
+            onChange={(e) => setDeliveryAddress(e.target.value)}
             placeholder="Enter your delivery address"
             style={{
               width: "80%",
@@ -152,7 +204,7 @@ export default function Cart() {
           />
         </div>
         <button
-          onClick={closePopup}
+          onClick={handleContinueCheckOut}
           style={{
             padding: "10px",
             marginTop: "20px",
@@ -167,6 +219,23 @@ export default function Cart() {
           Continue for payment
         </button>
       </Popup>
+
+      {isPaymentOpen && (
+        <Elements
+          stripe={stripePromise}
+          options={{
+            clientSecret:
+              clientSecret ||
+              "pi_3QQQwGHp3hdPZfFz0sI21jZX_secret_YXQpw8roblKFqquNCYyO8xPYN",
+          }}
+        >
+          <CheckoutForm
+            isClose={setIsPaymentOpen}
+            orderObject={orderObject}
+            orderId={orderId}
+          />
+        </Elements>
+      )}
     </div>
   );
 }
