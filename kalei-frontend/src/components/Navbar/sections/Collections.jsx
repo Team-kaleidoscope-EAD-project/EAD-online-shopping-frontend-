@@ -9,9 +9,18 @@ import img1 from "../../../assets/images/collectionImages/customerFavorites.png"
 import img2 from "../../../assets/images/collectionImages/specialOffers_forwomen.png";
 import img3 from "../../../assets/images/collectionImages/women_newArrivals.png";
 import img4 from "../../../assets/images/collectionImages/favorites.png";
+import { useNavigate } from "react-router-dom";
 // collections images
 
+const collectionData = [
+  { name: "SPECIAL OFFERS FOR WOMEN", image: img1 },
+  { name: "SPECIAL OFFERS FOR WOMEN", image: img2 },
+  { name: "SPECIAL OFFERS FOR WOMEN", image: img3 },
+  { name: "SPECIAL OFFERS FOR WOMEN", image: img4 },
+];
+
 export default function Collections({ anchorEl, open, handleClose }) {
+  const navigate = useNavigate();
   return (
     <div>
       {" "}
@@ -37,38 +46,22 @@ export default function Collections({ anchorEl, open, handleClose }) {
       >
         <div className={`${styles.megaMenuSection} ${styles.megaMenuSection2}`}>
           <div className={styles.collectionsContainer}>
-            {/* collection card */}
-            <div className={styles.collectionCard}>
-              <div className={styles.collectionCardImgContainer}>
-                <img src={img1} alt="collection card img" width={400} />
+            {collectionData.map((item, index) => (
+              //  collection card
+              <div className={styles.collectionCard}>
+                <div
+                  className={styles.collectionCardImgContainer}
+                  onClick={() =>
+                    navigate("/product-catalog", {
+                      state: { category: item.name },
+                    })
+                  }
+                >
+                  <img src={item.image} alt="collection card img" width={400} />
+                </div>
+                <span>{item.name.toUpperCase()}</span>
               </div>
-              <span>SPECIAL OFFERS FOR WOMEN</span>
-            </div>
-            {/* collection card */}
-            {/* collection card */}
-            <div className={styles.collectionCard}>
-              <div className={styles.collectionCardImgContainer}>
-                <img src={img3} alt="collection card img" width={400} />
-              </div>
-              <span>CUSTOMER FAVORITES</span>
-            </div>
-            {/* collection card */}
-            {/* collection card */}
-            <div className={styles.collectionCard}>
-              <div className={styles.collectionCardImgContainer}>
-                <img src={img2} alt="collection card img" width={400} />
-              </div>
-              <span>NEW PRODUCTS FOR WOMEN</span>
-            </div>
-            {/* collection card */}
-            {/* collection card */}
-            <div className={styles.collectionCard}>
-              <div className={styles.collectionCardImgContainer}>
-                <img src={img4} alt="collection card img" width={400} />
-              </div>
-              <span>TRENDING PRODUCTS</span>
-            </div>
-            {/* collection card */}
+            ))}
           </div>
         </div>
       </Menu>

@@ -144,8 +144,9 @@
 
 .productCatalogContainer {
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+
+  /* justify-content: space-evenly; */
+  /* align-items: center; */
   flex-wrap: wrap;
   gap: 50px;
 }

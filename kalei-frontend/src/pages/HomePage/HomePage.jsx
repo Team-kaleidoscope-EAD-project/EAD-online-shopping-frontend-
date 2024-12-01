@@ -15,7 +15,7 @@ export default function HomePage() {
       {/* your section */}
       <Carousel />
       <Collections />
-      <NewArrivals />
+      {/* <NewArrivals /> */}
       {/* your section */}
 
       {/* footer section */}

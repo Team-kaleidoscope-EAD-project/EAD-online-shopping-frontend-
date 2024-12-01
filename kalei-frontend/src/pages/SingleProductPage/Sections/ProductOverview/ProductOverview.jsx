@@ -22,7 +22,7 @@ const ProductOverview = ({
   const [selectedQuantity, setSelectedQuantity] = useState(1);
 
   const ProductList = singleProductImageList.map((item, index) => (
-    <ProductColors key={index} image={item.image} />
+    <ProductColors key={index} image={item.imageUrl} />
   ));
 
   const handleCart = () => {
@@ -79,7 +79,10 @@ const ProductOverview = ({
               marginTop: { xs: "25px", sm: "30px", md: "40px" },
             }}
           >
-            <SizeComponent sizeList={sizeList} selectedSize={setSelectedSize} />
+            <SizeComponent
+              sizeList={singleProductImageList[selectedColor].sizes}
+              selectedSize={setSelectedSize}
+            />
           </Box>
 
           {/* product prices */}

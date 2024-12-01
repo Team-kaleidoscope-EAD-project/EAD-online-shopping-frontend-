@@ -6,8 +6,8 @@ export const createPaymentIntent = async (amount) => {
     const response = await axiosInstance.post(
       "/api/v1/order/stripepayment/create-payment-intent",
       {
-        amount,
-        currency: "lkr",
+        amount: amount * 100,
+        currency: "usd",
       }
     );
     console.log(response.data);

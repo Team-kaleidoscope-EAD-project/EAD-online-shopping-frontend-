@@ -15,10 +15,10 @@ const useCheckoutForm = (stripe, elements, isClose, orderObject, orderId) => {
       return;
     }
 
-    const isOrderConfirm = await sendOrderDetails(orderObject);
+    // const isOrderConfirm = await sendOrderDetails(orderObject);
 
     //confirm the payment
-    if (isOrderConfirm) {
+    if (true) {
       await paymentConfirmation(stripe, elements, setAlert, isClose, orderId);
     }
   };

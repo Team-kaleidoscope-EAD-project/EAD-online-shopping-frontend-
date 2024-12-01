@@ -47,10 +47,10 @@ export default function CartItem({
         </div>
 
         {/* Remove Button */}
-        <div className="removeButton" >
+        <div className="removeButton">
           <img
             className="removeButtonImage"
-            onClick={() => onRemove(product.id)}
+            onClick={() => onRemove(product.itemId)}
             src={RemoveButton}
             alt="Remove"
           />

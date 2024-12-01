@@ -41,8 +41,20 @@ export default function Cart() {
     }
   }, [cartItems]);
 
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const paymentStatus = urlParams.get("redirect_status"); // Stripe adds this to the URL
+
+    if (paymentStatus === "succeeded") {
+      // Payment succeeded; clear the cart
+      localStorage.removeItem("cart");
+      setCartItems([]); // Update UI to reflect the empty cart
+    }
+  }, [location]);
+
   const handleRemove = (id) => {
-    setCartItems(cartItems.filter((item) => item.id !== id));
+    setCartItems(cartItems.filter((item) => item.itemId !== id));
+    console.log("cart", cartItems);
   };
 
   const handleQuantityChange = (id, quantity) => {
@@ -52,7 +64,15 @@ export default function Cart() {
   };
 
   const orderObject = {
-    userId: userInfo()?.userId || "Unregistered User",
+    orderDetails: {
+      status: "Pending",
+      totalAmount: totalPrice,
+      userId: userInfo()?.userId || "Unregistered",
+    },
+    shippingDetails: {
+      shippingAddress: deliveryAddress,
+    },
+
     orderItemsData: cartItems,
   };
 
@@ -87,6 +107,7 @@ export default function Cart() {
         // }
 
         const { clientSecret } = await createPaymentIntent(totalPrice);
+        console.log(clientSecret);
         setClientSecret(clientSecret);
       } catch (error) {
         console.log(error);

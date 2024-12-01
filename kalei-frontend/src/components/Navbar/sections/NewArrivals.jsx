@@ -5,14 +5,23 @@ import Menu from "@mui/material/Menu";
 import Fade from "@mui/material/Fade";
 
 // new arrival images
-import newDenimWear from "../../../assets/images/categoryImages/newDenimWear.png";
-import newMenWear from "../../../assets/images/categoryImages/newMenWear.png";
-import newShoeWear from "../../../assets/images/categoryImages/newShoeWear.png";
-import newWomenWear from "../../../assets/images/categoryImages/newWomenWear.png";
-import watchArrivals from "../../../assets/images/categoryImages/watchArrivals.png";
+import img1 from "../../../assets/images/categoryImages/newDenimWear.png";
+import img2 from "../../../assets/images/categoryImages/newMenWear.png";
+import img3 from "../../../assets/images/categoryImages/newShoeWear.png";
+import img4 from "../../../assets/images/categoryImages/newWomenWear.png";
+import img5 from "../../../assets/images/categoryImages/watchArrivals.png";
+import { useNavigate } from "react-router-dom";
 // new arrival images
 
+const newArrivalData = [
+  { name: "GYMWARE FOR MEN", image: img1 },
+  { name: "GYMWARE FOR MEN", image: img2 },
+  { name: "GYMWARE FOR MEN", image: img3 },
+  { name: "GYMWARE FOR MEN", image: img4 },
+];
+
 export default function NewArrivals({ anchorEl, open, handleClose }) {
+  const navigate = useNavigate();
   return (
     <div>
       {" "}
@@ -38,52 +47,27 @@ export default function NewArrivals({ anchorEl, open, handleClose }) {
       >
         <div className={`${styles.megaMenuSection} ${styles.megaMenuSection1}`}>
           <div className={styles.newArrivalContainer}>
-            {/* arrival card */}
-            <div className={styles.newArrivalCard}>
-              <div className={styles.imgContainer}>
-                <img src={newWomenWear} width={200} alt="new arrival img" />
+            {newArrivalData.map((item, index) => (
+              <div className={styles.collectionCard}>
+                <div
+                  className={styles.collectionCardImgContainer}
+                  onClick={() =>
+                    navigate("/product-catalog", {
+                      state: { category: item.name },
+                    })
+                  }
+                >
+                  <img src={item.image} alt="newArrival card img" width={400} />
+                </div>
+                <span>{item.name.toUpperCase()}</span>
               </div>
-              <span>NEW WOMEN'S WEAR</span>
-            </div>
-            {/* arrival card */}
-            {/* arrival card */}
-            <div className={styles.newArrivalCard}>
-              <div className={styles.imgContainer}>
-                <img src={newMenWear} width={200} alt="new arrival img" />
-              </div>
-              <span>NEW MEN'S WEAR</span>
-            </div>
-            {/* arrival card */}
-            {/* arrival card */}
-            <div className={styles.newArrivalCard}>
-              <div className={styles.imgContainer}>
-                <img src={newDenimWear} width={200} alt="new arrival img" />
-              </div>
-              <span>NEW DENIM WEAR</span>
-            </div>
-            {/* arrival card */}
-            {/* arrival card */}
-            <div className={styles.newArrivalCard}>
-              <div className={styles.imgContainer}>
-                <img src={watchArrivals} width={200} alt="new arrival img" />
-              </div>
-              <span>WATCH ARRIVALS</span>
-            </div>
-            {/* arrival card */}
-            {/* arrival card */}
-            <div className={styles.newArrivalCard}>
-              <div className={styles.imgContainer}>
-                <img src={newShoeWear} width={200} alt="new arrival img" />
-              </div>
-              <span>NEW SHOE ARRIVALS</span>
-            </div>
-            {/* arrival card */}
+            ))}
           </div>
-          <div className={styles.viewMoreSection}>
+          {/* <div className={styles.viewMoreSection}>
             <div className={styles.viewMoreBtn}>
               <span>VIEW MORE RESULTS</span>
             </div>
-          </div>
+          </div> */}
         </div>
       </Menu>
     </div>

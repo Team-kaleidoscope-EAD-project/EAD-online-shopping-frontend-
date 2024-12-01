@@ -9,9 +9,18 @@ import img1 from "../../../assets/images/menSectionImages/men_gym.png";
 import img2 from "../../../assets/images/menSectionImages/men_model.png";
 import img3 from "../../../assets/images/menSectionImages/men_street.png";
 import img4 from "../../../assets/images/menSectionImages/men_watches.png";
+import { useNavigate } from "react-router-dom";
 // men section images
 
+const mensData = [
+  { name: "GYMWARE FOR MEN", image: img1 },
+  { name: "GYMWARE FOR MEN", image: img2 },
+  { name: "GYMWARE FOR MEN", image: img3 },
+  { name: "GYMWARE FOR MEN", image: img4 },
+];
+
 export default function Mens({ anchorEl, open, handleClose }) {
+  const navigate = useNavigate();
   return (
     <div>
       {" "}
@@ -37,38 +46,22 @@ export default function Mens({ anchorEl, open, handleClose }) {
       >
         <div className={`${styles.megaMenuSection} ${styles.megaMenuSection4}`}>
           <div className={styles.collectionsContainer}>
-            {/* mens card */}
-            <div className={styles.collectionCard}>
-              <div className={styles.collectionCardImgContainer}>
-                <img src={img1} alt="collection card img" width={400} />
+            {mensData.map((item, index) => (
+              //  mens card
+              <div className={styles.collectionCard}>
+                <div
+                  className={styles.collectionCardImgContainer}
+                  onClick={() =>
+                    navigate("/product-catalog", {
+                      state: { category: item.name },
+                    })
+                  }
+                >
+                  <img src={item.image} alt="mens card img" width={400} />
+                </div>
+                <span>{item.name.toUpperCase()}</span>
               </div>
-              <span>GYMWARE FOR MEN</span>
-            </div>
-            {/* mens card */}
-            {/* mens card */}
-            <div className={styles.collectionCard}>
-              <div className={styles.collectionCardImgContainer}>
-                <img src={img3} alt="collection card img" width={400} />
-              </div>
-              <span>MEN'S EYE WEAR</span>
-            </div>
-            {/* mens card */}
-            {/* mens card */}
-            <div className={styles.collectionCard}>
-              <div className={styles.collectionCardImgContainer}>
-                <img src={img2} alt="collection card img" width={400} />
-              </div>
-              <span>STREETWARE FOR MEN</span>
-            </div>
-            {/* mens card */}
-            {/* mens card */}
-            <div className={styles.collectionCard}>
-              <div className={styles.collectionCardImgContainer}>
-                <img src={img4} alt="collection card img" width={400} />
-              </div>
-              <span>ACCESSORIES FOR MEN</span>
-            </div>
-            {/* mens card */}
+            ))}
           </div>
         </div>
       </Menu>

@@ -39,6 +39,7 @@ import closeBtn from "../../assets/images/icons/cross.png";
 import { grey } from "@mui/material/colors";
 import ProductCard from "../../components/Cards/ProductCard/ProductCard";
 import Footer from "../../components/Footer/Footer";
+import { productFilter } from "../../services/products/filters";
 
 function handleClick(event) {
   event.preventDefault();
@@ -59,13 +60,11 @@ const marks = [
 ];
 // price ranges
 
-export default function ProductCatalog({ category = productCategories[0] }) {
+export default function ProductCatalog() {
   const location = useLocation();
 
-  const passedCategory = location.state?.category || category;
-
-  console.log("default category: " + category);
-  console.log("parsed category: " + passedCategory);
+  const passedCategory = location.state.category;
+  // console.log(passedCategory);
 
   // filters
   const [productCategory, setProductCategory] = useState(passedCategory);
@@ -74,17 +73,52 @@ export default function ProductCatalog({ category = productCategories[0] }) {
   const [outofstock_availability, setOutofstock_Availability] = useState(false);
   const [price, setPrice] = useState(0.0);
   // filters
+  const [filters, setFilters] = useState({
+    categories: [passedCategory],
+    colors: [],
+    brands: [],
+    sizes: [],
+    minPrice: null,
+    maxPrice: null,
+  });
+
+  const handleFilterChange = (name, value) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [name]: value,
+    }));
+
+    console.log(filters);
+  };
+
+  const [productList, setProductList] = useState([]);
 
   useEffect(() => {
-    setProductCategory(passedCategory);
-  }, []);
+    fetchProductsByFilters();
+  }, [filters]);
+
+  useEffect(() => {
+    handleProductCategoryFilter(passedCategory);
+  }, [passedCategory]);
+
+  const fetchProductsByFilters = async () => {
+    const products = await productFilter(filters);
+    setProductList(products);
+  };
 
   const handleProductCategoryFilter = (category) => {
-    setProductCategory(category);
+    console.log(category);
+    setFilters((prev) => ({
+      ...prev,
+      categories: category !== "All Products" ? category : [],
+    }));
+
+    console.log(filters);
   };
 
   const handleProductSizeFilter = (size) => {
     setSize(size);
+    handleFilterChange("sizes", size);
   };
 
   const handleInstock_Availability = () => {
@@ -110,6 +144,7 @@ export default function ProductCatalog({ category = productCategories[0] }) {
   // price range
   const handleProductPrice = (_, newValue) => {
     setPrice(newValue);
+    handleFilterChange("minPrice", newValue);
   };
 
   // price range
@@ -221,7 +256,7 @@ export default function ProductCatalog({ category = productCategories[0] }) {
           </Accordion>
           {/* product sizes */}
           {/* product availability */}
-          <Accordion sx={{ boxShadow: "none", border: "none" }}>
+          {/* <Accordion sx={{ boxShadow: "none", border: "none" }}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1-content"
@@ -261,7 +296,7 @@ export default function ProductCatalog({ category = productCategories[0] }) {
                 <span>Out Of Stock</span>
               </div>
             </AccordionDetails>
-          </Accordion>
+          </Accordion> */}
           {/* product availability */}
           {/* product price */}
           <Accordion sx={{ boxShadow: "none", border: "none" }}>
@@ -500,14 +535,9 @@ export default function ProductCatalog({ category = productCategories[0] }) {
           paddingLeft={3}
           className={styles.productCatalogContainer}
         >
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+          {productList.map((item, index) => (
+            <ProductCard singleProduct={item} />
+          ))}
         </Grid>
       </Grid>
       {/* product catalog */}

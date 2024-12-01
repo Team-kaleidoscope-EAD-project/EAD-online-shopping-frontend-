@@ -53,7 +53,7 @@ function SizeComponent({ sizeList, selectedSize }) {
                     color: selectedIndex === index ? "white" : "#1E1B1B",
                   }}
                 >
-                  {item}
+                  {item.size}
                 </Typography>
               </Box>
             ))

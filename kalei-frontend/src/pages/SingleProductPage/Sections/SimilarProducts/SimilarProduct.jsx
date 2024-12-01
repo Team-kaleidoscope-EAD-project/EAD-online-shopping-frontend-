@@ -23,12 +23,12 @@ function SimilarProduct({ similarProductList }) {
         spacing={{ xs: 2, sm: 3, md: 4, lg: 6 }}
         columns={{ xs: 4, sm: 8, md: 12 }}
         sx={{
-          justifyContent: "center",
+          justifyContent: "flex-start",
         }}
       >
         {similarProductList.map((item, index) => (
           <Grid2 key={index} item xs={6} md={8}>
-            <ProductCard />
+            <ProductCard singleProduct={item} />
           </Grid2>
         ))}
       </Grid2>

@@ -7,42 +7,11 @@ import SimilarProduct from "./Sections/SimilarProducts/SimilarProduct";
 import PopUp from "./Sections/CutomerReview/PopUp";
 import EditIcon from "@mui/icons-material/Edit";
 import Footer from "../../components/Footer/Footer";
-import useFetch from "../../hooks/useFetch";
 import ProductService from "../../services/productServices";
-import { useNavigate } from "react-router-dom";
-
-// dummy data for ProductOverview
-const singleProductImageList = [
-  {
-    image: require("../../assets/images/singleProductImages/woman_image1.png"),
-    color: "purple",
-  },
-
-  {
-    image: require("../../assets/images/singleProductImages/woman_image2.png"),
-    color: "green",
-  },
-
-  {
-    image: require("../../assets/images/singleProductImages/woman_image3.png"),
-    color: "orange",
-  },
-  {
-    image: require("../../assets/images/singleProductImages/woman_image2.png"),
-    color: "green",
-  },
-];
-
-const productName = "Women’s Silk TShirt";
-const productId = "1234567890_KALEI";
-const productPrice = 3500;
+import { useLocation, useNavigate } from "react-router-dom";
 
 const sizeList = ["sm", "md", "lg", "xl"];
 const productStock = 10;
-
-//dummy data for ProductDescription
-const productDescription =
-  "Brand - HUF & DEE Material -Cotton Lycra \n Neck – Crew \n Sleeve - Short Sleeve \n Texture – Printed \n Size - S - 3XL";
 
 //dummy data for customer review
 
@@ -90,27 +59,27 @@ const reviewDataList = [
 ];
 
 //dummy data for similar products
-const similarProductList = [1, 2, 3, 1, 2];
 
-function SingleProductPage({ productId = "1234567890_KALEI" }) {
+function SingleProductPage() {
+  const location = useLocation();
+  const product = location.state.singleProduct;
+
+  const similarProductList = [product, product];
+
   const navigate = useNavigate();
   const [displayPopUp, setDisplayPopUp] = useState(false);
-
-  const { data, error, loading } = useFetch(
-    () => ProductService.getProductById(productId),
-    [productId]
-  );
 
   const addToCart = (selectedQuantity, selectedSize, selectedColor) => {
     // Prepare the item data
     const selectedItem = {
-      itemId: productId,
-      name: productName,
-      price: productPrice,
+      itemId: product.id,
+      sku: product.variants[selectedColor].sizes[selectedSize].sku,
+      name: product.name,
+      price: product.price,
       quantity: selectedQuantity,
       size: sizeList[selectedSize],
-      color: singleProductImageList[selectedColor].color,
-      image: singleProductImageList[selectedColor].image,
+      color: product.variants[selectedColor].color,
+      image: product.variants[selectedColor].imageUrl,
     };
 
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -137,10 +106,10 @@ function SingleProductPage({ productId = "1234567890_KALEI" }) {
       >
         {/* Header Section  */}
         <ProductOverview
-          singleProductImageList={singleProductImageList}
-          productName={productName}
-          productId={productId}
-          productPrice={productPrice}
+          singleProductImageList={product.variants}
+          productName={product.name}
+          productId={product.id}
+          productPrice={product.price}
           sizeList={sizeList}
           productStock={productStock}
           addToCart={addToCart}
@@ -152,7 +121,7 @@ function SingleProductPage({ productId = "1234567890_KALEI" }) {
             marginTop: { xs: "60px", md: "100px" },
           }}
         >
-          <ProductDescription productDescription={productDescription} />
+          <ProductDescription productDescription={product.description} />
         </Box>
 
         {/* Review  */}
