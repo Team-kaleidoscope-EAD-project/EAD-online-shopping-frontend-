@@ -54,7 +54,7 @@ export default function CollectionCard({ name, image }) {
         >
           <div className={styles.container}>
             <h1>{name}</h1>
-            <CollectionButton />
+            <CollectionButton buttonName={"SHOP NOW"} />
           </div>
         </CardContent>
       </Card>

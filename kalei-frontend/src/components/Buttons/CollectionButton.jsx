@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "@mui/material/Button";
 
-export default function CollectionButton({ name, bgColor, txtColor }) {
+export default function CollectionButton(buttonName) {
   return (
     <div>
       <Button
@@ -21,7 +21,7 @@ export default function CollectionButton({ name, bgColor, txtColor }) {
           boxSizing: "border-box",
         }}
       >
-        SHOP NOW
+        {buttonName.buttonName}
       </Button>
     </div>
   );
