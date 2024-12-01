@@ -10,6 +10,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import {
   createPaymentIntent,
+  orderStatusUpdate,
   sendOrderDetails,
 } from "../../services/order/orderService";
 import { userInfo } from "../../services/users/userInfo";
@@ -42,15 +43,21 @@ export default function Cart() {
   }, [cartItems]);
 
   useEffect(() => {
+    afterPayment();
+  }, [location]);
+
+  //after payment completion
+  const afterPayment = async () => {
     const urlParams = new URLSearchParams(location.search);
-    const paymentStatus = urlParams.get("redirect_status"); // Stripe adds this to the URL
+    const paymentStatus = urlParams.get("redirect_status");
 
     if (paymentStatus === "succeeded") {
-      // Payment succeeded; clear the cart
       localStorage.removeItem("cart");
-      setCartItems([]); // Update UI to reflect the empty cart
+      setCartItems([]);
+
+      await orderStatusUpdate(orderId);
     }
-  }, [location]);
+  };
 
   const handleRemove = (id) => {
     setCartItems(cartItems.filter((item) => item.itemId !== id));
@@ -73,7 +80,10 @@ export default function Cart() {
       shippingAddress: deliveryAddress,
     },
 
-    orderItemsData: cartItems,
+    orderItems: cartItems,
+    paymentDetails: {
+      paymentAmount: totalPrice,
+    },
   };
 
   useEffect(() => {

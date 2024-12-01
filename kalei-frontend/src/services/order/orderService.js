@@ -22,7 +22,7 @@ export const sendOrderDetails = async (orderObject) => {
   try {
     console.log(orderObject);
     const response = await axiosInstance.post(
-      "/api/v1/order/addorder",
+      "/api/v1/order/addplaceorder",
       orderObject
     );
 
@@ -37,6 +37,21 @@ export const orderRollBack = async (orderId) => {
   try {
     console.log("rollbacked");
     const response = await axiosInstance.post("/order/addorder", { orderId });
+
+    return response.status;
+  } catch (error) {
+    console.error("Error creating Payment:", error);
+    throw error;
+  }
+};
+
+export const orderStatusUpdate = async (orderId) => {
+  try {
+    console.log("rollbacked");
+    const response = await axiosInstance.post("/order/updateOrder", {
+      orderId,
+      status: "Completed",
+    });
 
     return response.status;
   } catch (error) {
