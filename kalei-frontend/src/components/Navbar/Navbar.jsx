@@ -36,13 +36,22 @@ import Zoom from "@mui/material/Zoom";
 import { auth } from "../../auth/auth";
 import keycloak from "../../auth/keycloak";
 import ProfileMenu from "./sections/ProfileMenu";
+import ProductCard from "../Cards/ProductCard/ProductCard";
+
+// dummy product list
+import { fakeProductNames } from "../../data/productFilters";
 
 export default function Navbar() {
   // search modal controls
+  const [keyword, setKeyword] = React.useState("");
   const [openSearchModal, setSearchModal] = React.useState(false);
   const handleSearchModalOpen = () => setSearchModal(true);
   const handleSearchModalClose = () => setSearchModal(false);
   // search modal controls
+
+  const handleSearchBar = (event) => {
+    setKeyword(event.target.value);
+  };
 
   const navigate = useNavigate();
   const [authenticated, setAuthenticated] = useState(false);
@@ -141,14 +150,42 @@ export default function Navbar() {
         <Box className={styles.searchBoxContainer}>
           <Grid container>
             {/* search bar */}
-            <Grid size={{ xs: "12" }} className={styles.searchBar}></Grid>
+            <Grid size={{ xs: "12" }} className={styles.searchBar}>
+              <input placeholder="Search..." onChange={handleSearchBar} />
+              <div
+                style={{
+                  width: "5%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <img
+                  src={searchIcon}
+                  alt="search icon"
+                  width={18}
+                  style={{ cursor: "pointer" }}
+                />
+              </div>
+            </Grid>
             {/* search bar */}
-            {/* searched products */}
-            <Grid
-              size={{ xs: "12" }}
-              className={styles.searchedProducts}
-            ></Grid>
-            {/* searched products */}
+            {/* Searched products */}
+            <Grid size={{ xs: "12" }} className={styles.searchedProducts}>
+              {fakeProductNames.map((item, index) => {
+                const match = item.slice(0, keyword.length); // Part matching the keyword
+                const remaining = item.slice(keyword.length); // Remaining part after the keyword
+                
+                return (
+                  <div key={index} className={styles.suggestion}>
+                    <span style={{ color: "#be8748", fontWeight: "bold" }}>
+                      {match}
+                    </span>
+                    <span>{remaining}</span>
+                  </div>
+                );
+              })}
+            </Grid>
+            {/* Searched products */}
           </Grid>
         </Box>
       </Modal>

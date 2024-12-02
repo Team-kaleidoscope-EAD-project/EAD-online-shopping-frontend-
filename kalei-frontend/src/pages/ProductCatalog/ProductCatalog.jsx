@@ -73,6 +73,7 @@ export default function ProductCatalog() {
   const [outofstock_availability, setOutofstock_Availability] = useState(false);
   const [price, setPrice] = useState(0.0);
   // filters
+
   const [filters, setFilters] = useState({
     categories: [passedCategory],
     colors: [],
@@ -87,7 +88,6 @@ export default function ProductCatalog() {
       ...prevFilters,
       [name]: value,
     }));
-
     console.log(filters);
   };
 
@@ -107,12 +107,11 @@ export default function ProductCatalog() {
   };
 
   const handleProductCategoryFilter = (category) => {
-    console.log(category);
+    setProductCategory(category);
     setFilters((prev) => ({
       ...prev,
       categories: category !== "All Products" ? category : [],
     }));
-
     console.log(filters);
   };
 
