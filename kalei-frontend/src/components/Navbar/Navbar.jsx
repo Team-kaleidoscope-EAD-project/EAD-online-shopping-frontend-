@@ -75,12 +75,14 @@ export default function Navbar() {
     });
   };
 
+  const handleNavigation = (path) => {
+    navigate(path);
+    setState({ ...state, ["bottom"]: false });
+  };
+
   // drawer settings
   const [state, setState] = React.useState({
-    top: false,
-    left: false,
     bottom: false,
-    right: false,
   });
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -90,7 +92,6 @@ export default function Navbar() {
     ) {
       return;
     }
-
     setState({ ...state, [anchor]: open });
   };
   // drawer settings
@@ -220,6 +221,9 @@ export default function Navbar() {
                 width={60}
                 alt="kalei_logo"
                 className={styles.logo}
+                onClick={() => {
+                  navigate(`/`);
+                }}
               />
             </Grid>
             <Grid
@@ -375,6 +379,7 @@ export default function Navbar() {
             </Grid>
           </Grid>
         </Grid>
+
         <Drawer
           anchor={"bottom"}
           open={state["bottom"]}
@@ -382,7 +387,7 @@ export default function Navbar() {
         >
           <div
             style={{
-              height: "70vh",
+              height: "65vh",
               width: "100%",
               backgroundColor: "#FCF2E7",
               paddingTop: "40px",
@@ -412,12 +417,52 @@ export default function Navbar() {
                 className={styles.navbarOptions}
                 sx={{ alignItems: { xs: "start", md: "center" } }}
               >
-                <h4>HOME</h4>
-                <h4>NEW ARRIVALS</h4>
-                <h4>COLLECTIONS</h4>
-                <h4>WOMEN</h4>
-                <h4>MEN</h4>
-                <h4>ACCESSORIES</h4>
+                <h4
+                  onClick={() => {
+                    toggleDrawer("bottom", false);
+                    handleNavigation("/");
+                  }}
+                >
+                  HOME
+                </h4>
+                <h4
+                  onClick={() => {
+                    toggleDrawer("bottom", false);
+                    handleNavigation("/collections");
+                  }}
+                >
+                  COLLECTIONS
+                </h4>
+                <h4
+                  onClick={() => {
+                    setState({ ...state, ["bottom"]: false });
+                    navigate("/product-catalog", {
+                      state: { category: "BOTTOMS FOR WOMEN" },
+                    });
+                  }}
+                >
+                  WOMEN
+                </h4>
+                <h4
+                  onClick={() => {
+                    setState({ ...state, ["bottom"]: false });
+                    navigate("/product-catalog", {
+                      state: { category: "GYMWARE FOR MEN" },
+                    });
+                  }}
+                >
+                  MEN
+                </h4>
+                <h4
+                  onClick={() => {
+                    setState({ ...state, ["bottom"]: false });
+                    navigate("/product-catalog", {
+                      state: { category: "MEN'S WATCHES" },
+                    });
+                  }}
+                >
+                  ACCESSORIES
+                </h4>
               </Grid>
               {/* navbar options */}
             </Grid>
