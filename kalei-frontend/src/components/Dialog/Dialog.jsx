@@ -39,6 +39,7 @@ export default function FormDialog({
         {message}
       </IconButton>
       <Dialog
+        className="profile"
         open={open}
         onClose={handleClose}
         fullWidth
@@ -80,6 +81,44 @@ export default function FormDialog({
             value={formValues[2]}
             onChange={(event) => handleInputChange(2, event)}
             type="email"
+            fullWidth
+            variant="standard"
+          />
+          <Box display="flex" justifyContent="space-between" gap={2}>
+            <TextField
+              margin="dense"
+              label={dialogContent[3]}
+              value={formValues[3]}
+              onChange={(event) => handleInputChange(3, event)}
+              type="name"
+              fullWidth
+              variant="standard"
+            />
+            <TextField
+              margin="dense"
+              label={dialogContent[4]}
+              value={formValues[4]}
+              onChange={(event) => handleInputChange(4, event)}
+              type="name"
+              fullWidth
+              variant="standard"
+            />
+          </Box>
+          <TextField
+            margin="dense"
+            label={dialogContent[5]}
+            value={formValues[5]}
+            onChange={(event) => handleInputChange(5, event)}
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+          <TextField
+            margin="dense"
+            label={dialogContent[6]}
+            value={formValues[6]}
+            onChange={(event) => handleInputChange(6, event)}
+            type="text"
             fullWidth
             variant="standard"
           />
