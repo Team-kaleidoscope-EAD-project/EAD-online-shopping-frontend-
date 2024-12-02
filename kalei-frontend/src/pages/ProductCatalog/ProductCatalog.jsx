@@ -41,11 +41,6 @@ import ProductCard from "../../components/Cards/ProductCard/ProductCard";
 import Footer from "../../components/Footer/Footer";
 import { productFilter } from "../../services/products/filters";
 
-function handleClick(event) {
-  event.preventDefault();
-  console.info("You clicked a breadcrumb.");
-}
-
 const MAX = 9000.0;
 const MIN = 0.0;
 const marks = [
@@ -148,13 +143,7 @@ export default function ProductCatalog() {
 
   // price range
   const breadcrumbs = [
-    <Link
-      underline="hover"
-      key="2"
-      color="inherit"
-      href="/"
-      onClick={handleClick}
-    >
+    <Link underline="hover" key="2" color="inherit" href="/">
       Home
     </Link>,
     <Typography key="3" sx={{ color: "text.primary" }}>
@@ -534,9 +523,9 @@ export default function ProductCatalog() {
           paddingLeft={3}
           className={styles.productCatalogContainer}
         >
-          {productList.map((item, index) => (
+          {/* {productList.map((item, index) => (
             <ProductCard singleProduct={item} />
-          ))}
+          ))} */}
         </Grid>
       </Grid>
       {/* product catalog */}

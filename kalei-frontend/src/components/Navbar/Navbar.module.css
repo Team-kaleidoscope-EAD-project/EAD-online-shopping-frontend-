@@ -348,6 +348,7 @@
   border: none;
   outline: none;
   font-family: "amiko_regular";
+  border-radius: 50px;
 }
 
 .searchBar div img {

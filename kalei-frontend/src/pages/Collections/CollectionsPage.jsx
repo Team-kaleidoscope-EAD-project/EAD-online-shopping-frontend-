@@ -18,10 +18,9 @@ import image10 from "../../assets/images/collectionImages/collection10.jpg";
 import styles from "./CollectionPage.module.css";
 import CollectionCard from "../../components/Cards/CollectionCard2";
 
-function handleClick(event) {
-  event.preventDefault();
-  console.info("You clicked a breadcrumb.");
-}
+// navigation
+import { useNavigate } from "react-router-dom";
+// navigation
 
 const collections = [
   {
@@ -77,6 +76,7 @@ const collections = [
 ];
 
 export default function CollectionsPage() {
+  const navigate = useNavigate();
   // price range
   const breadcrumbs = [
     <Link
@@ -84,7 +84,7 @@ export default function CollectionsPage() {
       key="2"
       color="inherit"
       href="/"
-      onClick={handleClick}
+      // onClick={handleClick}
     >
       Home
     </Link>,
@@ -96,9 +96,7 @@ export default function CollectionsPage() {
   return (
     <div>
       <Grid container>
-        <Grid size={{ xs: 12 }}>
-          {/* <Navbar /> */}
-        </Grid>
+        <Grid size={{ xs: 12 }}>{/* <Navbar /> */}</Grid>
         <Grid size={{ xs: 12 }} sx={{ padding: "2vw" }}>
           <Breadcrumbs
             separator={<NavigateNextIcon fontSize="small" />}
@@ -111,11 +109,14 @@ export default function CollectionsPage() {
         <Grid
           size={{ xs: 12 }}
           sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexWrap: "wrap",
-            gap: "4vw",
+            display: "grid",
+            gridTemplateColumns: {
+              xs: "repeat(auto-fit, minmax(250px, 1fr))",
+              lg: "repeat(auto-fit, minmax(300px, 1fr))",
+            },
+            rowGap: "5vw",
+            columnGap: "5vw",
+            justifyItems: "center",
             paddingLeft: "3vw",
             paddingRight: "3vw",
           }}

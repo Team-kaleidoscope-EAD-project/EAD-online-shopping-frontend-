@@ -36,7 +36,6 @@ import Zoom from "@mui/material/Zoom";
 import { auth } from "../../auth/auth";
 import keycloak from "../../auth/keycloak";
 import ProfileMenu from "./sections/ProfileMenu";
-import ProductCard from "../Cards/ProductCard/ProductCard";
 
 // dummy product list
 import { fakeProductNames } from "../../data/productFilters";
@@ -68,6 +67,13 @@ export default function Navbar() {
 
     initializeAuth();
   }, []);
+
+  const handleViewProduct = (singleProduct) => {
+    // Pass the product ID or any relevant data via the route
+    navigate(`/single-product-view`, {
+      state: { id: singleProduct.id, singleProduct },
+    });
+  };
 
   // drawer settings
   const [state, setState] = React.useState({
@@ -172,11 +178,17 @@ export default function Navbar() {
             {/* Searched products */}
             <Grid size={{ xs: "12" }} className={styles.searchedProducts}>
               {fakeProductNames.map((item, index) => {
-                const match = item.slice(0, keyword.length); // Part matching the keyword
-                const remaining = item.slice(keyword.length); // Remaining part after the keyword
-                
+                const match = item.slice(0, keyword.length);
+                const remaining = item.slice(keyword.length);
+
                 return (
-                  <div key={index} className={styles.suggestion}>
+                  <div
+                    key={index}
+                    className={styles.suggestion}
+                    onClick={() => {
+                      handleViewProduct(item);
+                    }}
+                  >
                     <span style={{ color: "#be8748", fontWeight: "bold" }}>
                       {match}
                     </span>
@@ -215,19 +227,19 @@ export default function Navbar() {
               className={styles.sectionLinkContainer}
             >
               <Link to="/">HOME</Link>
-              <Link to="/" onMouseOver={handleNewArrivalClick}>
+              <Link to="/" onClick={handleNewArrivalClick}>
                 NEW ARRIVALS
               </Link>
-              <Link to="/" onMouseOver={handleCollectionClick}>
+              <Link to="/" onClick={handleCollectionClick}>
                 COLLECTIONS
               </Link>
-              <Link to="/" onMouseOver={handleWomenClick}>
+              <Link to="/" onClick={handleWomenClick}>
                 WOMEN
               </Link>
-              <Link to="/" onMouseOver={handleMenClick}>
+              <Link to="/" onClick={handleMenClick}>
                 MEN
               </Link>
-              <Link to="/" onMouseOver={handleAccessoriesClick}>
+              <Link to="/" onClick={handleAccessoriesClick}>
                 ACCESSORIES
               </Link>
             </Grid>
