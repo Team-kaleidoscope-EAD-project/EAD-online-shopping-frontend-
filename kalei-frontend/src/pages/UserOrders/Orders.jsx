@@ -5,27 +5,54 @@ import image1 from "../../assets/images/collectionImages/collection1.jpg";
 import image2 from "../../assets/images/collectionImages/collection2.jpg";
 import Typography from "@mui/material/Typography";
 
-export default function CollectionsPage() {
-  const orders = [
-    {
-      key: 1,
-      orderNumber: "#1234",
-      image: image1,
-      noOfItems: 2,
-      price: "Rs 8500",
-      status: "Delivered",
-      lastUpdated: "6 days ago",
-    },
-    {
-      key: 2,
-      orderNumber: "#4321",
-      image: image2,
-      noOfItems: 3,
-      price: "Rs 10500",
-      status: "In Transit",
-      lastUpdated: "2 days ago",
-    },
-  ];
+const orders = [
+  {
+    key: 1,
+    status: "Delivered",
+    lastUpdatedDate: "6 days ago",
+    imgUrl: image1,
+    noOfItems: 2,
+    orderNo: "#1234",
+    price: 8500,
+  },
+  {
+    key: 2,
+    status: "On its way",
+    lastUpdatedDate: "3 days ago",
+    imgUrl: image2,
+    noOfItems: 1,
+    orderNo: "#2134",
+    price: 6000,
+  },
+  {
+    key: 3,
+    status: "Delivered",
+    lastUpdatedDate: "1 week ago",
+    imgUrl: image1,
+    noOfItems: 3,
+    orderNo: "#1235",
+    price: 12000,
+  },
+  {
+    key: 4,
+    status: "Delivered",
+    lastUpdatedDate: "2 weeks ago",
+    imgUrl: image2,
+    noOfItems: 1,
+    orderNo: "#1236",
+    price: 6000,
+  },
+  {
+    key: 5,
+    status: "Delivered",
+    lastUpdatedDate: "3 weeks ago",
+    imgUrl: image1,
+    noOfItems: 2,
+    orderNo: "#1237",
+    price: 8500,
+  },
+];
+export default function Orders() {
   return (
     <div>
       <Typography
@@ -54,17 +81,17 @@ export default function CollectionsPage() {
         }}
       >
         {orders.length === 0 ? (
-          <div>No collections found.</div>
+          <div>No orders found.</div>
         ) : (
           orders.map((order) => (
             <OrderCard
               key={order.key}
-              orderNumber={order.orderNumber}
-              image={order.image}
-              noOfItems={order.noOfItems}
-              price={order.price}
               status={order.status}
-              lastUpdated={order.lastUpdated}
+              price={order.price}
+              lastUpdatedDate={order.lastUpdatedDate}
+              imgUrl={order.imgUrl}
+              noOfItems={order.noOfItems}
+              orderNo={order.orderNo}
             />
           ))
         )}
