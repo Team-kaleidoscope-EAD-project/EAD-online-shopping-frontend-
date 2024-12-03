@@ -27,7 +27,7 @@ export default function CollectionButton({
         }}
         onClick={parseFunction}
       >
-        SHOP NOW
+        {name}
       </Button>
     </div>
   );

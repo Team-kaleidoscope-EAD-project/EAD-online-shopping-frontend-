@@ -5,6 +5,8 @@ import AddToCartPage from "../pages/AddToCart/AddToCart";
 import NotFoundPage from "../pages/NotFoundPage";
 import SingleProductPage from "../pages/SingleProductPage/SingleProductPage";
 import CollectionsPage from "../pages/Collections/CollectionsPage";
+import Profile from "../pages/Profile/profile";
+import Orders from "../pages/UserOrders/Orders";
 
 const routes = [
   {
@@ -48,6 +50,24 @@ const routes = [
     element: (
       <Layout>
         <CollectionsPage />
+      </Layout>
+    ),
+    errorElement: <NotFoundPage />,
+  },
+  {
+    path: "/profile",
+    element: (
+      <Layout>
+        <Profile />
+      </Layout>
+    ),
+    errorElement: <NotFoundPage />,
+  },
+  {
+    path: "/orders",
+    element: (
+      <Layout>
+        <Orders />
       </Layout>
     ),
     errorElement: <NotFoundPage />,
