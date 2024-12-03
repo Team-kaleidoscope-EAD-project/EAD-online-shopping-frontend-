@@ -51,11 +51,12 @@ export default function NewArrivals({ anchorEl, open, handleClose }) {
               <div className={styles.collectionCard}>
                 <div
                   className={styles.collectionCardImgContainer}
-                  onClick={() =>
+                  onClick={() => {
+                    handleClose();
                     navigate("/product-catalog", {
                       state: { category: item.name },
-                    })
-                  }
+                    });
+                  }}
                 >
                   <img src={item.image} alt="newArrival card img" width={400} />
                 </div>

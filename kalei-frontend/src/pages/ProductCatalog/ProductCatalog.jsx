@@ -520,12 +520,16 @@ export default function ProductCatalog() {
         </Grid>
         <Grid
           size={{ xs: 12, md: 8, lg: 9 }}
+          sx={{
+            justifyItems: productList.length === 1 ? "start" : "center",
+            paddingLeft: productList.length === 1 ? "5vw" : "3vw",
+          }}
           paddingLeft={3}
           className={styles.productCatalogContainer}
         >
-          {/* {productList.map((item, index) => (
+          {productList.map((item, index) => (
             <ProductCard singleProduct={item} />
-          ))} */}
+          ))}
         </Grid>
       </Grid>
       {/* product catalog */}

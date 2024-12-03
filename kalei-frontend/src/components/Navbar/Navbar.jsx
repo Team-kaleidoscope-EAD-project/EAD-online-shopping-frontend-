@@ -15,6 +15,8 @@ import Accessories from "./sections/Accessories";
 import searchIcon from "../../assets/images/icons/search.png";
 import cartIcon from "../../assets/images/icons/cart.png";
 import hamburger from "../../assets/images/icons/hamburger.png";
+import sadEmoji from "../../assets/images/icons/sad.png";
+
 // icons
 
 // drawer
@@ -38,18 +40,37 @@ import keycloak from "../../auth/keycloak";
 import ProfileMenu from "./sections/ProfileMenu";
 
 // dummy product list
-import { fakeProductNames } from "../../data/productFilters";
+import { productFilterByName } from "../../services/products/getProductByName";
 
 export default function Navbar() {
+  
   // search modal controls
   const [keyword, setKeyword] = React.useState("");
+  const [productSuggestions, setProductSuggestions] = React.useState([]);
   const [openSearchModal, setSearchModal] = React.useState(false);
   const handleSearchModalOpen = () => setSearchModal(true);
   const handleSearchModalClose = () => setSearchModal(false);
   // search modal controls
 
-  const handleSearchBar = (event) => {
-    setKeyword(event.target.value);
+  const handleSearchBar = async (event) => {
+    const inputValue = event.target.value;
+    setKeyword(inputValue);
+
+    if (inputValue.trim() === "") {
+      setProductSuggestions([]);
+      return;
+    }
+
+    try {
+      const filteredProducts = await productFilterByName(inputValue);
+      console.log(filteredProducts); // Log to debug the response
+      setProductSuggestions(
+        Array.isArray(filteredProducts) ? filteredProducts : []
+      );
+    } catch (error) {
+      console.error("Error fetching product suggestions:", error);
+      setProductSuggestions([]);
+    }
   };
 
   const navigate = useNavigate();
@@ -178,25 +199,44 @@ export default function Navbar() {
             {/* search bar */}
             {/* Searched products */}
             <Grid size={{ xs: "12" }} className={styles.searchedProducts}>
-              {fakeProductNames.map((item, index) => {
-                const match = item.slice(0, keyword.length);
-                const remaining = item.slice(keyword.length);
-
-                return (
-                  <div
-                    key={index}
-                    className={styles.suggestion}
-                    onClick={() => {
-                      handleViewProduct(item);
-                    }}
-                  >
-                    <span style={{ color: "#be8748", fontWeight: "bold" }}>
-                      {match}
-                    </span>
-                    <span>{remaining}</span>
-                  </div>
-                );
-              })}
+              {productSuggestions.length !== 0 ? (
+                productSuggestions.map((item, index) => {
+                  const match = item.name.slice(0, keyword.length);
+                  const remaining = item.name.slice(keyword.length);
+                  return (
+                    <div
+                      key={index}
+                      className={styles.suggestion}
+                      onClick={() => {
+                        handleSearchModalClose();
+                        setKeyword("");
+                        setProductSuggestions([]);
+                        handleViewProduct(item);
+                      }}
+                    >
+                      <span style={{ color: "#be8748", fontWeight: "bold" }}>
+                        {match}
+                      </span>
+                      <span>{remaining}</span>
+                    </div>
+                  );
+                })
+              ) : keyword !== "" ? (
+                <div
+                  className={styles.suggestion}
+                  style={{
+                    display: "flex",
+                    justifyContent: "start",
+                    alignItems: "center",
+                    gap: "1vw",
+                  }}
+                >
+                  <img alt="no products" src={sadEmoji} width={30} />
+                  <span style={{ color: "#be8748", fontWeight: "bold" }}>
+                    No Products found
+                  </span>
+                </div>
+              ) : null}
             </Grid>
             {/* Searched products */}
           </Grid>
@@ -230,22 +270,12 @@ export default function Navbar() {
               size={{ xs: 6, md: 7, lg: 8 }}
               className={styles.sectionLinkContainer}
             >
-              <Link>HOME</Link>
-              <Link onClick={handleNewArrivalClick}>
-                NEW ARRIVALS
-              </Link>
-              <Link onClick={handleCollectionClick}>
-                COLLECTIONS
-              </Link>
-              <Link onClick={handleWomenClick}>
-                WOMEN
-              </Link>
-              <Link onClick={handleMenClick}>
-                MEN
-              </Link>
-              <Link onClick={handleAccessoriesClick}>
-                ACCESSORIES
-              </Link>
+              <Link to="/">HOME</Link>
+              <Link onClick={handleNewArrivalClick}>NEW ARRIVALS</Link>
+              <Link onClick={handleCollectionClick}>COLLECTIONS</Link>
+              <Link onClick={handleWomenClick}>WOMEN</Link>
+              <Link onClick={handleMenClick}>MEN</Link>
+              <Link onClick={handleAccessoriesClick}>ACCESSORIES</Link>
             </Grid>
             <div style={{ display: "none" }}>
               {/* new arrivals section */}
@@ -415,7 +445,7 @@ export default function Navbar() {
               {/* navbar options */}
               <Grid
                 className={styles.navbarOptions}
-                sx={{ alignItems: { xs: "start", md: "center" } }}
+                sx={{ alignItems: { xs: "start", md: "center" }, gap: "7vh" }}
               >
                 <h4
                   onClick={() => {
