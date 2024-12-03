@@ -13,9 +13,9 @@ export default function FormDialog({
   message,
   dialogTitle,
   dialogContent,
+  onSave,
 }) {
   const [open, setOpen] = React.useState(false);
-
   const [formValues, setFormValues] = React.useState([...value]);
 
   const handleClickOpen = () => {
@@ -33,26 +33,18 @@ export default function FormDialog({
     setFormValues(updatedValues);
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onSave(formValues);
+    handleClose();
+  };
+
   return (
     <React.Fragment>
       <IconButton aria-label="edit" onClick={handleClickOpen}>
         {message}
       </IconButton>
-      <Dialog
-        className="profile"
-        open={open}
-        onClose={handleClose}
-        fullWidth
-        maxWidth="md"
-        PaperProps={{
-          component: "form",
-          onSubmit: (event) => {
-            event.preventDefault();
-            console.log("Updated values:", formValues);
-            handleClose();
-          },
-        }}
-      >
+      <Dialog open={open} onClose={handleClose}>
         <DialogTitle>{dialogTitle}</DialogTitle>
         <DialogContent>
           <Box display="flex" justifyContent="space-between" gap={2}>
@@ -63,7 +55,7 @@ export default function FormDialog({
               onChange={(event) => handleInputChange(0, event)}
               type="name"
               fullWidth
-              variant="standard"
+              variant="standard" //first name
             />
             <TextField
               margin="dense"
@@ -72,17 +64,18 @@ export default function FormDialog({
               onChange={(event) => handleInputChange(1, event)}
               type="name"
               fullWidth
-              variant="standard"
+              variant="standard" //last name
             />
           </Box>
           <TextField
             margin="dense"
+            disabled
             label={dialogContent[2]}
             value={formValues[2]}
             onChange={(event) => handleInputChange(2, event)}
             type="email"
             fullWidth
-            variant="standard"
+            variant="standard" //email
           />
           <Box display="flex" justifyContent="space-between" gap={2}>
             <TextField
@@ -90,18 +83,18 @@ export default function FormDialog({
               label={dialogContent[3]}
               value={formValues[3]}
               onChange={(event) => handleInputChange(3, event)}
-              type="name"
+              type="text"
               fullWidth
-              variant="standard"
+              variant="standard" //address
             />
             <TextField
               margin="dense"
               label={dialogContent[4]}
               value={formValues[4]}
               onChange={(event) => handleInputChange(4, event)}
-              type="name"
+              type="text"
               fullWidth
-              variant="standard"
+              variant="standard" //city
             />
           </Box>
           <TextField
@@ -111,7 +104,7 @@ export default function FormDialog({
             onChange={(event) => handleInputChange(5, event)}
             type="text"
             fullWidth
-            variant="standard"
+            variant="standard" //zip code
           />
           <TextField
             margin="dense"
@@ -120,7 +113,7 @@ export default function FormDialog({
             onChange={(event) => handleInputChange(6, event)}
             type="text"
             fullWidth
-            variant="standard"
+            variant="standard" //phone number
           />
         </DialogContent>
         <DialogActions>
@@ -144,6 +137,7 @@ export default function FormDialog({
             Cancel
           </Button>
           <Button
+            onClick={handleSubmit}
             type="submit"
             sx={{
               backgroundColor: "#be8748",

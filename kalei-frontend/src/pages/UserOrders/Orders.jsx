@@ -4,6 +4,13 @@ import OrderCard from "../../components/Cards/OrderCard/OrderCard";
 import image1 from "../../assets/images/collectionImages/collection1.jpg";
 import image2 from "../../assets/images/collectionImages/collection2.jpg";
 import Typography from "@mui/material/Typography";
+import { Breadcrumbs, Link } from "@mui/material";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+
+function handleClick(event) {
+  event.preventDefault();
+  console.info("You clicked a breadcrumb.");
+}
 
 const orders = [
   {
@@ -53,21 +60,32 @@ const orders = [
   },
 ];
 export default function Orders() {
+  const breadcrumbs = [
+    <Link
+      underline="hover"
+      key="2"
+      color="inherit"
+      to="/"
+      onClick={handleClick}
+    >
+      Profile
+    </Link>,
+    <Typography key="3" sx={{ color: "text.primary" }}>
+      Orders
+    </Typography>,
+  ];
+
   return (
     <div>
-      <Typography
-        key="3"
-        sx={{
-          color: "text.primary",
-          marginBottom: 2,
-          fontSize: 24,
-          fontFamily: "amiko",
-          textAlign: "start",
-          marginLeft: "20px",
-        }}
-      >
-        Orders
-      </Typography>
+      <Grid size={{ xs: 12 }} sx={{ padding: "2vw" }}>
+        <Breadcrumbs
+          separator={<NavigateNextIcon fontSize="small" />}
+          aria-label="breadcrumb"
+        >
+          {breadcrumbs}
+        </Breadcrumbs>
+      </Grid>
+
       <Grid
         size={{ xs: 12 }}
         sx={{

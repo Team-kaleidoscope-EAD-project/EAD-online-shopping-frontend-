@@ -1,15 +1,15 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid2";
 import Box from "@mui/material/Box";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import Dialog from "../../components/Dialog/Dialog";
 import profileStyle from "./profile.module.css";
 import Link from "@mui/material/Link";
+import { useState } from "react";
 
 export default function Profile() {
-  const details = [
+  const [details, setDetails] = useState([
     {
       key: 1,
       firstName: "John",
@@ -20,12 +20,26 @@ export default function Profile() {
       zip: "10001",
       phone: "0771234567",
     },
-  ];
+  ]);
+
+  const handleSave = (updatedValues) => {
+    setDetails((prevDetails) => [
+      {
+        ...prevDetails[0],
+        firstName: updatedValues[0],
+        lastName: updatedValues[1],
+        email: updatedValues[2],
+        address: updatedValues[3],
+        city: updatedValues[4],
+        zip: updatedValues[5],
+        phone: updatedValues[6],
+      },
+    ]);
+  };
 
   return (
     <div>
       <Typography
-        key="3"
         sx={{
           color: "text.primary",
           marginBottom: 2,
@@ -39,7 +53,6 @@ export default function Profile() {
       </Typography>
       <Link href="/orders" underline="hover" color="inherit">
         <Typography
-          key="4"
           sx={{
             color: "text.primary",
             marginBottom: 2,
@@ -68,13 +81,12 @@ export default function Profile() {
             <Grid item>
               <Grid container alignItems="center" spacing={2}>
                 <Grid item>
-                  <h4 className={profileStyle}>
+                  <h4 className={profileStyle.name}>
                     {details[0].firstName} {details[0].lastName}
                   </h4>
                 </Grid>
                 <Grid item>
                   <Dialog
-                    className={"prfile"}
                     value={[
                       details[0].firstName,
                       details[0].lastName,
@@ -95,6 +107,7 @@ export default function Profile() {
                       "Zip Code",
                       "Phone Number",
                     ]}
+                    onSave={handleSave}
                   />
                 </Grid>
               </Grid>
@@ -102,38 +115,25 @@ export default function Profile() {
             <Grid item>
               <Grid container alignItems="center" spacing={1}>
                 <Grid item xs>
-                  <TextField
-                    disabled
-                    defaultValue={details[0].email}
-                    fullWidth
-                    variant="standard"
-                  />
+                  <h4 className={profileStyle.title}>Email</h4>
+                  <h4 className={profileStyle.email}>{details[0].email}</h4>
                 </Grid>
               </Grid>
             </Grid>
           </Grid>
-          <Grid container direction="column" spacing={2}>
-            <Grid item>
-              <Grid
-                container
-                alignItems="center"
-                justifyContent="space-between"
-              >
-                <Grid item>
-                  <h4 className={profileStyle}>Address</h4>
-                </Grid>
-              </Grid>
-            </Grid>
-            <Grid item>
-              <Grid container alignItems="center" spacing={1}>
-                <Grid item xs>
-                  <TextField
-                    disabled
-                    defaultValue={details[0].address}
-                    fullWidth
-                    variant="standard"
-                  />
-                </Grid>
+          <hr />
+
+          <Grid item>
+            <h4 className={profileStyle.title}>Address</h4>
+          </Grid>
+
+          <Grid item>
+            <Grid container alignItems="center" spacing={1}>
+              <Grid item xs>
+                <h4>{details[0].address}</h4>
+                <h4>{details[0].city}</h4>
+                <h4>{details[0].zip}</h4>
+                <h4>{details[0].phone}</h4>
               </Grid>
             </Grid>
           </Grid>
