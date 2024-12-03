@@ -61,11 +61,12 @@ export default function Accessories({ anchorEl, open, handleClose }) {
               <div className={styles.accessoryContent}>
                 {Object.values(item)[0].map((name, index) => (
                   <h4
-                    onClick={() =>
+                    onClick={() => {
+                      handleClose();
                       navigate("/product-catalog", {
                         state: { category: name },
-                      })
-                    }
+                      });
+                    }}
                     key={index}
                   >
                     {name}
