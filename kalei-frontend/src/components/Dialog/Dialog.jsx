@@ -116,7 +116,7 @@ export default function FormDialog({
             variant="standard" //phone number
           />
         </DialogContent>
-        <DialogActions>
+        <DialogActions sx={{ padding: "20px" }}>
           <Button
             onClick={handleClose}
             sx={{

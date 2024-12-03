@@ -7,11 +7,6 @@ import Typography from "@mui/material/Typography";
 import { Breadcrumbs, Link } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
-function handleClick(event) {
-  event.preventDefault();
-  console.info("You clicked a breadcrumb.");
-}
-
 const orders = [
   {
     key: 1,
@@ -65,8 +60,7 @@ export default function Orders() {
       underline="hover"
       key="2"
       color="inherit"
-      to="/"
-      onClick={handleClick}
+      href="/profile"
     >
       Profile
     </Link>,
@@ -89,13 +83,17 @@ export default function Orders() {
       <Grid
         size={{ xs: 12 }}
         sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexWrap: "wrap",
-          gap: "4vw",
+          display: "grid",
+          gridTemplateColumns: {
+            xs: "repeat(auto-fit, minmax(250px, 1fr))",
+          },
+          rowGap: "5vw",
+          columnGap: "5vw",
+          justifyItems: "center",
           paddingLeft: "3vw",
           paddingRight: "3vw",
+          paddingTop: "3vw",
+          paddingBottom: "3vw",
         }}
       >
         {orders.length === 0 ? (

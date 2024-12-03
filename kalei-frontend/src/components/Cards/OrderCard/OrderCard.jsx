@@ -7,6 +7,8 @@ import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
 import CollectionButton from "../../Buttons/CollectionButton";
 
+import styles from "./OrderCard.module.css";
+
 export default function OrderCard({
   status,
   lastUpdatedDate,
@@ -16,7 +18,10 @@ export default function OrderCard({
   price,
 }) {
   return (
-    <Card sx={{ width: "250px", borderRadius: "15px" }}>
+    <Card
+      sx={{ width: "250px", borderRadius: "15px"}}
+      className={styles.orderCard}
+    >
       <CardHeader
         title={
           <Typography

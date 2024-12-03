@@ -230,20 +230,20 @@ export default function Navbar() {
               size={{ xs: 6, md: 7, lg: 8 }}
               className={styles.sectionLinkContainer}
             >
-              <Link to="/">HOME</Link>
-              <Link to="/" onClick={handleNewArrivalClick}>
+              <Link>HOME</Link>
+              <Link onClick={handleNewArrivalClick}>
                 NEW ARRIVALS
               </Link>
-              <Link to="/" onClick={handleCollectionClick}>
+              <Link onClick={handleCollectionClick}>
                 COLLECTIONS
               </Link>
-              <Link to="/" onClick={handleWomenClick}>
+              <Link onClick={handleWomenClick}>
                 WOMEN
               </Link>
-              <Link to="/" onClick={handleMenClick}>
+              <Link onClick={handleMenClick}>
                 MEN
               </Link>
-              <Link to="/" onClick={handleAccessoriesClick}>
+              <Link onClick={handleAccessoriesClick}>
                 ACCESSORIES
               </Link>
             </Grid>
