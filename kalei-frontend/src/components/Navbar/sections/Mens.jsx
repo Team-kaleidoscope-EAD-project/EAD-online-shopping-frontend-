@@ -51,11 +51,12 @@ export default function Mens({ anchorEl, open, handleClose }) {
               <div className={styles.collectionCard}>
                 <div
                   className={styles.collectionCardImgContainer}
-                  onClick={() =>
+                  onClick={() => {
+                    localStorage.setItem("category", JSON.stringify(item.name));
                     navigate("/product-catalog", {
                       state: { category: item.name },
-                    })
-                  }
+                    });
+                  }}
                 >
                   <img src={item.image} alt="mens card img" width={400} />
                 </div>

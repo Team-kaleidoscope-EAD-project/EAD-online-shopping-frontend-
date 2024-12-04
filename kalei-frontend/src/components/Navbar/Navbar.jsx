@@ -1,5 +1,5 @@
 // Dinul
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Grid from "@mui/material/Grid2";
 import styles from "./Navbar.module.css";
 
@@ -36,28 +36,28 @@ import Zoom from "@mui/material/Zoom";
 import { auth } from "../../auth/auth";
 import keycloak from "../../auth/keycloak";
 import ProfileMenu from "./sections/ProfileMenu";
+import { KeycloakContext } from "../../auth/KeycloakProvider";
 
 export default function Navbar() {
-  // search modal controls
   const [openSearchModal, setSearchModal] = React.useState(false);
   const handleSearchModalOpen = () => setSearchModal(true);
   const handleSearchModalClose = () => setSearchModal(false);
-  // search modal controls
-
+  const { authenticated } = useContext(KeycloakContext);
   const navigate = useNavigate();
-  const [authenticated, setAuthenticated] = useState(false);
+
+  console.log(authenticated);
 
   useEffect(() => {
-    const initializeAuth = async () => {
-      try {
-        const isAuthenticated = await keycloak.init({ onLoad: "check-sso" }); // Check if the user is authenticated
-        setAuthenticated(isAuthenticated); // Update state based on Keycloak's status
-      } catch (error) {
-        console.error("Error during Keycloak initialization:", error);
-      }
-    };
-
-    initializeAuth();
+    // const initializeAuth = async () => {
+    //   try {
+    //     const isAuthenticated = await keycloak.init({ onLoad: "check-sso" });
+    //     localStorage.setItem("authToken", keycloak.token);
+    //     localStorage.setItem("isAuthenticated", isAuthenticated);
+    //     setAuthenticated(isAuthenticated);
+    //   } catch (error) {
+    //     console.error("Error during Keycloak initialization:", error);
+    //   }
+    // };
   }, []);
 
   // drawer settings

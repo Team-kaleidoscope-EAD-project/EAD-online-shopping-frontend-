@@ -38,6 +38,8 @@ export default function ProductCard({ singleProduct }) {
 
   const handleViewProduct = () => {
     // Pass the product ID or any relevant data via the route
+
+    localStorage.setItem("singleProduct", JSON.stringify(singleProduct));
     navigate(`/single-product-view`, {
       state: { id: singleProduct.id, singleProduct },
     });
@@ -94,12 +96,14 @@ export default function ProductCard({ singleProduct }) {
         >
           <CardMedia
             component="img"
-            image={singleProduct.imageUrl}
+            image={singleProduct.variants[0].imageUrl}
             alt="productImage"
             sx={{
               transition: "transform 0.3s ease-in-out",
               borderRadius: 2,
               mb: 1,
+              height: "250px",
+              objectFit: "fill",
             }}
           />
         </Box>
@@ -162,7 +166,7 @@ export default function ProductCard({ singleProduct }) {
                       border: "1px solid rgba(0,0,0,0.3)",
                     }}
                   >
-                    {!availableColors.includes(item.color) && (
+                    {/* {!availableColors.includes(item.color) && (
                       <Box
                         sx={{
                           position: "absolute",
@@ -174,7 +178,7 @@ export default function ProductCard({ singleProduct }) {
                           backgroundColor: "#FF0000", // Red cross mark
                         }}
                       />
-                    )}
+                    )} */}
                   </Box>
                 ))}
               <IconButton size="small" onClick={handleNextColorSet}>

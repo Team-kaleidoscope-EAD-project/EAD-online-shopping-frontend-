@@ -63,7 +63,7 @@ const marks = [
 export default function ProductCatalog() {
   const location = useLocation();
 
-  const passedCategory = location.state.category;
+  const passedCategory = JSON.parse(localStorage.getItem("category"));
   // console.log(passedCategory);
 
   // filters
@@ -103,6 +103,7 @@ export default function ProductCatalog() {
 
   const fetchProductsByFilters = async () => {
     const products = await productFilter(filters);
+    // console.log(products);
     setProductList(products);
   };
 
