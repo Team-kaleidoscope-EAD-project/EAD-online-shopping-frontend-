@@ -43,7 +43,6 @@ import ProfileMenu from "./sections/ProfileMenu";
 import { productFilterByName } from "../../services/products/getProductByName";
 
 export default function Navbar() {
-  
   // search modal controls
   const [keyword, setKeyword] = React.useState("");
   const [productSuggestions, setProductSuggestions] = React.useState([]);

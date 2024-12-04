@@ -21,9 +21,9 @@ const ProductOverview = ({
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedQuantity, setSelectedQuantity] = useState(1);
 
-  const ProductList = singleProductImageList.map((item, index) => (
-    <ProductColors key={index} image={item.imageUrl} />
-  ));
+  const ProductList = singleProductImageList.map(
+    (item, index) => <ProductColors key={index} image={item.imageUrl} />
+  );
 
   const handleCart = () => {
     addToCart(selectedQuantity, selectedSize, selectedColor);
@@ -41,6 +41,7 @@ const ProductOverview = ({
       >
         {/* cover Image */}
         <MainImage productImage={singleProductImageList[selectedColor].image} />
+        {/* <MainImage productImage={coverImg} /> */}
 
         {/* Right Section */}
         <Box>
@@ -60,7 +61,7 @@ const ProductOverview = ({
             {/* Color Carousel */}
             <Box
               sx={{
-                maxWidth: { xs: "100%", md: "45vw", lg: "38vw" },
+                width: { xs: "100%", md: "45vw", lg: "38vw" },
                 padding: "10px",
                 marginTop: { xs: "0px", sm: "10px", md: "30px" },
                 marginBottom: { xs: "30px", md: "0px" },

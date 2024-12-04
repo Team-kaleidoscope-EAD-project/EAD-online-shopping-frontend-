@@ -153,10 +153,8 @@ export default function ProductCatalog() {
 
   return (
     <div className={styles.ProductCatalogPage}>
-
       {/* product catalog */}
       <Grid container>
-        
         <Grid p={3} size={{ xs: 12 }} className={styles.breadcrumbs}>
           <Stack spacing={2}>
             <Breadcrumbs
@@ -517,22 +515,38 @@ export default function ProductCatalog() {
             </Grid>
           </Drawer>
           {/* drawer */}
-        </Grid>                                    
-        <Grid
-          size={{ xs: 12, md: 8, lg: 9 }}
-          sx={{
-            justifyItems: productList.length === 1 ? "start" : "center",
-            paddingLeft: productList.length === 1 ? "5vw" : "3vw",
-          }}
-          paddingLeft={3}
-          className={styles.productCatalogContainer}
-        >
-          {productList.map((item, index) => (
-            <ProductCard singleProduct={item} />
-          ))}
         </Grid>
+
+        {productList ? (
+          <Grid
+            size={{ xs: 12, md: 8, lg: 9 }}
+            sx={{
+              justifyItems: productList.length === 1 ? "start" : "center",
+              paddingLeft: productList.length === 1 ? "5vw" : "3vw",
+            }}
+            paddingLeft={3}
+            className={styles.productCatalogContainer}
+          >
+            {productList.map((item, index) => (
+              <ProductCard singleProduct={item} />
+            ))}
+          </Grid>
+        ) : (
+          <Grid
+            size={{ xs: 12, md: 8, lg: 9 }}
+            paddingLeft={3}
+            className={styles.productCatalogContainer}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            No products in the inventory
+          </Grid>
+        )}
       </Grid>
-      {/* product catalog */}
+
       {/* footer section */}
       <Footer />
       {/* footer section */}

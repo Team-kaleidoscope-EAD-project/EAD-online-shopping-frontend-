@@ -64,11 +64,6 @@ export default function NewArrivals({ anchorEl, open, handleClose }) {
               </div>
             ))}
           </div>
-          {/* <div className={styles.viewMoreSection}>
-            <div className={styles.viewMoreBtn}>
-              <span>VIEW MORE RESULTS</span>
-            </div>
-          </div> */}
         </div>
       </Menu>
     </div>
