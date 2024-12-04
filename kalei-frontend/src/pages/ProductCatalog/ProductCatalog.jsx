@@ -153,11 +153,10 @@ export default function ProductCatalog() {
 
   return (
     <div className={styles.ProductCatalogPage}>
-      {/* navbar section */}
-      {/* <Navbar /> */}
-      {/* navbar section */}
+
       {/* product catalog */}
       <Grid container>
+        
         <Grid p={3} size={{ xs: 12 }} className={styles.breadcrumbs}>
           <Stack spacing={2}>
             <Breadcrumbs
@@ -169,6 +168,7 @@ export default function ProductCatalog() {
             </Breadcrumbs>
           </Stack>
         </Grid>
+
         <Grid
           size={{ xs: 10, sm: 6, md: 4, lg: 3 }}
           paddingLeft={3}
@@ -517,7 +517,7 @@ export default function ProductCatalog() {
             </Grid>
           </Drawer>
           {/* drawer */}
-        </Grid>
+        </Grid>                                    
         <Grid
           size={{ xs: 12, md: 8, lg: 9 }}
           sx={{
