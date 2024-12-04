@@ -141,14 +141,19 @@ export default function Navbar() {
   const handleCollectionClose = () => {
     setAnchorCollectionEl(null);
   };
-  const handleWomenClick = (event) => {
-    setAnchorWomenEl(event.currentTarget);
+  const handleWomenClick = () => {
+    navigate("/product-catalog", {
+      state: { category: "women" },
+    });
+    // setAnchorWomenEl(event.currentTarget);
   };
   const handleWomenClose = () => {
     setAnchorWomenEl(null);
   };
   const handleMenClick = (event) => {
-    setAnchorMenEl(event.currentTarget);
+    navigate("/product-catalog", {
+      state: { category: "men" },
+    });
   };
   const handleMenClose = () => {
     setAnchorMenEl(null);
@@ -250,7 +255,13 @@ export default function Navbar() {
           <Grid
             container
             size={{ lg: 12 }}
-            sx={{ display: { xs: "none", lg: "flex" } }}
+            sx={{
+              display: {
+                xs: "none",
+                lg: "flex",
+                justifyContent: "space-between",
+              },
+            }}
           >
             <Grid
               size={{ xs: 6, md: 1, lg: 1 }}
@@ -266,16 +277,27 @@ export default function Navbar() {
                 }}
               />
             </Grid>
+
             <Grid
-              size={{ xs: 6, md: 7, lg: 8 }}
+              size={{ xs: 6, md: 7, lg: 7 }}
               className={styles.sectionLinkContainer}
             >
               <Link to="/">HOME</Link>
               <Link onClick={handleNewArrivalClick}>NEW ARRIVALS</Link>
-              <Link onClick={handleCollectionClick}>COLLECTIONS</Link>
-              <Link onClick={handleWomenClick}>WOMEN</Link>
-              <Link onClick={handleMenClick}>MEN</Link>
-              <Link onClick={handleAccessoriesClick}>ACCESSORIES</Link>
+              {/* <Link onClick={handleCollectionClick}>COLLECTIONS</Link> */}
+              <div
+                style={{ cursor: "pointer", fontSize: "13px" }}
+                onClick={handleWomenClick}
+              >
+                WOMEN
+              </div>
+              <div
+                style={{ cursor: "pointer", fontSize: "13px" }}
+                onClick={handleMenClick}
+              >
+                MEN
+              </div>
+              {/* <Link onClick={handleAccessoriesClick}>ACCESSORIES</Link> */}
             </Grid>
             <div style={{ display: "none" }}>
               {/* new arrivals section */}
@@ -365,6 +387,7 @@ export default function Navbar() {
                 </Tooltip>
               </>
             </Grid>
+
             {/* search bar,cart and profile */}
           </Grid>
           {/* large and extra large devices */}
@@ -455,14 +478,14 @@ export default function Navbar() {
                 >
                   HOME
                 </h4>
-                <h4
+                {/* <h4
                   onClick={() => {
                     toggleDrawer("bottom", false);
                     handleNavigation("/collections");
                   }}
                 >
                   COLLECTIONS
-                </h4>
+                </h4> */}
                 <h4
                   onClick={() => {
                     setState({ ...state, ["bottom"]: false });
@@ -483,7 +506,7 @@ export default function Navbar() {
                 >
                   MEN
                 </h4>
-                <h4
+                {/* <h4
                   onClick={() => {
                     setState({ ...state, ["bottom"]: false });
                     navigate("/product-catalog", {
@@ -492,7 +515,7 @@ export default function Navbar() {
                   }}
                 >
                   ACCESSORIES
-                </h4>
+                </h4> */}
               </Grid>
               {/* navbar options */}
             </Grid>

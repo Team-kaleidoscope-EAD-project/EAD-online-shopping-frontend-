@@ -20,7 +20,7 @@ export const createPaymentIntent = async (amount) => {
 
 export const sendOrderDetails = async (orderObject) => {
   try {
-    console.log(orderObject);
+    console.log("order details", orderObject);
     const response = await axiosInstance.post(
       "/api/v1/order/addplaceorder",
       orderObject
