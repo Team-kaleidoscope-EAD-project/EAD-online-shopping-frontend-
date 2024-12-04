@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ProductOverview from "./Sections/ProductOverview/ProductOverview";
 import { Box, Typography } from "@mui/material";
 import ProductDescription from "./Sections/ProductDescription/ProductDescription";
@@ -7,69 +7,47 @@ import SimilarProduct from "./Sections/SimilarProducts/SimilarProduct";
 import PopUp from "./Sections/CutomerReview/PopUp";
 import EditIcon from "@mui/icons-material/Edit";
 import Footer from "../../components/Footer/Footer";
-import ProductService from "../../services/productServices";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { getFeedbacksByProducts } from "../../services/feedbacks/feedback";
+import { userInfo } from "../../services/users/userInfo";
+import { getProductStocksBySku } from "../../services/products/getProductStocksBySku";
+import { KeycloakContext } from "../../auth/KeycloakProvider";
 
 const sizeList = ["sm", "md", "lg", "xl"];
-const productStock = 10;
-
-//dummy data for customer review
-
-const reviewDataList = [
-  {
-    proPic: require("../../assets/images/profile/profileImg.png"),
-    username: "Anonymous user",
-    date: "October 21, 2024",
-    ratingValue: 3,
-    comment:
-      "The silk clothing is absolutely stunning! It feels incredibly soft and lightweight, making it perfect for all-day comfort. The fabric drapes beautifully and gives a luxurious vibe. I love how breathable it is, even on warmer days. It’s my new go-to for both casual outings and special occasions!",
-  },
-  {
-    proPic: require("../../assets/images/profile/profileImg.png"),
-    username: "Anonymous user",
-    date: "October 21, 2024",
-    ratingValue: 4,
-    comment:
-      "The silk clothing is absolutely stunning! It feels incredibly soft and lightweight, making it perfect for all-day comfort. The fabric drapes beautifully and gives a luxurious vibe. I love how breathable it is, even on warmer days. It’s my new go-to for both casual outings and special occasions!",
-  },
-  {
-    proPic: require("../../assets/images/profile/profileImg.png"),
-    username: "Anonymous user",
-    date: "October 21, 2024",
-    ratingValue: 5,
-    comment:
-      "The silk clothing is absolutely stunning! It feels incredibly soft and lightweight, making it perfect for all-day comfort. The fabric drapes beautifully and gives a luxurious vibe. I love how breathable it is, even on warmer days. It’s my new go-to for both casual outings and special occasions!",
-  },
-  {
-    proPic: require("../../assets/images/profile/profileImg.png"),
-    username: "Anonymous user",
-    date: "October 21, 2024",
-    ratingValue: 4,
-    comment:
-      "The silk clothing is absolutely stunning! It feels incredibly soft and lightweight, making it perfect for all-day comfort. The fabric drapes beautifully and gives a luxurious vibe. I love how breathable it is, even on warmer days. It’s my new go-to for both casual outings and special occasions!",
-  },
-  {
-    proPic: require("../../assets/images/profile/profileImg.png"),
-    username: "Anonymous user",
-    date: "October 21, 2024",
-    ratingValue: 1,
-    comment:
-      "The silk clothing is absolutely stunning! It feels incredibly soft and lightweight, making it perfect for all-day comfort. The fabric drapes beautifully and gives a luxurious vibe. I love how breathable it is, even on warmer days. It’s my new go-to for both casual outings and special occasions!",
-  },
-];
-
-//dummy data for similar products
 
 function SingleProductPage() {
-  const location = useLocation();
-  const product = location.state.singleProduct;
+  // const location = useLocation();
+  // const product = location.state.singleProduct;
+  const { authenticated } = useContext(KeycloakContext);
+
+  const product = JSON.parse(localStorage.getItem("singleProduct"));
 
   const similarProductList = [product, product];
 
   const navigate = useNavigate();
   const [displayPopUp, setDisplayPopUp] = useState(false);
+  const [reviewDataList, setReviewDataList] = useState([]);
+  const [userData, setUserData] = useState([]);
 
-  const addToCart = (selectedQuantity, selectedSize, selectedColor) => {
+  useEffect(() => {
+    fetchUserFeedbacks();
+    fetchUserData();
+
+    console.log(userData);
+  }, []);
+
+  const fetchUserFeedbacks = async () => {
+    const feedbacks = await getFeedbacksByProducts(product.id);
+    setReviewDataList(feedbacks);
+  };
+
+  //add to cart function
+  const addToCart = (
+    selectedQuantity,
+    selectedSize,
+    selectedColor,
+    productStock
+  ) => {
     // Prepare the item data
     const selectedItem = {
       itemId: product.id,
@@ -80,6 +58,7 @@ function SingleProductPage() {
       size: sizeList[selectedSize],
       color: product.variants[selectedColor].color,
       image: product.variants[selectedColor].imageUrl,
+      productStock: productStock,
     };
 
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -94,8 +73,15 @@ function SingleProductPage() {
       localStorage.setItem("cart", JSON.stringify(cart));
     }
 
-    navigate("/add-to-cart", { state: { productStock: productStock } });
+    navigate("/add-to-cart", { state: { productStock } });
   };
+
+  const fetchUserData = async () => {
+    const res = await userInfo();
+    setUserData(res);
+  };
+
+  console.log(userData);
 
   return (
     <>
@@ -110,8 +96,7 @@ function SingleProductPage() {
           productName={product.name}
           productId={product.id}
           productPrice={product.price}
-          sizeList={sizeList}
-          productStock={productStock}
+          product={product}
           addToCart={addToCart}
         />
 
@@ -133,42 +118,45 @@ function SingleProductPage() {
           <CustomerReview reviewDataList={reviewDataList} />
 
           {/* write a review */}
-          <Box
-            sx={{
-              display: "flex",
-              width: "100%",
-              border: "1px solid transparent",
-              marginTop: "60px",
-              cursor: "pointer",
-              transition: "all 0.15s ease-in",
-              justifyContent: "center",
-              alignItems: "center",
-              "&:hover": {
-                border: "1px solid rgba(0,0,0,0.2)",
-              },
 
-              "&:active": {
-                opacity: 0.6,
-              },
-            }}
-            onClick={() => setDisplayPopUp(true)}
-          >
-            <EditIcon
+          {authenticated && (
+            <Box
               sx={{
-                fontSize: { xs: "20px", md: "25px" },
-                marginRight: "15px",
+                display: "flex",
+                width: "100%",
+                border: "1px solid transparent",
+                marginTop: "60px",
+                cursor: "pointer",
+                transition: "all 0.15s ease-in",
+                justifyContent: "center",
+                alignItems: "center",
+                "&:hover": {
+                  border: "1px solid rgba(0,0,0,0.2)",
+                },
+
+                "&:active": {
+                  opacity: 0.6,
+                },
               }}
-            />
-            <Typography
-              sx={{
-                fontFamily: "amiko_semibold",
-                fontSize: { xs: "20px", md: "25px" },
-                height: "100%",
-              }}
+              onClick={() => setDisplayPopUp(true)}
             >
-              WRITE A REVIEW
-            </Typography>
-          </Box>
+              <EditIcon
+                sx={{
+                  fontSize: { xs: "20px", md: "25px" },
+                  marginRight: "15px",
+                }}
+              />
+              <Typography
+                sx={{
+                  fontFamily: "amiko_semibold",
+                  fontSize: { xs: "20px", md: "25px" },
+                  height: "100%",
+                }}
+              >
+                WRITE A REVIEW
+              </Typography>
+            </Box>
+          )}
         </Box>
 
         {/* Similar product bottom section */}
@@ -182,7 +170,9 @@ function SingleProductPage() {
         </Box>
 
         {/* popup */}
-        {displayPopUp && <PopUp close={setDisplayPopUp} />}
+        {displayPopUp && (
+          <PopUp close={setDisplayPopUp} productId={product.id} />
+        )}
 
         {/* footer section */}
         <Footer />

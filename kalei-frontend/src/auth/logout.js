@@ -1,11 +1,11 @@
-import keycloak from "./keycloak";
+import keycloakConfig from "./keycloak";
 
 export const logout = async () => {
   try {
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("authenticated");
+    // localStorage.removeItem("authToken");
+    // localStorage.removeItem("isAuthenticated");
 
-    await keycloak.logout({
+    await keycloakConfig.logout({
       redirectUri: window.location.origin,
     });
 

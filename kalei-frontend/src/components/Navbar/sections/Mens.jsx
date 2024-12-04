@@ -53,6 +53,7 @@ export default function Mens({ anchorEl, open, handleClose }) {
                   className={styles.collectionCardImgContainer}
                   onClick={() => {
                     handleClose();
+                    localStorage.setItem("category", JSON.stringify(item.name));
                     navigate("/product-catalog", {
                       state: { category: item.name },
                     });
