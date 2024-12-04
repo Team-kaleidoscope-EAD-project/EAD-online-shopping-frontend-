@@ -15,6 +15,8 @@ import Accessories from "./sections/Accessories";
 import searchIcon from "../../assets/images/icons/search.png";
 import cartIcon from "../../assets/images/icons/cart.png";
 import hamburger from "../../assets/images/icons/hamburger.png";
+import sadEmoji from "../../assets/images/icons/sad.png";
+
 // icons
 
 // drawer
@@ -38,11 +40,38 @@ import keycloak from "../../auth/keycloak";
 import ProfileMenu from "./sections/ProfileMenu";
 import { KeycloakContext } from "../../auth/KeycloakProvider";
 
+// dummy product list
+import { productFilterByName } from "../../services/products/getProductByName";
+
 export default function Navbar() {
+  // search modal controls
+  const [keyword, setKeyword] = React.useState("");
+  const [productSuggestions, setProductSuggestions] = React.useState([]);
   const [openSearchModal, setSearchModal] = React.useState(false);
   const handleSearchModalOpen = () => setSearchModal(true);
   const handleSearchModalClose = () => setSearchModal(false);
   const { authenticated } = useContext(KeycloakContext);
+  const handleSearchBar = async (event) => {
+    const inputValue = event.target.value;
+    setKeyword(inputValue);
+
+    if (inputValue.trim() === "") {
+      setProductSuggestions([]);
+      return;
+    }
+
+    try {
+      const filteredProducts = await productFilterByName(inputValue);
+      console.log(filteredProducts); // Log to debug the response
+      setProductSuggestions(
+        Array.isArray(filteredProducts) ? filteredProducts : []
+      );
+    } catch (error) {
+      console.error("Error fetching product suggestions:", error);
+      setProductSuggestions([]);
+    }
+  };
+
   const navigate = useNavigate();
 
   console.log(authenticated);
@@ -60,12 +89,21 @@ export default function Navbar() {
     // };
   }, []);
 
+  const handleViewProduct = (singleProduct) => {
+    // Pass the product ID or any relevant data via the route
+    navigate(`/single-product-view`, {
+      state: { id: singleProduct.id, singleProduct },
+    });
+  };
+
+  const handleNavigation = (path) => {
+    navigate(path);
+    setState({ ...state, ["bottom"]: false });
+  };
+
   // drawer settings
   const [state, setState] = React.useState({
-    top: false,
-    left: false,
     bottom: false,
-    right: false,
   });
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -75,7 +113,6 @@ export default function Navbar() {
     ) {
       return;
     }
-
     setState({ ...state, [anchor]: open });
   };
   // drawer settings
@@ -141,14 +178,67 @@ export default function Navbar() {
         <Box className={styles.searchBoxContainer}>
           <Grid container>
             {/* search bar */}
-            <Grid size={{ xs: "12" }} className={styles.searchBar}></Grid>
+            <Grid size={{ xs: "12" }} className={styles.searchBar}>
+              <input placeholder="Search..." onChange={handleSearchBar} />
+              <div
+                style={{
+                  width: "5%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <img
+                  src={searchIcon}
+                  alt="search icon"
+                  width={18}
+                  style={{ cursor: "pointer" }}
+                />
+              </div>
+            </Grid>
             {/* search bar */}
-            {/* searched products */}
-            <Grid
-              size={{ xs: "12" }}
-              className={styles.searchedProducts}
-            ></Grid>
-            {/* searched products */}
+            {/* Searched products */}
+            <Grid size={{ xs: "12" }} className={styles.searchedProducts}>
+              {productSuggestions.length !== 0 ? (
+                productSuggestions.map((item, index) => {
+                  const match = item.name.slice(0, keyword.length);
+                  const remaining = item.name.slice(keyword.length);
+                  return (
+                    <div
+                      key={index}
+                      className={styles.suggestion}
+                      onClick={() => {
+                        handleSearchModalClose();
+                        setKeyword("");
+                        setProductSuggestions([]);
+                        handleViewProduct(item);
+                      }}
+                    >
+                      <span style={{ color: "#be8748", fontWeight: "bold" }}>
+                        {match}
+                      </span>
+                      <span>{remaining}</span>
+                    </div>
+                  );
+                })
+              ) : keyword !== "" ? (
+                <div
+                  className={styles.suggestion}
+                  style={{
+                    display: "flex",
+                    justifyContent: "start",
+                    alignItems: "center",
+                    gap: "1vw",
+                  }}
+                >
+                  <img alt="no products" src={sadEmoji} width={30} />
+                  <span style={{ color: "#be8748", fontWeight: "bold" }}>
+                    No Products found
+                  </span>
+                </div>
+              ) : null}
+            </Grid>
+            {/* Searched products */}
           </Grid>
         </Box>
       </Modal>
@@ -171,6 +261,9 @@ export default function Navbar() {
                 width={60}
                 alt="kalei_logo"
                 className={styles.logo}
+                onClick={() => {
+                  navigate(`/`);
+                }}
               />
             </Grid>
             <Grid
@@ -178,21 +271,11 @@ export default function Navbar() {
               className={styles.sectionLinkContainer}
             >
               <Link to="/">HOME</Link>
-              <Link to="/" onMouseOver={handleNewArrivalClick}>
-                NEW ARRIVALS
-              </Link>
-              <Link to="/" onMouseOver={handleCollectionClick}>
-                COLLECTIONS
-              </Link>
-              <Link to="/" onMouseOver={handleWomenClick}>
-                WOMEN
-              </Link>
-              <Link to="/" onMouseOver={handleMenClick}>
-                MEN
-              </Link>
-              <Link to="/" onMouseOver={handleAccessoriesClick}>
-                ACCESSORIES
-              </Link>
+              <Link onClick={handleNewArrivalClick}>NEW ARRIVALS</Link>
+              <Link onClick={handleCollectionClick}>COLLECTIONS</Link>
+              <Link onClick={handleWomenClick}>WOMEN</Link>
+              <Link onClick={handleMenClick}>MEN</Link>
+              <Link onClick={handleAccessoriesClick}>ACCESSORIES</Link>
             </Grid>
             <div style={{ display: "none" }}>
               {/* new arrivals section */}
@@ -326,6 +409,7 @@ export default function Navbar() {
             </Grid>
           </Grid>
         </Grid>
+
         <Drawer
           anchor={"bottom"}
           open={state["bottom"]}
@@ -333,7 +417,7 @@ export default function Navbar() {
         >
           <div
             style={{
-              height: "70vh",
+              height: "65vh",
               width: "100%",
               backgroundColor: "#FCF2E7",
               paddingTop: "40px",
@@ -361,14 +445,54 @@ export default function Navbar() {
               {/* navbar options */}
               <Grid
                 className={styles.navbarOptions}
-                sx={{ alignItems: { xs: "start", md: "center" } }}
+                sx={{ alignItems: { xs: "start", md: "center" }, gap: "7vh" }}
               >
-                <h4>HOME</h4>
-                <h4>NEW ARRIVALS</h4>
-                <h4>COLLECTIONS</h4>
-                <h4>WOMEN</h4>
-                <h4>MEN</h4>
-                <h4>ACCESSORIES</h4>
+                <h4
+                  onClick={() => {
+                    toggleDrawer("bottom", false);
+                    handleNavigation("/");
+                  }}
+                >
+                  HOME
+                </h4>
+                <h4
+                  onClick={() => {
+                    toggleDrawer("bottom", false);
+                    handleNavigation("/collections");
+                  }}
+                >
+                  COLLECTIONS
+                </h4>
+                <h4
+                  onClick={() => {
+                    setState({ ...state, ["bottom"]: false });
+                    navigate("/product-catalog", {
+                      state: { category: "BOTTOMS FOR WOMEN" },
+                    });
+                  }}
+                >
+                  WOMEN
+                </h4>
+                <h4
+                  onClick={() => {
+                    setState({ ...state, ["bottom"]: false });
+                    navigate("/product-catalog", {
+                      state: { category: "GYMWARE FOR MEN" },
+                    });
+                  }}
+                >
+                  MEN
+                </h4>
+                <h4
+                  onClick={() => {
+                    setState({ ...state, ["bottom"]: false });
+                    navigate("/product-catalog", {
+                      state: { category: "MEN'S WATCHES" },
+                    });
+                  }}
+                >
+                  ACCESSORIES
+                </h4>
               </Grid>
               {/* navbar options */}
             </Grid>

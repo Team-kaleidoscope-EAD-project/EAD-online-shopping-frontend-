@@ -41,11 +41,6 @@ import ProductCard from "../../components/Cards/ProductCard/ProductCard";
 import Footer from "../../components/Footer/Footer";
 import { productFilter } from "../../services/products/filters";
 
-function handleClick(event) {
-  event.preventDefault();
-  console.info("You clicked a breadcrumb.");
-}
-
 const MAX = 9000.0;
 const MIN = 0.0;
 const marks = [
@@ -73,6 +68,7 @@ export default function ProductCatalog() {
   const [outofstock_availability, setOutofstock_Availability] = useState(false);
   const [price, setPrice] = useState(0.0);
   // filters
+
   const [filters, setFilters] = useState({
     categories: [passedCategory],
     colors: [],
@@ -87,7 +83,6 @@ export default function ProductCatalog() {
       ...prevFilters,
       [name]: value,
     }));
-
     console.log(filters);
   };
 
@@ -108,12 +103,11 @@ export default function ProductCatalog() {
   };
 
   const handleProductCategoryFilter = (category) => {
-    console.log(category);
+    setProductCategory(category);
     setFilters((prev) => ({
       ...prev,
       categories: category !== "All Products" ? category : [],
     }));
-
     console.log(filters);
   };
 
@@ -150,13 +144,7 @@ export default function ProductCatalog() {
 
   // price range
   const breadcrumbs = [
-    <Link
-      underline="hover"
-      key="2"
-      color="inherit"
-      href="/"
-      onClick={handleClick}
-    >
+    <Link underline="hover" key="2" color="inherit" href="/">
       Home
     </Link>,
     <Typography key="3" sx={{ color: "text.primary" }}>
@@ -166,11 +154,10 @@ export default function ProductCatalog() {
 
   return (
     <div className={styles.ProductCatalogPage}>
-      {/* navbar section */}
-      {/* <Navbar /> */}
-      {/* navbar section */}
+
       {/* product catalog */}
       <Grid container>
+        
         <Grid p={3} size={{ xs: 12 }} className={styles.breadcrumbs}>
           <Stack spacing={2}>
             <Breadcrumbs
@@ -182,6 +169,7 @@ export default function ProductCatalog() {
             </Breadcrumbs>
           </Stack>
         </Grid>
+
         <Grid
           size={{ xs: 10, sm: 6, md: 4, lg: 3 }}
           paddingLeft={3}
@@ -530,9 +518,13 @@ export default function ProductCatalog() {
             </Grid>
           </Drawer>
           {/* drawer */}
-        </Grid>
+        </Grid>                                    
         <Grid
           size={{ xs: 12, md: 8, lg: 9 }}
+          sx={{
+            justifyItems: productList.length === 1 ? "start" : "center",
+            paddingLeft: productList.length === 1 ? "5vw" : "3vw",
+          }}
           paddingLeft={3}
           className={styles.productCatalogContainer}
         >

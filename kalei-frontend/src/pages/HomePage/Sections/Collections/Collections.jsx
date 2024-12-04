@@ -57,30 +57,42 @@ export default function Collections() {
         >
           <h2 className={styles.title}>COLLECTIONS</h2>
         </Grid>
-        <Grid size={{ xs: 12 }}>
-          <div className={styles.container}>
-            {collections.length === 0 ? (
-              <div>No collections found.</div>
-            ) : (
-              collections.map((collection) => (
-                <CollectionCard
-                  key={collection.key}
-                  name={collection.name}
-                  image={collection.image}
-                />
-              ))
-            )}
-          </div>
+        <Grid
+          size={{ xs: 12 }}
+          sx={{
+            display: "grid",
+            gridTemplateColumns: {
+              xs: "repeat(auto-fit, minmax(250px, 1fr))",
+              lg: "repeat(auto-fit, minmax(300px, 1fr))",
+            },
+            rowGap: "5vw",
+            columnGap: "5vw",
+            justifyItems: "center",
+            paddingLeft: "3vw",
+            paddingRight: "3vw",
+          }}
+        >
+          {collections.length === 0 ? (
+            <div>No collections found.</div>
+          ) : (
+            collections.map((collection) => (
+              <CollectionCard
+                key={collection.key}
+                name={collection.name}
+                image={collection.image}
+              />
+            ))
+          )}
         </Grid>
         <Grid
           size={{ xs: 12 }}
           sx={{
             display: "flex",
-            justifyContent: "end",
+            justifyContent: { xs: "center", xl: "end" },
             alignItems: "center",
             paddingLeft: "2vw",
             paddingRight: "2vw",
-            marginTop: "2vh",
+            marginTop: "5vh",
           }}
         >
           <SeeMoreButton

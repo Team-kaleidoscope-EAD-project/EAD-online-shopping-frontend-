@@ -51,6 +51,7 @@ export default function Womens({ anchorEl, open, handleClose }) {
                   className={styles.collectionCardImgContainer}
                   onClick={() => {
                     localStorage.setItem("category", JSON.stringify(item.name));
+                    handleClose();
                     navigate("/product-catalog", {
                       state: { category: item.name },
                     });

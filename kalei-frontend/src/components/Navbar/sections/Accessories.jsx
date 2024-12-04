@@ -62,6 +62,7 @@ export default function Accessories({ anchorEl, open, handleClose }) {
                 {Object.values(item)[0].map((name, index) => (
                   <h4
                     onClick={() => {
+                      handleClose();
                       localStorage.setItem("category", JSON.stringify(name));
                       navigate("/product-catalog", {
                         state: { category: name },
