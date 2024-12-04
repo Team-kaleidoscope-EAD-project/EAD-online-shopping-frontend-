@@ -31,9 +31,9 @@ function MultiCarousel({ list, selectedItem, itemsCount }) {
       responsive={responsive}
       ssr={true} // Server-side rendering
       infinite={false}
-      autoPlay={true}
+      autoPlay={false}
       keyBoardControl={true}
-      customTransition="all 1.3s"
+      customTransition="all .5s"
       transitionDuration={500}
       containerClass="customContainerClass"
     >

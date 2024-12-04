@@ -41,6 +41,7 @@ function SingleProductPage() {
     setReviewDataList(feedbacks);
   };
 
+  //add to cart function
   const addToCart = (
     selectedQuantity,
     selectedSize,
@@ -57,7 +58,7 @@ function SingleProductPage() {
       size: sizeList[selectedSize],
       color: product.variants[selectedColor].color,
       image: product.variants[selectedColor].imageUrl,
-      productStock,
+      productStock: productStock,
     };
 
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -72,7 +73,7 @@ function SingleProductPage() {
       localStorage.setItem("cart", JSON.stringify(cart));
     }
 
-    navigate("/add-to-cart");
+    navigate("/add-to-cart", { state: { productStock } });
   };
 
   const fetchUserData = async () => {

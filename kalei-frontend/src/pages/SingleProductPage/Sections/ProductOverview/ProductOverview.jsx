@@ -9,6 +9,13 @@ import PriceSection from "./PriceSection";
 import UserRating from "./UserRating";
 import { getProductStocksBySku } from "../../../../services/products/getProductStocksBySku";
 
+// dummy data
+const sps = [
+  require("../../../../assets/images/singleProductImages/woman_image1.png"),
+
+  require("../../../../assets/images/singleProductImages/woman_image2.png"),
+];
+
 const ProductOverview = ({
   singleProductImageList,
   productName,
@@ -31,7 +38,8 @@ const ProductOverview = ({
   }, [selectedColor, selectedSize]);
 
   const handleCart = () => {
-    addToCart(selectedQuantity, selectedSize, selectedColor);
+    console.log("overview stoks", productStock);
+    addToCart(selectedQuantity, selectedSize, selectedColor, productStock);
   };
 
   // console.log(selectedColor);
@@ -77,7 +85,7 @@ const ProductOverview = ({
             {/* Color Carousel */}
             <Box
               sx={{
-                maxWidth: { xs: "100%", md: "45vw", lg: "38vw" },
+                width: { xs: "100%", md: "45vw", lg: "38vw" },
                 padding: "10px",
                 marginTop: { xs: "0px", sm: "10px", md: "30px" },
                 marginBottom: { xs: "30px", md: "0px" },

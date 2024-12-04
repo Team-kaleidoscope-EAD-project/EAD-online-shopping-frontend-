@@ -7,6 +7,8 @@ export const paymentConfirmation = async (
   isClose,
   orderId
 ) => {
+  localStorage.setItem("cart", "");
+  //payment confirmation
   const { error, paymentIntent } = await stripe.confirmPayment({
     elements,
     confirmParams: {
@@ -22,6 +24,7 @@ export const paymentConfirmation = async (
     });
   } else if (paymentIntent && paymentIntent.status !== "succeeded") {
     //rolback
+    console.log(error);
     await orderRollBack(orderId);
   } else if (paymentIntent && paymentIntent.status === "succeeded") {
     setAlert({
