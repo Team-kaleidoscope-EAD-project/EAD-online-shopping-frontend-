@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MainImage from "./MainImage";
 import { Box } from "@mui/material";
 import ProductHeader from "./ProductHeader";
@@ -7,26 +7,49 @@ import ProductColors from "./ProductColors";
 import SizeComponent from "./SizeComponent";
 import PriceSection from "./PriceSection";
 import UserRating from "./UserRating";
+import { getProductStocksBySku } from "../../../../services/products/getProductStocksBySku";
+
+// dummy data
+const sps = [
+  require("../../../../assets/images/singleProductImages/woman_image1.png"),
+
+  require("../../../../assets/images/singleProductImages/woman_image2.png"),
+];
 
 const ProductOverview = ({
   singleProductImageList,
   productName,
   productId,
   productPrice,
-  sizeList,
-  productStock,
+  product,
   addToCart,
 }) => {
   const [selectedColor, setSelectedColor] = useState(0);
-  const [selectedSize, setSelectedSize] = useState("");
+  const [selectedSize, setSelectedSize] = useState(0);
   const [selectedQuantity, setSelectedQuantity] = useState(1);
+  const [productStock, setProductStock] = useState(1);
 
   const ProductList = singleProductImageList.map((item, index) => (
     <ProductColors key={index} image={item.imageUrl} />
   ));
 
+  useEffect(() => {
+    fetchProductStock();
+  }, [selectedColor, selectedSize]);
+
   const handleCart = () => {
-    addToCart(selectedQuantity, selectedSize, selectedColor);
+    console.log("overview stoks", productStock);
+    addToCart(selectedQuantity, selectedSize, selectedColor, productStock);
+  };
+
+  // console.log(selectedColor);
+
+  const fetchProductStock = async () => {
+    const stocks = await getProductStocksBySku(
+      product.variants[selectedColor].sizes[selectedSize].sku
+    );
+    // console.log("stocks", stocks);
+    setProductStock(stocks.quantity);
   };
 
   return (
@@ -40,7 +63,9 @@ const ProductOverview = ({
         }}
       >
         {/* cover Image */}
-        <MainImage productImage={singleProductImageList[selectedColor].image} />
+        <MainImage
+          productImage={singleProductImageList[selectedColor].imageUrl}
+        />
 
         {/* Right Section */}
         <Box>
@@ -60,7 +85,7 @@ const ProductOverview = ({
             {/* Color Carousel */}
             <Box
               sx={{
-                maxWidth: { xs: "100%", md: "45vw", lg: "38vw" },
+                width: { xs: "100%", md: "45vw", lg: "38vw" },
                 padding: "10px",
                 marginTop: { xs: "0px", sm: "10px", md: "30px" },
                 marginBottom: { xs: "30px", md: "0px" },

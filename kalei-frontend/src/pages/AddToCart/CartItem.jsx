@@ -8,6 +8,7 @@ export default function CartItem({
   onQuantityChange,
   productStock,
 }) {
+  // console.log("cartstokes", productStock);
   return (
     <div className="cartItem">
       <div className="imageProduct">

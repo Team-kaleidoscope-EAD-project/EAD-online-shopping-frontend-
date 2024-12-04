@@ -53,6 +53,7 @@ export default function NewArrivals({ anchorEl, open, handleClose }) {
                   className={styles.collectionCardImgContainer}
                   onClick={() => {
                     handleClose();
+                    localStorage.setItem("category", JSON.stringify(item.name));
                     navigate("/product-catalog", {
                       state: { category: item.name },
                     });
@@ -64,11 +65,6 @@ export default function NewArrivals({ anchorEl, open, handleClose }) {
               </div>
             ))}
           </div>
-          {/* <div className={styles.viewMoreSection}>
-            <div className={styles.viewMoreBtn}>
-              <span>VIEW MORE RESULTS</span>
-            </div>
-          </div> */}
         </div>
       </Menu>
     </div>

@@ -58,7 +58,7 @@ const marks = [
 export default function ProductCatalog() {
   const location = useLocation();
 
-  const passedCategory = location.state.category;
+  const passedCategory = JSON.parse(localStorage.getItem("category"));
   // console.log(passedCategory);
 
   // filters
@@ -98,6 +98,7 @@ export default function ProductCatalog() {
 
   const fetchProductsByFilters = async () => {
     const products = await productFilter(filters);
+    // console.log(products);
     setProductList(products);
   };
 
@@ -153,9 +154,6 @@ export default function ProductCatalog() {
 
   return (
     <div className={styles.ProductCatalogPage}>
-      {/* navbar section */}
-      {/* <Navbar /> */}
-      {/* navbar section */}
       {/* product catalog */}
       <Grid container>
         <Grid p={3} size={{ xs: 12 }} className={styles.breadcrumbs}>
@@ -169,6 +167,7 @@ export default function ProductCatalog() {
             </Breadcrumbs>
           </Stack>
         </Grid>
+
         <Grid
           size={{ xs: 10, sm: 6, md: 4, lg: 3 }}
           paddingLeft={3}
@@ -518,21 +517,37 @@ export default function ProductCatalog() {
           </Drawer>
           {/* drawer */}
         </Grid>
-        <Grid
-          size={{ xs: 12, md: 8, lg: 9 }}
-          sx={{
-            justifyItems: productList.length === 1 ? "start" : "center",
-            paddingLeft: productList.length === 1 ? "5vw" : "3vw",
-          }}
-          paddingLeft={3}
-          className={styles.productCatalogContainer}
-        >
-          {productList.map((item, index) => (
-            <ProductCard singleProduct={item} />
-          ))}
-        </Grid>
+
+        {productList ? (
+          <Grid
+            size={{ xs: 12, md: 8, lg: 9 }}
+            sx={{
+              justifyItems: productList.length === 1 ? "start" : "center",
+              paddingLeft: productList.length === 1 ? "5vw" : "3vw",
+            }}
+            paddingLeft={3}
+            className={styles.productCatalogContainer}
+          >
+            {productList.map((item, index) => (
+              <ProductCard singleProduct={item} />
+            ))}
+          </Grid>
+        ) : (
+          <Grid
+            size={{ xs: 12, md: 8, lg: 9 }}
+            paddingLeft={3}
+            className={styles.productCatalogContainer}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            No products in the inventory
+          </Grid>
+        )}
       </Grid>
-      {/* product catalog */}
+
       {/* footer section */}
       <Footer />
       {/* footer section */}

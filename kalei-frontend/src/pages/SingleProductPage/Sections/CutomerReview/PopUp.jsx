@@ -1,9 +1,28 @@
 import { Box, Rating, Typography } from "@mui/material";
 import React, { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
+import { addFeedback } from "../../../../services/feedbacks/feedback";
+import { userInfo } from "../../../../services/users/userInfo";
 
-function PopUp({ close }) {
+function PopUp({ close, productId }) {
   const [ratedValue, setRatedValue] = useState(0);
+  const [feedbackContent, setFeedbackContent] = useState("");
+
+  const handleSubmit = async () => {
+    try {
+      const { userId } = await userInfo();
+
+      close(false);
+      await addFeedback({
+        userId: userId,
+        productId,
+        rating: ratedValue,
+        feedbackContent,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -109,6 +128,9 @@ function PopUp({ close }) {
               outline: "none",
               borderRadius: "10px",
             }}
+            onChange={(e) => {
+              setFeedbackContent(e.target.value);
+            }}
           />
 
           {/* submit btn */}
@@ -134,6 +156,7 @@ function PopUp({ close }) {
                 opacity: 0.6,
               },
             }}
+            onClick={handleSubmit}
           >
             <Typography
               sx={{

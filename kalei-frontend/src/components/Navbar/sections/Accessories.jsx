@@ -63,6 +63,7 @@ export default function Accessories({ anchorEl, open, handleClose }) {
                   <h4
                     onClick={() => {
                       handleClose();
+                      localStorage.setItem("category", JSON.stringify(name));
                       navigate("/product-catalog", {
                         state: { category: name },
                       });

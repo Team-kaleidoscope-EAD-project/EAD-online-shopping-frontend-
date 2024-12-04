@@ -59,3 +59,13 @@ export const orderStatusUpdate = async (orderId) => {
     throw error;
   }
 };
+
+export const getOrdersByUserId = async (userId) => {
+  try {
+    const response = await axiosInstance.get("/getorderbyuserid", { userId: userId });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching orders for userId:", error);
+    throw error;
+  }
+}

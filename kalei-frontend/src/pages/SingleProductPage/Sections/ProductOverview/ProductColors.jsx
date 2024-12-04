@@ -13,12 +13,12 @@ function ProductColors({ image }) {
     >
       <ImageListItem
         sx={{
-          width: "100%",
-          height: "100%",
+          width: "150px",
+          height: "150px",
           img: {
             // Styles for the <img> within ImageListItem
-            width: "100%",
-            height: "100%",
+            width: "100px",
+            height: "100px",
             objectFit: "cover",
             transition: "all 0.2s ease",
             "&:hover": { scale: 1.1 },

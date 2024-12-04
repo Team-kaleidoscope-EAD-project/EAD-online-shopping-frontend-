@@ -21,7 +21,7 @@ const stripePromise = loadStripe(
 
 export default function Cart() {
   const location = useLocation();
-  const { productStock } = location.state || {};
+  const productStock = location.state?.productStock || 0;
 
   const [cartItems, setCartItems] = useState(() => {
     const savedCartData = localStorage.getItem("cart");
@@ -175,15 +175,16 @@ export default function Cart() {
               </div>
             </div>
           </div>
-          {cartItems.map((item) => (
-            <CartItem
-              key={item.id}
-              product={item}
-              onRemove={handleRemove}
-              onQuantityChange={handleQuantityChange}
-              productStock={productStock}
-            />
-          ))}
+          {cartItems.length > 0 &&
+            cartItems.map((item) => (
+              <CartItem
+                key={item.id}
+                product={item}
+                onRemove={handleRemove}
+                onQuantityChange={handleQuantityChange}
+                productStock={productStock}
+              />
+            ))}
         </div>
 
         <div className="summarySection">

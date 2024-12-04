@@ -38,7 +38,7 @@ function ProductHeader({ productName, productId, productPrice }) {
           marginTop: { xs: "25px", sm: "30px", md: "30px" },
         }}
       >
-        Rs {productPrice.toLocaleString("en-IN")}
+        Rs. {productPrice.toLocaleString("en-IN")}
       </Typography>
     </Box>
   );
