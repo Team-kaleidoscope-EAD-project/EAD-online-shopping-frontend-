@@ -5,7 +5,7 @@ import MultiCarousel from "../../../../components/MultiCarousel/MultiCarousel";
 import { userInfo } from "../../../../services/users/userInfo";
 
 function CustomerReview({ reviewDataList }) {
-  const reviewList = reviewDataList.map((item, index) => {
+  const reviewList = reviewDataList?.map((item, index) => {
     const date = new Date(item.dateTime);
 
     return (

@@ -83,27 +83,20 @@ export default function Orders() {
     getOrdersById();
   }, [userInfo]);
 
-
-  const breadcrumbs = [
-    <Link underline="hover" key="2" color="inherit" href="/profile">
-      Profile
-    </Link>,
-    <Typography key="3" sx={{ color: "text.primary" }}>
-      Orders
-    </Typography>,
-  ];
-
   return (
     <div>
-      <Grid size={{ xs: 12 }} sx={{ padding: "2vw" }}>
-        <Breadcrumbs
-          separator={<NavigateNextIcon fontSize="small" />}
-          aria-label="breadcrumb"
-        >
-          {breadcrumbs}
-        </Breadcrumbs>
-      </Grid>
-
+      <Typography
+        sx={{
+          color: "text.primary",
+          marginTop: 10,
+          fontSize: 24,
+          fontFamily: "amiko",
+          textAlign: "start",
+          marginLeft: "15px",
+        }}
+      >
+        Your Orders
+      </Typography>
       <Grid
         size={{ xs: 12 }}
         sx={{
@@ -123,7 +116,7 @@ export default function Orders() {
         {orders.length === 0 ? (
           <div>No orders found.</div>
         ) : (
-          orders.map((order,index) => (
+          orders.map((order, index) => (
             <>
               {console.log(order)}
               <OrderCard

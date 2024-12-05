@@ -13,6 +13,7 @@ function MainImage({ productImage }) {
           overflow: "hidden",
         }}
       >
+        {console.log("main image:" + productImage)}
         <img
           src={productImage}
           alt="Single Product"

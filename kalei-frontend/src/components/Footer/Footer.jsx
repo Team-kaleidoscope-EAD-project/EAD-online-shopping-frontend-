@@ -23,7 +23,11 @@ import emailIcon from "../../assets/images/icons/social media icons/email.svg";
 import visaIcon from "../../assets/images/icons/payment icons/visa.png";
 import masterIcon from "../../assets/images/icons/payment icons/master card.png";
 
+import { useNavigate } from "react-router-dom";
+
 export default function Footer() {
+  const navigate = useNavigate();
+
   const [shopOpen, setShopOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
   const [termsOpen, setTermsOpen] = useState(false);
@@ -52,6 +56,10 @@ export default function Footer() {
       setSnackbarMessage("Email submitted successfully!");
       setSnackbarOpen(true);
     }
+  };
+
+  const handleNavigator = (location) => {
+    navigate(location);
   };
 
   const handleSnackbarClose = () => {
@@ -117,17 +125,23 @@ export default function Footer() {
               >
                 <Box sx={{ marginBottom: "10px", marginTop: "20px" }}>
                   <Link
-                    href="/home"
                     color="inherit"
                     sx={{
+                      cursor: "pointer",
                       textDecoration: "none",
                       "&:hover": { textDecoration: "none" },
                     }}
                   >
-                    Home
+                    <span
+                      onClick={() => {
+                        handleNavigator("/");
+                      }}
+                    >
+                      Home
+                    </span>
                   </Link>
                 </Box>
-                <Box sx={{ marginBottom: "10px" }}>
+                {/* <Box sx={{ marginBottom: "10px" }}>
                   <Link
                     href="/new-arrivals"
                     color="inherit"
@@ -138,8 +152,8 @@ export default function Footer() {
                   >
                     New Arrivals
                   </Link>
-                </Box>
-                <Box sx={{ marginBottom: "10px" }}>
+                </Box> */}
+                {/* <Box sx={{ marginBottom: "10px" }}>
                   <Link
                     href="/best-sellers"
                     color="inherit"
@@ -150,32 +164,48 @@ export default function Footer() {
                   >
                     Best Sellers
                   </Link>
-                </Box>
+                </Box> */}
                 <Box sx={{ marginBottom: "10px" }}>
                   <Link
-                    href="/mens-collection"
                     color="inherit"
                     sx={{
+                      cursor: "pointer",
                       textDecoration: "none",
                       "&:hover": { textDecoration: "none" },
                     }}
                   >
-                    Men's Collection
+                    <span
+                      onClick={() => {
+                        handleNavigator("/product-catalog", {
+                          state: { gender: "men" },
+                        });
+                      }}
+                    >
+                      Men's Collection
+                    </span>
                   </Link>
                 </Box>
                 <Box sx={{ marginBottom: "10px" }}>
                   <Link
-                    href="/womens-collection"
                     color="inherit"
                     sx={{
+                      cursor: "pointer",
                       textDecoration: "none",
                       "&:hover": { textDecoration: "none" },
                     }}
                   >
-                    Women's Collection
+                    <span
+                      onClick={() => {
+                        handleNavigator("/product-catalog", {
+                          state: { gender: "women" },
+                        });
+                      }}
+                    >
+                      Women's Collection
+                    </span>
                   </Link>
                 </Box>
-                <Box sx={{ marginBottom: "10px" }}>
+                {/* <Box sx={{ marginBottom: "10px" }}>
                   <Link
                     href="/accessories"
                     color="inherit"
@@ -186,7 +216,7 @@ export default function Footer() {
                   >
                     Accessories
                   </Link>
-                </Box>
+                </Box> */}
               </Box>
               <Box
                 sx={{
@@ -253,7 +283,7 @@ export default function Footer() {
               >
                 <Box sx={{ marginBottom: "10px", marginTop: "20px" }}>
                   <Link
-                    href="/about-us"
+                    href="/"
                     color="inherit"
                     sx={{
                       textDecoration: "none",
@@ -265,7 +295,7 @@ export default function Footer() {
                 </Box>
                 <Box sx={{ marginBottom: "10px" }}>
                   <Link
-                    href="/contact-us"
+                    href="/"
                     color="inherit"
                     sx={{
                       textDecoration: "none",
@@ -277,7 +307,7 @@ export default function Footer() {
                 </Box>
                 <Box sx={{ marginBottom: "10px" }}>
                   <Link
-                    href="/faq"
+                    href="/"
                     color="inherit"
                     sx={{
                       textDecoration: "none",
@@ -289,7 +319,7 @@ export default function Footer() {
                 </Box>
                 <Box sx={{ marginBottom: "10px" }}>
                   <Link
-                    href="/size-guide"
+                    href="/"
                     color="inherit"
                     sx={{
                       textDecoration: "none",
@@ -301,7 +331,7 @@ export default function Footer() {
                 </Box>
                 <Box sx={{ marginBottom: "10px" }}>
                   <Link
-                    href="/shipping-info"
+                    href="/"
                     color="inherit"
                     sx={{
                       textDecoration: "none",
@@ -313,7 +343,7 @@ export default function Footer() {
                 </Box>
                 <Box sx={{ marginBottom: "10px" }}>
                   <Link
-                    href="/returns"
+                    href="/"
                     color="inherit"
                     sx={{
                       textDecoration: "none",

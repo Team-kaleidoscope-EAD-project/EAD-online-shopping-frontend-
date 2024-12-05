@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid2";
 import Box from "@mui/material/Box";
@@ -6,32 +6,71 @@ import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import Dialog from "../../components/Dialog/Dialog";
 import profileStyle from "./profile.module.css";
 import Link from "@mui/material/Link";
-import { useState } from "react";
 import { KeycloakContext } from "../../auth/KeycloakProvider";
-
 import { useNavigate } from "react-router-dom";
+import Orders from "../UserOrders/Orders";
+import Footer from "../../components/Footer/Footer";
 
 export default function Profile() {
   const navigate = useNavigate();
-
-  const { authenticated, keycloak } = useContext(KeycloakContext);
-
-  const userInfo = keycloak?.tokenParsed;
-
-  console.log(userInfo);
-
+  const { keycloak } = useContext(KeycloakContext);
+  console.log(keycloak);
+  // State to manage user details
   const [details, setDetails] = useState([
     {
       key: 1,
-      firstName: "John",
-      lastName: "Doe",
-      email: "johndoe@gmail.com",
+      firstName: "",
+      lastName: "",
+      email: "",
       address: "123, Main Street, Colombo 05",
       city: "Colombo",
       zip: "10001",
       phone: "0771234567",
     },
   ]);
+
+  // Fetch token and parse user details
+  useEffect(() => {
+    const initializeKeycloak = async () => {
+      if (keycloak) {
+        try {
+          // Check if token exists and is valid
+          const tokenFromStorage = localStorage.getItem("keycloakToken");
+          if (tokenFromStorage) {
+            keycloak.token = tokenFromStorage;
+            keycloak.tokenParsed = JSON.parse(
+              localStorage.getItem("keycloakTokenParsed")
+            );
+          }
+
+          // Update the token if about to expire
+          const refreshed = await keycloak.updateToken(30);
+          if (refreshed) {
+            localStorage.setItem("keycloakToken", keycloak.token);
+            localStorage.setItem(
+              "keycloakTokenParsed",
+              JSON.stringify(keycloak.tokenParsed)
+            );
+          }
+
+          // Set user details in the state
+          setDetails((prevDetails) => [
+            {
+              ...prevDetails[0],
+              firstName: keycloak.tokenParsed?.given_name,
+              lastName: keycloak.tokenParsed?.family_name,
+              email: keycloak.tokenParsed?.email,
+            },
+          ]);
+        } catch (error) {
+          console.error("Error initializing Keycloak:", error);
+          keycloak.login(); // Redirect to login if token is invalid
+        }
+      }
+    };
+
+    initializeKeycloak();
+  }, [keycloak]);
 
   const handleSave = (updatedValues) => {
     setDetails((prevDetails) => [
@@ -40,17 +79,13 @@ export default function Profile() {
         firstName: updatedValues[0],
         lastName: updatedValues[1],
         email: updatedValues[2],
-        address: updatedValues[3],
-        city: updatedValues[4],
-        zip: updatedValues[5],
-        phone: updatedValues[6],
       },
     ]);
   };
 
   const handleOrderPageNavigation = () => {
     navigate(`/orders`, {
-      state: { userId: userInfo.sub },
+      state: { userId: keycloak.tokenParsed?.sub },
     });
   };
 
@@ -59,6 +94,7 @@ export default function Profile() {
       <Typography
         sx={{
           color: "text.primary",
+          marginTop: 5,
           marginBottom: 2,
           fontSize: 24,
           fontFamily: "amiko",
@@ -68,20 +104,6 @@ export default function Profile() {
       >
         Profile
       </Typography>
-      <Link underline="hover" color="inherit">
-        <Typography
-          sx={{
-            color: "text.primary",
-            marginBottom: 2,
-            fontSize: 18,
-            fontFamily: "amiko",
-            textAlign: "start",
-            marginLeft: "20px",
-          }}
-        >
-          <span onClick={handleOrderPageNavigation}>Orders</span>
-        </Typography>
-      </Link>
       <div className={profileStyle.box}>
         <Box
           sx={{
@@ -108,10 +130,6 @@ export default function Profile() {
                       details[0].firstName,
                       details[0].lastName,
                       details[0].email,
-                      details[0].address,
-                      details[0].city,
-                      details[0].zip,
-                      details[0].phone,
                     ]}
                     message={<ModeEditOutlineIcon sx={{ fontSize: 16 }} />}
                     dialogTitle="Edit Details"
@@ -139,23 +157,14 @@ export default function Profile() {
             </Grid>
           </Grid>
           <hr />
-
-          <Grid item>
-            <h4 className={profileStyle.title}>Address</h4>
-          </Grid>
-
-          <Grid item>
-            <Grid container alignItems="center" spacing={1}>
-              <Grid item xs>
-                <h4>{details[0].address}</h4>
-                <h4>{details[0].city}</h4>
-                <h4>{details[0].zip}</h4>
-                <h4>{details[0].phone}</h4>
-              </Grid>
-            </Grid>
-          </Grid>
         </Box>
       </div>
+      <Grid container>
+        <Grid size={{ xs: 12 }}>
+          <Orders />
+        </Grid>
+      </Grid>
+      <Footer />
     </div>
   );
 }

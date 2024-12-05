@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useContext } from "react";
 import CartItem from "./CartItem";
 
 import "./Cart.css";
@@ -14,6 +14,8 @@ import {
   sendOrderDetails,
 } from "../../services/order/orderService";
 import { userInfo } from "../../services/users/userInfo";
+import { KeycloakContext } from "../../auth/KeycloakProvider";
+import Footer from "../../components/Footer/Footer";
 
 const stripePromise = loadStripe(
   "pk_test_51QOBxSHp3hdPZfFz6HFx8CyHRsKhaN8O1pi2GtBVoEOcnJQR9rJPpFQ7sW9HKYHFwqpdSwzeXEWg5PPx2r474Cyg00TihsPctx"
@@ -21,6 +23,8 @@ const stripePromise = loadStripe(
 
 export default function Cart() {
   const navigate = useNavigate();
+
+  const { keycloak } = useContext(KeycloakContext);
 
   const location = useLocation();
   const productStock = location.state?.productStock || 0;
@@ -76,7 +80,7 @@ export default function Cart() {
     orderDetails: {
       status: "Pending",
       totalAmount: totalPrice,
-      userId: userInfo()?.userId || "Unregistered",
+      userId: keycloak?.tokenParsed?.sub || "Unregistered",
     },
     shippingDetails: {
       shippingAddress: deliveryAddress,
@@ -277,6 +281,10 @@ export default function Cart() {
           />
         </Elements>
       )}
+
+      <div style={{ marginTop: "50vh" }}>
+        <Footer />
+      </div>
     </div>
   );
 }

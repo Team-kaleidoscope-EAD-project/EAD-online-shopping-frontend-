@@ -56,7 +56,7 @@ export default function OrderCard({
               </Typography>
             }
           />
-          <CardMedia component="img" height="195" image={imgUrl} />
+          {/* <CardMedia component="img" height="195" image={imgUrl} /> */}
           <CardContent>
             <Typography
               sx={{
@@ -85,8 +85,8 @@ export default function OrderCard({
 
       {/* order details */}
       <OrderDetails
-        closingController={toggleDrawer(false)}
-        open={open}
+        // closingController={toggleDrawer(false)}
+        // open={open}
         order={order}
       />
       {/* order details */}

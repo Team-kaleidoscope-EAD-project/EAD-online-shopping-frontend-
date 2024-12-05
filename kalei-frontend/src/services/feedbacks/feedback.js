@@ -18,17 +18,14 @@ export const getFeedbacksByProducts = async (productId) => {
     const response = await axiosInstance.get(
       "/api/v1/feedback/getfeedback/byproduct/" + productId
     );
-
     console.log("feedbacks", response.data);
     return response.data;
   } catch (error) {
-    console.log(error.message);
-    throw error;
+    console.error(error.message);
   }
 };
 
 export const productRating = (feedbackList) => {
-  const sumOfRating = feedbackList.reduce((sum, item) => sum + item.rating, 0);
-
-  return sumOfRating / feedbackList.length;
+  const sumOfRating = feedbackList?.reduce((sum, item) => sum + item.rating, 0);
+  return sumOfRating / feedbackList?.length;
 };
