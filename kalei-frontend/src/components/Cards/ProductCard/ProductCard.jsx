@@ -151,22 +151,23 @@ export default function ProductCard({ singleProduct }) {
               Color
             </Typography>
             <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-              {singleProduct.variants
-                .slice(colorIndex, colorIndex + 4)
-                .map((item, index) => (
-                  <Box
-                    key={index}
-                    sx={{
-                      position: "relative",
-                      width: 15,
-                      height: 15,
-                      backgroundColor: item.color,
-                      borderRadius: "50%",
-                      cursor: "pointer",
-                      border: "1px solid rgba(0,0,0,0.3)",
-                    }}
-                  >
-                    {/* {!availableColors.includes(item.color) && (
+              {singleProduct &&
+                singleProduct.variants
+                  .slice(colorIndex, colorIndex + 4)
+                  .map((item, index) => (
+                    <Box
+                      key={index}
+                      sx={{
+                        position: "relative",
+                        width: 15,
+                        height: 15,
+                        backgroundColor: item.color,
+                        borderRadius: "50%",
+                        cursor: "pointer",
+                        border: "1px solid rgba(0,0,0,0.3)",
+                      }}
+                    >
+                      {/* {!availableColors.includes(item.color) && (
                       <Box
                         sx={{
                           position: "absolute",
@@ -179,8 +180,8 @@ export default function ProductCard({ singleProduct }) {
                         }}
                       />
                     )} */}
-                  </Box>
-                ))}
+                    </Box>
+                  ))}
               <IconButton size="small" onClick={handleNextColorSet}>
                 <ArrowForwardIosIcon sx={{ fontSize: 8 }} />
               </IconButton>

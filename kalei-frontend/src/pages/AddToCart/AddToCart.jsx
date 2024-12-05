@@ -3,7 +3,7 @@ import CartItem from "./CartItem";
 
 import "./Cart.css";
 import Popup from "./DiliveryAddressPopup";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import CheckoutForm from "../../components/CheckoutForm/CheckoutForm";
 
 import { Elements } from "@stripe/react-stripe-js";
@@ -20,6 +20,8 @@ const stripePromise = loadStripe(
 );
 
 export default function Cart() {
+  const navigate = useNavigate();
+
   const location = useLocation();
   const productStock = location.state?.productStock || 0;
 
@@ -55,7 +57,7 @@ export default function Cart() {
       localStorage.removeItem("cart");
       setCartItems([]);
 
-      await orderStatusUpdate(orderId);
+      // await orderStatusUpdate(orderId);
     }
   };
 
@@ -105,6 +107,10 @@ export default function Cart() {
 
   const closePopup = () => {
     setIsPopupOpen(false); // Close the popup
+  };
+
+  const handleContinueShopping = () => {
+    navigate("/product-catalog");
   };
 
   const handleContinueCheckOut = async () => {
@@ -204,7 +210,10 @@ export default function Cart() {
             <button className="checkoutButton" onClick={handleCheckout}>
               PROCEED TO CHECKOUT
             </button>
-            <button className="continueShoppingButton">
+            <button
+              className="continueShoppingButton"
+              onClick={handleContinueShopping}
+            >
               CONTINUE SHOPPING
             </button>
           </div>
