@@ -78,7 +78,6 @@ export default function OrderCard({
             >
               Total : {"Rs " + price}
             </Typography>
-            {/* <CollectionButton name={"VIEW MORE"} /> */}
           </CardContent>
           <CardActions disableSpacing></CardActions>
         </Card>

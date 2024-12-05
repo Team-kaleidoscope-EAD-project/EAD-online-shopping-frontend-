@@ -69,6 +69,10 @@ export default function Orders() {
 
   useEffect(() => {
     const getOrdersById = async () => {
+      if (!userInfo) {
+        console.warn("UserInfo is undefined");
+        return;
+      }
       try {
         const orderList = await getOrdersByUserId(userInfo.sub);
         setOrders(orderList);
@@ -78,6 +82,7 @@ export default function Orders() {
     };
     getOrdersById();
   }, [userInfo]);
+
 
   const breadcrumbs = [
     <Link underline="hover" key="2" color="inherit" href="/profile">
@@ -118,11 +123,11 @@ export default function Orders() {
         {orders.length === 0 ? (
           <div>No orders found.</div>
         ) : (
-          orders.map((order) => (
+          orders.map((order,index) => (
             <>
               {console.log(order)}
               <OrderCard
-                key={order.key}
+                key={index}
                 status={order.status}
                 price={order.totalAmount}
                 lastUpdatedDate={order.orderDate}

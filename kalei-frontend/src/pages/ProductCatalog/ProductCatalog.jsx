@@ -200,10 +200,11 @@ export default function ProductCatalog() {
             </AccordionSummary>
             <AccordionDetails sx={{ textAlign: "start" }}>
               <div className={styles.productCategories}>
-                {productCategories.map((item) => {
+                {productCategories.map((item,index) => {
                   return (
                     <>
                       <span
+                        key={index}
                         className={
                           productCategory === item
                             ? `${styles.selectedCategory}`
@@ -235,10 +236,11 @@ export default function ProductCatalog() {
             </AccordionSummary>
             <AccordionDetails sx={{ textAlign: "start" }}>
               <div className={styles.productSizes}>
-                {productSizes.map((item) => {
+                {productSizes.map((item,index) => {
                   return (
                     <>
                       <div
+                        key={index}
                         className={
                           size === item
                             ? `${styles.selectedSizeBox}`
@@ -392,10 +394,11 @@ export default function ProductCatalog() {
                 </AccordionSummary>
                 <AccordionDetails sx={{ textAlign: "start" }}>
                   <div className={styles.productCategories}>
-                    {productCategories.map((item) => {
+                    {productCategories.map((item,index) => {
                       return (
                         <>
                           <span
+                            key={index}
                             className={
                               productCategory === item
                                 ? `${styles.selectedCategory}`
@@ -427,10 +430,11 @@ export default function ProductCatalog() {
                 </AccordionSummary>
                 <AccordionDetails sx={{ textAlign: "start" }}>
                   <div className={styles.productSizes}>
-                    {productSizes.map((item) => {
+                    {productSizes.map((item,index) => {
                       return (
                         <>
                           <div
+                            key={index}
                             className={
                               size === item
                                 ? `${styles.selectedSizeBox}`

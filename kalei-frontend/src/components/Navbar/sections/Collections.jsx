@@ -48,7 +48,7 @@ export default function Collections({ anchorEl, open, handleClose }) {
           <div className={styles.collectionsContainer}>
             {collectionData.map((item, index) => (
               //  collection card
-              <div className={styles.collectionCard}>
+              <div className={styles.collectionCard} key={index}>
                 <div
                   className={styles.collectionCardImgContainer}
                   onClick={() => {

@@ -31,7 +31,6 @@ export default function NewArrivals({ anchorEl, open, handleClose }) {
       const data = await newArrivals();
       setNewProducts(data);
     };
-
     fetchNewArrivals();
   }, []);
 
@@ -68,26 +67,27 @@ export default function NewArrivals({ anchorEl, open, handleClose }) {
       >
         <div className={`${styles.megaMenuSection} ${styles.megaMenuSection1}`}>
           <div className={styles.newArrivalContainer}>
-            {newProducts.slice(0, 4).map((item, index) => (
-              <div className={styles.collectionCard}>
-                <div
-                  className={styles.collectionCardImgContainer}
-                  onClick={() => {
-                    handleViewProduct(item);
-                  }}
-                >
-                  <img
-                    src={item.variants[0].imageUrl}
-                    alt="newArrival card img"
-                    style={{
-                      width: "100%",
-                      objectFit: "fill",
+            {newProducts &&
+              newProducts.slice(0, 4).map((item, index) => (
+                <div className={styles.collectionCard} key={index}>
+                  <div
+                    className={styles.collectionCardImgContainer}
+                    onClick={() => {
+                      handleViewProduct(item);
                     }}
-                  />
+                  >
+                    <img
+                      src={item.variants[0].imageUrl}
+                      alt="newArrival card img"
+                      style={{
+                        width: "100%",
+                        objectFit: "fill",
+                      }}
+                    />
+                  </div>
+                  <span>{item.name.toUpperCase()}</span>
                 </div>
-                <span>{item.name.toUpperCase()}</span>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       </Menu>

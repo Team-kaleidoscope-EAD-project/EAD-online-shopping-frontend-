@@ -46,7 +46,7 @@ export default function Womens({ anchorEl, open, handleClose }) {
         <div className={`${styles.megaMenuSection} ${styles.megaMenuSection3}`}>
           <div className={styles.collectionsContainer}>
             {womensData.map((item, index) => (
-              <div className={styles.collectionCard}>
+              <div className={styles.collectionCard} key={index}>
                 <div
                   className={styles.collectionCardImgContainer}
                   onClick={() => {

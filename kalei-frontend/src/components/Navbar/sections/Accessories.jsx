@@ -53,7 +53,7 @@ export default function Accessories({ anchorEl, open, handleClose }) {
           {/* accessory section - 1 */}
 
           {accessories.map((item, index) => (
-            <div className={styles.accessorySection}>
+            <div className={styles.accessorySection} key={index}>
               <div className={styles.accessoryHeader}>
                 <span key={index}>{Object.keys(item)[0]}</span>
               </div>
@@ -61,6 +61,7 @@ export default function Accessories({ anchorEl, open, handleClose }) {
               <div className={styles.accessoryContent}>
                 {Object.values(item)[0].map((name, index) => (
                   <h4
+                    key={index}
                     onClick={() => {
                       handleClose();
                       // localStorage.setItem("category", JSON.stringify(name));
@@ -68,7 +69,6 @@ export default function Accessories({ anchorEl, open, handleClose }) {
                         state: { category: name },
                       });
                     }}
-                    key={index}
                   >
                     {name}
                   </h4>

@@ -5,7 +5,10 @@ import { Chip, Drawer, Typography } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { DataGrid } from "@mui/x-data-grid";
 import Paper from "@mui/material/Paper";
-import { getOrderItemsByOrderId } from "../../services/orderItems/orderItemsService";
+import {
+  getOrderItemsByOrderId,
+  getProductBySku,
+} from "../../services/orderItems/orderItemsService";
 
 const columns = [
   { field: "id", headerName: "ID", width: 50 },
@@ -112,18 +115,43 @@ export default function OrderDetails({ closingController, open, order }) {
   ];
 
   const [orderItemList, setOrderItemList] = useState([]);
+  const [skuDetailsList, setSkuDetailsList] = useState([]);
+
+  const getOrderItems = async () => {
+    try {
+      const orderItems = await getOrderItemsByOrderId(order.id);
+      setOrderItemList(orderItems);
+
+      const skus = orderItems.map((item) => item.sku);
+
+      // Fetch details for each SKU using Promise.all
+      const skuDetails = await Promise.all(
+        skus.map(async (sku,index) => {
+          try {
+            return await getProductBySku(sku); // Call API for each SKU
+          } catch (error) {
+            console.error(
+              `Error fetching details for SKU ${sku}:`,
+              error.message
+            );
+            return null; // Handle errors gracefully
+          }
+        })
+      );
+
+      // Filter out any null responses and store in state
+      setSkuDetailsList(skuDetails.filter((detail) => detail !== null));
+    } catch (error) {
+      console.error(
+        "Error fetching order items or SKU details:",
+        error.message
+      );
+    }
+  };
 
   useEffect(() => {
-    const getOrderItems = async () => {
-      try {
-        const orderItems = await getOrderItemsByOrderId(order.id);
-        setOrderItemList(orderItems);
-      } catch (error) {
-        console.error("error in fetching order items:" + error.message);
-      }
-    };
     getOrderItems();
-  }, []);
+  }, [order]);
 
   return (
     <>

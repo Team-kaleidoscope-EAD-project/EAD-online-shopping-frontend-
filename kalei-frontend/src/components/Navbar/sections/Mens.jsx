@@ -48,7 +48,7 @@ export default function Mens({ anchorEl, open, handleClose }) {
           <div className={styles.collectionsContainer}>
             {mensData.map((item, index) => (
               //  mens card
-              <div className={styles.collectionCard}>
+              <div className={styles.collectionCard} key={index}>
                 <div
                   className={styles.collectionCardImgContainer}
                   onClick={() => {

@@ -63,7 +63,7 @@ export const orderStatusUpdate = async (orderId) => {
 };
 
 export const getOrdersByUserId = async (userId) => {
-  console.log("userId" + userId)
+  console.log("userId:" + userId)
   try {
     const response = await axiosInstance.get("/api/v1/order/getorderbyuserid/" + userId);
     console.log(response)
