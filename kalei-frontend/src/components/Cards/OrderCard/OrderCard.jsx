@@ -5,10 +5,6 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid2";
-import CollectionButton from "../../Buttons/CollectionButton";
-
-import Drawer from "@mui/material/Drawer";
 
 import styles from "./OrderCard.module.css";
 import OrderDetails from "../../OrderDetails/OrderDetails";
@@ -17,10 +13,10 @@ export default function OrderCard({
   status,
   lastUpdatedDate,
   imgUrl,
-  noOfItems,
-  orderNo,
+  order,
   price,
 }) {
+
   // drawer
   const [open, setOpen] = React.useState(false);
 
@@ -63,18 +59,6 @@ export default function OrderCard({
           <CardMedia component="img" height="195" image={imgUrl} />
           <CardContent>
             <Typography
-              variant="body2"
-              sx={{
-                color: "#000000",
-                fontFamily: "amiko",
-                fontWeight: "800",
-                fontSize: "14px",
-              }}
-            >
-              {noOfItems}
-              {noOfItems > 1 ? " items" : " item"}
-            </Typography>
-            <Typography
               sx={{
                 color: "text.secondary",
                 fontFamily: "amiko",
@@ -82,17 +66,17 @@ export default function OrderCard({
                 fontSize: "14px",
               }}
             >
-              {"Order " + orderNo}
+              {"Order " + order.id}
             </Typography>
             <Typography
               sx={{
                 color: "#000000",
                 fontFamily: "amiko",
                 fontWeight: "800",
-                fontSize: "14px",
+                fontSize: "1.5rem",
               }}
             >
-              {"Rs " + price}
+              Total : {"Rs " + price}
             </Typography>
             {/* <CollectionButton name={"VIEW MORE"} /> */}
           </CardContent>
@@ -104,9 +88,10 @@ export default function OrderCard({
       <OrderDetails
         closingController={toggleDrawer(false)}
         open={open}
-        order={orderNo}
+        order={order}
       />
       {/* order details */}
+      
     </>
   );
 }

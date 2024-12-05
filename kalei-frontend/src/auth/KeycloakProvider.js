@@ -4,6 +4,7 @@ import keycloakConfig from "./keycloak";
 export const KeycloakContext = createContext();
 
 export default function KeycloakProvider({ children }) {
+
   const [keycloak, setKeycloak] = useState(null);
   const [authenticated, setAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -23,7 +24,6 @@ export default function KeycloakProvider({ children }) {
         setLoading(false);
       }
     };
-
     initKeycloak();
   }, []);
 

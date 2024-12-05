@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import Grid from "@mui/material/Grid2";
 import OrderCard from "../../components/Cards/OrderCard/OrderCard";
 import image1 from "../../assets/images/collectionImages/collection1.jpg";
@@ -8,6 +8,7 @@ import { Breadcrumbs, Link } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { getOrdersByUserId } from "../../services/order/orderService";
 import { useLocation } from "react-router-dom";
+import { KeycloakContext } from "../../auth/KeycloakProvider";
 
 // const orders = [
 //   {
@@ -59,20 +60,24 @@ import { useLocation } from "react-router-dom";
 
 export default function Orders() {
   const [orders, setOrders] = React.useState([]);
+
   const location = useLocation();
-  const user = location.state?.userId; // Safely access userId
+
+  const { keycloak } = useContext(KeycloakContext);
+
+  const userInfo = keycloak?.tokenParsed;
 
   useEffect(() => {
     const getOrdersById = async () => {
       try {
-        const orderList = await getOrdersByUserId(user);
+        const orderList = await getOrdersByUserId(userInfo.sub);
         setOrders(orderList);
       } catch (error) {
         console.error("Error fetching user orders:", error);
       }
     };
     getOrdersById();
-  }, []);
+  }, [userInfo]);
 
   const breadcrumbs = [
     <Link underline="hover" key="2" color="inherit" href="/profile">
@@ -114,15 +119,18 @@ export default function Orders() {
           <div>No orders found.</div>
         ) : (
           orders.map((order) => (
-            <OrderCard
-              key={order.key}
-              status={order.status}
-              price={order.price}
-              lastUpdatedDate={order.lastUpdatedDate}
-              imgUrl={order.imgUrl}
-              noOfItems={order.noOfItems}
-              orderNo={order.orderNo}
-            />
+            <>
+              {console.log(order)}
+              <OrderCard
+                key={order.key}
+                status={order.status}
+                price={order.totalAmount}
+                lastUpdatedDate={order.orderDate}
+                imgUrl={order.imgUrl}
+                noOfItems={order.noOfItems}
+                order={order}
+              />
+            </>
           ))
         )}
       </Grid>

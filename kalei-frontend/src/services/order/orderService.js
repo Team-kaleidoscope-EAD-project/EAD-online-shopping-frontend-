@@ -48,7 +48,7 @@ export const orderRollBack = async (orderId) => {
 export const orderStatusUpdate = async (orderId) => {
   try {
     console.log("rollbacked");
-    const response = await axiosInstance.post("/order/updateOrder", {
+    const response = await axiosInstance.post("/api/v1/order/updateOrder", {
       orderId,
       status: "Completed",
     });
@@ -61,8 +61,10 @@ export const orderStatusUpdate = async (orderId) => {
 };
 
 export const getOrdersByUserId = async (userId) => {
+  console.log("userId" + userId)
   try {
-    const response = await axiosInstance.get("/getorderbyuserid", { userId: userId });
+    const response = await axiosInstance.get("/api/v1/order/getorderbyuserid/" + userId);
+    console.log(response)
     return response.data;
   } catch (error) {
     console.error("Error fetching orders for userId:", error);
