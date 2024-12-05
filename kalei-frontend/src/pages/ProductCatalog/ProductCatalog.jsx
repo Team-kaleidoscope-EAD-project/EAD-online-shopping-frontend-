@@ -58,8 +58,11 @@ const marks = [
 export default function ProductCatalog() {
   const location = useLocation();
 
-  const passedGender = location.state?.category;
+  const passedGender = location.state?.gender;
   console.log("passed cat", passedGender);
+
+  const homeCategory = location.state?.category;
+  console.log("homecat", homeCategory);
 
   // filters
   const [productCategory, setProductCategory] = useState(passedGender);
@@ -72,7 +75,7 @@ export default function ProductCatalog() {
   // filters
 
   const [filters, setFilters] = useState({
-    categories: [],
+    categories: [homeCategory],
     colors: [],
     brand: [passedGender],
     sizes: [],
@@ -108,6 +111,10 @@ export default function ProductCatalog() {
       categories: category !== "All Products" ? category : [],
     }));
   };
+
+  useEffect(() => {
+    handleFilterChange("categories", homeCategory);
+  }, [homeCategory]);
 
   const handleProductSizeFilter = (size) => {
     if (size == "All") {

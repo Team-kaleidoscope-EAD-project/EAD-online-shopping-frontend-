@@ -142,7 +142,13 @@ function PriceSection({
         </Box>
       </Box>
 
-      <Typography sx={{ marginTop: "10px", color: "rgba(10,10,10,0.4)" }}>
+      <Typography
+        sx={{
+          marginTop: "10px",
+          color: "rgba(10,10,10,0.4)",
+          textAlign: "left",
+        }}
+      >
         {productStock} quanties are available
       </Typography>
     </>

@@ -143,7 +143,7 @@ export default function Navbar() {
   };
   const handleWomenClick = () => {
     navigate("/product-catalog", {
-      state: { category: "women" },
+      state: { gender: "women" },
     });
     // setAnchorWomenEl(event.currentTarget);
   };
@@ -152,7 +152,7 @@ export default function Navbar() {
   };
   const handleMenClick = (event) => {
     navigate("/product-catalog", {
-      state: { category: "men" },
+      state: { gender: "men" },
     });
   };
   const handleMenClose = () => {

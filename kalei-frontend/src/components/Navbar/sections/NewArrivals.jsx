@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../Navbar.module.css";
 
 import Menu from "@mui/material/Menu";
@@ -11,6 +11,8 @@ import img3 from "../../../assets/images/categoryImages/newShoeWear.png";
 import img4 from "../../../assets/images/categoryImages/newWomenWear.png";
 import img5 from "../../../assets/images/categoryImages/watchArrivals.png";
 import { useNavigate } from "react-router-dom";
+import { newArrivals } from "../../../services/products/newArrivals";
+import { Height } from "@mui/icons-material";
 // new arrival images
 
 const newArrivalData = [
@@ -22,6 +24,25 @@ const newArrivalData = [
 
 export default function NewArrivals({ anchorEl, open, handleClose }) {
   const navigate = useNavigate();
+  const [newProducts, setNewProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchNewArrivals = async () => {
+      const data = await newArrivals();
+      setNewProducts(data);
+    };
+
+    fetchNewArrivals();
+  }, []);
+
+  const handleViewProduct = (item) => {
+    handleClose();
+    localStorage.setItem("singleProduct", JSON.stringify(item));
+    navigate(`/single-product-view`, {
+      state: { id: item.id, item },
+    });
+  };
+
   return (
     <div>
       {" "}
@@ -47,19 +68,22 @@ export default function NewArrivals({ anchorEl, open, handleClose }) {
       >
         <div className={`${styles.megaMenuSection} ${styles.megaMenuSection1}`}>
           <div className={styles.newArrivalContainer}>
-            {newArrivalData.map((item, index) => (
+            {newProducts.slice(0, 4).map((item, index) => (
               <div className={styles.collectionCard}>
                 <div
                   className={styles.collectionCardImgContainer}
                   onClick={() => {
-                    handleClose();
-                    // localStorage.setItem("category", JSON.stringify(item.name));
-                    navigate("/product-catalog", {
-                      state: { category: item.name },
-                    });
+                    handleViewProduct(item);
                   }}
                 >
-                  <img src={item.image} alt="newArrival card img" width={400} />
+                  <img
+                    src={item.variants[0].imageUrl}
+                    alt="newArrival card img"
+                    style={{
+                      width: "100%",
+                      objectFit: "fill",
+                    }}
+                  />
                 </div>
                 <span>{item.name.toUpperCase()}</span>
               </div>
