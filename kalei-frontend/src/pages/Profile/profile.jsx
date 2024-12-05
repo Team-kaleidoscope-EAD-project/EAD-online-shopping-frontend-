@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid2";
 import Box from "@mui/material/Box";
@@ -7,8 +7,19 @@ import Dialog from "../../components/Dialog/Dialog";
 import profileStyle from "./profile.module.css";
 import Link from "@mui/material/Link";
 import { useState } from "react";
+import { KeycloakContext } from "../../auth/KeycloakProvider";
+
+import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
+  const navigate = useNavigate();
+
+  const { authenticated, keycloak } = useContext(KeycloakContext);
+
+  const userInfo = keycloak?.tokenParsed;
+
+  console.log(userInfo);
+
   const [details, setDetails] = useState([
     {
       key: 1,
@@ -37,6 +48,12 @@ export default function Profile() {
     ]);
   };
 
+  const handleOrderPageNavigation = () => {
+    navigate(`/orders`, {
+      state: { userId: userInfo.sub },
+    });
+  };
+
   return (
     <div>
       <Typography
@@ -51,7 +68,7 @@ export default function Profile() {
       >
         Profile
       </Typography>
-      <Link href="/orders" underline="hover" color="inherit">
+      <Link underline="hover" color="inherit">
         <Typography
           sx={{
             color: "text.primary",
@@ -62,7 +79,7 @@ export default function Profile() {
             marginLeft: "20px",
           }}
         >
-          Orders
+          <span onClick={handleOrderPageNavigation}>Orders</span>
         </Typography>
       </Link>
       <div className={profileStyle.box}>

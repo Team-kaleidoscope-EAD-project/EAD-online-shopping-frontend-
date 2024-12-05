@@ -18,7 +18,6 @@ export const productFilter = async (filteredProduct) => {
     console.log(response.data);
     return response.data;
   } catch (error) {
-    console.log("Error product filter");
-    throw error;
+    console.log("Error product filter:" + error.message);
   }
 };

@@ -1,5 +1,8 @@
 .orderCard {
   transition-duration: 300ms;
+  cursor: pointer;
+  width: 250px;
+  border-radius: 15px;
 }
 
 .orderCard:hover {

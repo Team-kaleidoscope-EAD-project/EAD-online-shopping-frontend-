@@ -546,7 +546,7 @@ export default function ProductCatalog() {
           ))}
         </Grid>
       </Grid>
-      {/* product catalog */}
+
       {/* footer section */}
       <Footer />
       {/* footer section */}

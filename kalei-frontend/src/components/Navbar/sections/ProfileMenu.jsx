@@ -4,14 +4,23 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { Avatar } from "@mui/material";
 import { logout } from "../../../auth/logout";
+import { useNavigate} from "react-router-dom";
 
 export default function ProfileMenu({ profileImg }) {
+  
+  const navigate = useNavigate();
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
+  const handleProfilePageNavigation = () => {
+    navigate(`/profile`);
+  };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -44,8 +53,8 @@ export default function ProfileMenu({ profileImg }) {
           },
         }}
       >
-        {/* <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem> */}
+        <MenuItem onClick={handleProfilePageNavigation}>Profile</MenuItem>
+        {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
     </div>
