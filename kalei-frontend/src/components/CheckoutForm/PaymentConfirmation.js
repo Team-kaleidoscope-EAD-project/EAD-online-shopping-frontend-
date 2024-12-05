@@ -16,6 +16,7 @@ export const paymentConfirmation = async (
     },
   });
 
+  console.log("payment status", paymentIntent.status);
   if (error) {
     setAlert({
       open: true,
@@ -25,7 +26,7 @@ export const paymentConfirmation = async (
   } else if (paymentIntent && paymentIntent.status !== "succeeded") {
     //rolback
     console.log(error);
-    await orderRollBack(orderId);
+    // await orderRollBack(orderId);
   } else if (paymentIntent && paymentIntent.status === "succeeded") {
     setAlert({
       open: true,

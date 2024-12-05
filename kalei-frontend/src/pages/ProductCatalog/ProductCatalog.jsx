@@ -58,21 +58,26 @@ const marks = [
 export default function ProductCatalog() {
   const location = useLocation();
 
-  const passedCategory = JSON.parse(localStorage.getItem("category"));
-  // console.log(passedCategory);
+  const passedGender = location.state?.gender;
+  console.log("passed cat", passedGender);
+
+  const homeCategory = location.state?.category;
+  console.log("homecat", homeCategory);
 
   // filters
-  const [productCategory, setProductCategory] = useState(passedCategory);
+  const [productCategory, setProductCategory] = useState(passedGender);
+
   const [size, setSize] = useState(productSizes[0]);
   const [instock_availability, setInstock_Availability] = useState(true);
   const [outofstock_availability, setOutofstock_Availability] = useState(false);
   const [price, setPrice] = useState(0.0);
+  const [productList, setProductList] = useState([]);
   // filters
 
   const [filters, setFilters] = useState({
-    categories: [passedCategory],
+    categories: [homeCategory],
     colors: [],
-    brands: [],
+    brand: [passedGender],
     sizes: [],
     minPrice: null,
     maxPrice: null,
@@ -83,18 +88,15 @@ export default function ProductCatalog() {
       ...prevFilters,
       [name]: value,
     }));
-    console.log(filters);
   };
-
-  const [productList, setProductList] = useState([]);
 
   useEffect(() => {
     fetchProductsByFilters();
   }, [filters]);
 
   useEffect(() => {
-    handleProductCategoryFilter(passedCategory);
-  }, [passedCategory]);
+    handleProductGenderFilter(passedGender);
+  }, [passedGender]);
 
   const fetchProductsByFilters = async () => {
     const products = await productFilter(filters);
@@ -108,12 +110,25 @@ export default function ProductCatalog() {
       ...prev,
       categories: category !== "All Products" ? category : [],
     }));
-    console.log(filters);
   };
 
+  useEffect(() => {
+    handleFilterChange("categories", homeCategory);
+  }, [homeCategory]);
+
   const handleProductSizeFilter = (size) => {
-    setSize(size);
-    handleFilterChange("sizes", size);
+    if (size == "All") {
+      setSize([]);
+      handleFilterChange("sizes", []);
+    } else {
+      setSize(size);
+      handleFilterChange("sizes", size);
+    }
+  };
+
+  const handleProductGenderFilter = (gender) => {
+    setSize(gender);
+    handleFilterChange("brand", gender);
   };
 
   const handleInstock_Availability = () => {
@@ -199,7 +214,7 @@ export default function ProductCatalog() {
                         }}
                       >
                         {productCategory === item ? "• " : ""}
-                        {item}
+                        {item.toUpperCase()}
                       </span>
                     </>
                   );
@@ -517,35 +532,19 @@ export default function ProductCatalog() {
           </Drawer>
           {/* drawer */}
         </Grid>
-
-        {productList ? (
-          <Grid
-            size={{ xs: 12, md: 8, lg: 9 }}
-            sx={{
-              justifyItems: productList.length === 1 ? "start" : "center",
-              paddingLeft: productList.length === 1 ? "5vw" : "3vw",
-            }}
-            paddingLeft={3}
-            className={styles.productCatalogContainer}
-          >
-            {productList.map((item, index) => (
-              <ProductCard singleProduct={item} />
-            ))}
-          </Grid>
-        ) : (
-          <Grid
-            size={{ xs: 12, md: 8, lg: 9 }}
-            paddingLeft={3}
-            className={styles.productCatalogContainer}
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            No products in the inventory
-          </Grid>
-        )}
+        <Grid
+          size={{ xs: 12, md: 8, lg: 9 }}
+          sx={{
+            justifyItems: productList.length === 1 ? "start" : "center",
+            paddingLeft: productList.length === 1 ? "5vw" : "3vw",
+          }}
+          paddingLeft={3}
+          className={styles.productCatalogContainer}
+        >
+          {productList.map((item, index) => (
+            <ProductCard singleProduct={item} />
+          ))}
+        </Grid>
       </Grid>
 
       {/* footer section */}

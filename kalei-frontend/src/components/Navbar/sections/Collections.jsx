@@ -53,7 +53,7 @@ export default function Collections({ anchorEl, open, handleClose }) {
                   className={styles.collectionCardImgContainer}
                   onClick={() => {
                     handleClose();
-                    localStorage.setItem("category", JSON.stringify(item.name));
+                    // localStorage.setItem("category", JSON.stringify(item.name));
                     navigate("/product-catalog", {
                       state: { category: item.name },
                     });

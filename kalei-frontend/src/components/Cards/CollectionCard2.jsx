@@ -9,7 +9,13 @@ export default function CollectionCard2({ name, image }) {
   const navigate = useNavigate();
 
   const handleViewCollection = (category) => {
-    navigate(`/product-catalog`, { state: { category } });
+    if (category == "men's wear") {
+      navigate(`/product-catalog`, { state: { gender: "men" } });
+    } else if (category == "women's wear") {
+      navigate(`/product-catalog`, { state: { gender: "women" } });
+    } else {
+      navigate(`/product-catalog`, { state: { category } });
+    }
   };
 
   return (
@@ -63,7 +69,7 @@ export default function CollectionCard2({ name, image }) {
           <div className={styles.container}>
             <h1>{name}</h1>
             <CollectionButton
-              parseFunction={() => handleViewCollection(name)}
+              parseFunction={() => handleViewCollection(name.toLowerCase())}
             />
           </div>
         </CardContent>

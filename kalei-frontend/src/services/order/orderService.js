@@ -20,7 +20,7 @@ export const createPaymentIntent = async (amount) => {
 
 export const sendOrderDetails = async (orderObject) => {
   try {
-    console.log(orderObject);
+    console.log("order details", orderObject);
     const response = await axiosInstance.post(
       "/api/v1/order/addplaceorder",
       orderObject
@@ -36,7 +36,9 @@ export const sendOrderDetails = async (orderObject) => {
 export const orderRollBack = async (orderId) => {
   try {
     console.log("rollbacked");
-    const response = await axiosInstance.post("/order/addorder", { orderId });
+    const response = await axiosInstance.post("/api/v1/order/addorder", {
+      orderId,
+    });
 
     return response.status;
   } catch (error) {
@@ -70,4 +72,4 @@ export const getOrdersByUserId = async (userId) => {
     console.error("Error fetching orders for userId:", error);
     throw error;
   }
-}
+};
