@@ -8,10 +8,14 @@ import PopUp from "./Sections/CutomerReview/PopUp";
 import EditIcon from "@mui/icons-material/Edit";
 import Footer from "../../components/Footer/Footer";
 import { useNavigate } from "react-router-dom";
-import { getFeedbacksByProducts } from "../../services/feedbacks/feedback";
+import {
+  getFeedbacksByProducts,
+  productRating,
+} from "../../services/feedbacks/feedback";
 import { userInfo } from "../../services/users/userInfo";
 import { getProductStocksBySku } from "../../services/products/getProductStocksBySku";
 import { KeycloakContext } from "../../auth/KeycloakProvider";
+import { similarProducts } from "../../services/products/similarProducts";
 
 const sizeList = ["sm", "md", "lg", "xl"];
 
@@ -22,12 +26,13 @@ function SingleProductPage() {
 
   const product = JSON.parse(localStorage.getItem("singleProduct"));
 
-  const similarProductList = [product, product];
+  const [similarProductList, setSimilarProductList] = useState([]);
 
   const navigate = useNavigate();
   const [displayPopUp, setDisplayPopUp] = useState(false);
   const [reviewDataList, setReviewDataList] = useState([]);
   const [userData, setUserData] = useState([]);
+  const [rating, setRating] = useState([]);
 
   useEffect(() => {
     fetchUserFeedbacks();
@@ -81,7 +86,19 @@ function SingleProductPage() {
     setUserData(res);
   };
 
-  console.log(userData);
+  useEffect(() => {
+    const totalRating = productRating(reviewDataList);
+    setRating(totalRating);
+  }, [reviewDataList]);
+
+  useEffect(() => {
+    const fetchSimilarProducts = async () => {
+      const res = await similarProducts(product.name);
+      setSimilarProductList(res);
+    };
+
+    fetchSimilarProducts();
+  }, [product.name]);
 
   return (
     <>
@@ -98,6 +115,7 @@ function SingleProductPage() {
           productPrice={product.price}
           product={product}
           addToCart={addToCart}
+          productRating={rating}
         />
 
         {/* Description  */}

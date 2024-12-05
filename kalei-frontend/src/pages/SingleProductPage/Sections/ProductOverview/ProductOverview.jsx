@@ -23,6 +23,7 @@ const ProductOverview = ({
   productPrice,
   product,
   addToCart,
+  productRating,
 }) => {
   const [selectedColor, setSelectedColor] = useState(0);
   const [selectedSize, setSelectedSize] = useState(0);
@@ -130,7 +131,7 @@ const ProductOverview = ({
               marginTop: { xs: "40px", sm: "45px", md: "50px" },
             }}
           >
-            <UserRating ratingValue={4} />
+            <UserRating ratingValue={productRating} />
           </Box>
         </Box>
       </Box>

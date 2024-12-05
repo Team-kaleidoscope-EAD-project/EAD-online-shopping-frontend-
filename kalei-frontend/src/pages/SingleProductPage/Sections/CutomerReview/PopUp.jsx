@@ -1,24 +1,27 @@
 import { Box, Rating, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { addFeedback } from "../../../../services/feedbacks/feedback";
 import { userInfo } from "../../../../services/users/userInfo";
+import { KeycloakContext } from "../../../../auth/KeycloakProvider";
 
 function PopUp({ close, productId }) {
+  const { keycloak } = useContext(KeycloakContext);
+
   const [ratedValue, setRatedValue] = useState(0);
   const [feedbackContent, setFeedbackContent] = useState("");
 
   const handleSubmit = async () => {
     try {
-      const { userId } = await userInfo();
-
-      close(false);
       await addFeedback({
-        userId: userId,
+        userId: keycloak.tokenParsed?.name,
         productId,
         rating: ratedValue,
         feedbackContent,
       });
+
+      close(false);
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -127,6 +130,7 @@ function PopUp({ close, productId }) {
               fontWeight: "regualar",
               outline: "none",
               borderRadius: "10px",
+              padding: "10px",
             }}
             onChange={(e) => {
               setFeedbackContent(e.target.value);

@@ -16,6 +16,7 @@ export const paymentConfirmation = async (
     },
   });
 
+  console.log("payment status", paymentIntent.status);
   if (error) {
     setAlert({
       open: true,
