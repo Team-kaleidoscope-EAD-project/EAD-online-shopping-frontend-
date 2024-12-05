@@ -20,6 +20,7 @@ function CheckoutForm({ isClose, orderObject, orderId }) {
     orderId
   );
 
+  console.log(alert.message);
   return (
     <Box
       sx={{
@@ -66,7 +67,7 @@ function CheckoutForm({ isClose, orderObject, orderId }) {
       <Snackbar
         open={alert.open}
         autoHideDuration={6000}
-        onClose={handleCloseAlert}
+        // onClose={handleCloseAlert}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
       >
         <Alert
