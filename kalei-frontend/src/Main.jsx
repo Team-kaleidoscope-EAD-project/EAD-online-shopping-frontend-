@@ -1,20 +1,16 @@
 import React from "react";
-import { createBrowserRouter, RouterProvider} from "react-router-dom";
-import HomePage from "./pages/HomePage/HomePage";
-import NotFoundPage from "./pages/NotFoundPage";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <HomePage />,
-    errorElement: <NotFoundPage />,
-  },
-]);
+import KeycloakProvider from "./auth/KeycloakProvider";
+import routes from "./routes/routes";
 
+const router = createBrowserRouter(routes);
 export default function Main() {
   return (
     <React.StrictMode>
-      <RouterProvider router={router}/>
+      <KeycloakProvider>
+        <RouterProvider router={router} />
+      </KeycloakProvider>
     </React.StrictMode>
   );
 }

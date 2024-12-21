@@ -1,0 +1,47 @@
+@font-face {
+  font-family: "amiko-regular";
+  src: url("../../../../assets/fonts/Amiko-Regular.ttf");
+}
+
+/* Dilrangi/NewArrivals.css */
+.newArrivals {
+  font-size: 18px;
+  font-weight: 200;
+  margin-top: 50px;
+  margin-left: 25px;
+  font-family: "amiko-regular";
+  color: #7c4100;
+  text-align: left;
+  font-weight: bold;
+}
+
+.ProductCard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  row-gap: 5vw;
+  column-gap: 5vw;
+  justify-items: center;
+  margin-top: 20px;
+  padding-left: 5vw;
+  padding-right: 5vw;
+}
+
+/* Tablet view: 3 cards per row */
+@media (max-width: 1146px) {
+  .ProductCard {
+    grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+  }
+}
+
+@media (max-width: 900px) {
+  .ProductCard {
+    grid-template-columns: 1fr 1fr; /* 1 card per row */
+  }
+}
+
+/* Mobile view: 1 card per row */
+@media (max-width: 680px) {
+  .ProductCard {
+    grid-template-columns: 1fr; /* 1 card per row */
+  }
+}

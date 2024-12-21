@@ -1,0 +1,50 @@
+h4 {
+    color: rgb(0, 0, 0); 
+    font-size: 15px; 
+    font-family: "amiko";
+    text-align: left;
+    margin-bottom: 0;
+    margin-top: 3px;
+  }
+
+  .box {
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .proPic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    
+  }
+
+  .add{
+    color: rgb(107, 107, 107); 
+    font-size: 15px; 
+    font-family: "amiko";
+    font-weight: bold;
+  }
+
+  hr{
+    border: 0.5px solid rgb(210, 210, 210);
+    width: 100%;
+    margin: 30px 0;
+  }
+
+  .name{
+    color: black;
+    font-size: 18px;
+    font-family: "amiko";
+    font-weight: bold;
+  }
+
+  .title{
+    color: rgb(171, 171, 171);
+    font-size: 15px;
+    font-family: "amiko";
+    font-weight: bold;
+    margin-bottom: 10px;
+  }

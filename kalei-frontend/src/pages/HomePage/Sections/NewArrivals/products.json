@@ -1,0 +1,85 @@
+[
+    {
+        "id": 1,
+        "name": "T-Shirt",
+        "price": 19.99,
+        "size": ["S", "M", "L", "XL"],
+        "color": ["Red", "Blue", "Green", "Black"]
+    },
+    {
+        "id": 2,
+        "name": "Jeans",
+        "price": 49.99,
+        "size": ["S", "M", "L", "XL"],
+        "color": ["Blue", "Black", "Gray"]
+    },
+    {
+        "id": 3,
+        "name": "Jeans",
+        "price": 49.99,
+        "size": ["S", "M", "L", "XL"],
+        "color": ["Blue", "Black", "Gray"]
+    },{
+        "id": 4,
+        "name": "Jeans",
+        "price": 49.99,
+        "size": ["S", "M", "L", "XL"],
+        "color": ["Blue", "Black", "Gray"]
+    },
+    {
+        "id": 5,
+        "name": "Jeans",
+        "price": 49.99,
+        "size": ["S", "M", "L", "XL"],
+        "color": ["Blue", "Black", "Gray"]
+    },
+    {
+        "id": 6,
+        "name": "Jeans",
+        "price": 49.99,
+        "size": ["S", "M", "L", "XL"],
+        "color": ["Blue", "Black", "Gray"]
+    },
+    {
+        "id": 7,
+        "name": "Jeans",
+        "price": 49.99,
+        "size": ["S", "M", "L", "XL"],
+        "color": ["Blue", "Black", "Gray"]
+    },
+    {
+        "id": 8,
+        "name": "Jeans",
+        "price": 49.99,
+        "size": ["S", "M", "L", "XL"],
+        "color": ["Blue", "Black", "Gray"]
+    },
+    {
+        "id": 9,
+        "name": "Jeans",
+        "price": 49.99,
+        "size": ["S", "M", "L", "XL"],
+        "color": ["Blue", "Black", "Gray"]
+    },
+    {
+        "id": 10,
+        "name": "Jeans",
+        "price": 49.99,
+        "size": ["S", "M", "L", "XL"],
+        "color": ["Blue", "Black", "Gray"]
+    },
+    {
+        "id": 11,
+        "name": "Jeans",
+        "price": 49.99,
+        "size": ["S", "M", "L", "XL"],
+        "color": ["Blue", "Black", "Gray"]
+    },
+    {
+        "id": 12,
+        "name": "Jeans",
+        "price": 49.99,
+        "size": ["S", "M", "L", "XL"],
+        "color": ["Blue", "Black", "Gray"]
+    }
+]

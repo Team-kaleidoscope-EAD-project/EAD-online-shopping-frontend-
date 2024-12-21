@@ -1,0 +1,23 @@
+@media (max-width: 600px) {
+  .icon-circle {
+    background-color: white;
+    border-radius: 50%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@font-face {
+  font-family: "amiko-regular";
+  src: url("../../assets/fonts/Amiko-Regular.ttf");
+}
+
+* {
+  font-family: "amiko-regular";
+}
+
+.footerText1 {
+  font-family: "amiko-regular";
+}

@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: 
+      context: ./kalei-frontend
+    image: kalei_frontend
+    container_name: kalei_frontend
+    ports:
+      - "3000:80"
+    environment:
+      - NODE_ENV=production
