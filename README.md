@@ -11,7 +11,6 @@ The **Kalei Online Shopping Platform Frontend** is a responsive, feature-rich e-
 - **Custom Styling**: Tailored CSS for additional enhancements and unique branding.  
 - **Secure Authentication**: Seamlessly integrated **Keycloak** for login, signup, and user management.  
 - **Dynamic Content**: Updates for product listings, and shopping carts.  
-- **Cloud Integration**: Backed by **AWS S3 Bucket** for secure storage of assets and data.  
 - **Dockerized Deployment**: Effortless setup and scaling using **Docker Compose**.  
 - **Optimized API Communication**: Simplified backend interactions with **Axios**.  
 
@@ -97,7 +96,6 @@ EAD-online-shopping-frontend/
 - **Material UI**: Styled and accessible UI components.  
 - **CSS**: For layout and styling customizations.  
 - **Keycloak**: Secure authentication and user management.  
-- **AWS S3 Bucket**: Scalable cloud storage solution.  
 - **Axios**: HTTP client for efficient API interactions.  
 - **Docker & Docker Compose**: Containerization for streamlined deployment.  
 
